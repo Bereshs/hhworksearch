@@ -20,51 +20,16 @@
 - /swagger-ui.html - полное описание
 
 ### Начало работы
-Создайте в корне приложения файл application.properties<br>
+Создайте в корне приложения файл security.properties<br>
 указав корректные значения:
 ```
-app.hh-user-agent= 
-app.hh-client-id = 
-app.hh-client-secret = 
-app.email-email = 
-app.email-password = 
-app.telegram.token =
-app.clientId =
+app.client-id=
+app.client-secret=
+app.telegram-token=
+app.telegram-chat-id=
+app.user-agent=
 ```
-```
-spring.application.name=HHWorkSearchApplication
-server.port=8080
-spring.datasource.url=jdbc:postgresql://psql:5432/postgres
-spring.datasource.username=postgres
-spring.datasource.password=postgres
-spring.datasource.driver-class-name=org.postgresql.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
-spring.jpa.show-sql=false
 
-spring.kafka.bootstrap-servers=kafka:9094
-spring.kafka.topic=tmessage
-
-
-app.hh-api-uri = https://api.hh.ru
-app.hh-api-callback=http://localhost:8080/authorization
-app.hh-api-token-uri=https://hh.ru/oauth/token
-app.hh-vacancy=/vacancy
-app.hh-resume=/resume
-
-app.hh-user-agent= 
-app.hh-client-id = 
-app.hh-client-secret = 
-app.email-email = 
-app.email-password = 
-app.telegram.token =
-app.clientId =
-
-
-spring.web.resources.static-locations=classpath:/frontend/
-spring.thymeleaf.prefix=classpath:/frontend/
-spring.thymeleaf.suffix=.html
-```
 Откройте в браузере http://localhost:8080/ и разешите приложению доступ к hh.ru
 
 ### Используемые технологии:
