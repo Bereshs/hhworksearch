@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/1.txt" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="AnnotationType" />
+        <option value="JUnit5 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2W115xOYK4LYqevDa7csgd9L87a" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.HHWorkSearch [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.HhWorkSearchApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/bereshs/MyProjects/1_productions/HHWorkSearch",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.3586207",
+    "settings.editor.selected.configurable": "http.proxy",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/frontend" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="ru.bereshs.HHWorkSearch" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="ru.bereshs.hhworksearch.service" />
+      <recent name="ru.bereshs.hhworksearch.controller" />
+      <recent name="ru.bereshs.HHWorkSearch.service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ru.bereshs.HHWorkSearch.hhApiClient.dto" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.SettingsControllerTest">
+    <configuration name="FilterEntityServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HHWorkSearch" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.service" />
+      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.service.FilterEntityServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SettingsControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HHWorkSearch" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.controller" />
+      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.controller.SettingsControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VacancyControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HHWorkSearch" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.controller" />
+      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.controller.VacancyControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VacancyControllerTest.postNegotiationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HHWorkSearch" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.controller" />
+      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.controller.VacancyControllerTest" />
+      <option name="METHOD_NAME" value="postNegotiationTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VacancyEntityServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HHWorkSearch" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.service" />
+      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.service.VacancyEntityServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HhWorkSearchApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="HHWorkSearch" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ru.bereshs.hhworksearch.HhWorkSearchApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SettingsControllerTest" />
+        <item itemvalue="JUnit.FilterEntityServiceTest" />
+        <item itemvalue="JUnit.VacancyEntityServiceTest" />
+        <item itemvalue="JUnit.VacancyControllerTest" />
+        <item itemvalue="JUnit.VacancyControllerTest.postNegotiationTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="" />
+      <created>1695885096175</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695885096175</updated>
+      <workItem from="1695885105251" duration="8160000" />
+      <workItem from="1695894004049" duration="4484000" />
+      <workItem from="1695899466718" duration="43851000" />
+      <workItem from="1696233933397" duration="21495000" />
+      <workItem from="1696258413430" duration="228000" />
+      <workItem from="1696259069690" duration="5299000" />
+      <workItem from="1696272572402" duration="26727000" />
+      <workItem from="1696415043998" duration="34396000" />
+      <workItem from="1696841660540" duration="89000" />
+      <workItem from="1696841921678" duration="7981000" />
+      <workItem from="1696851195296" duration="13047000" />
+      <workItem from="1697017996828" duration="3689000" />
+      <workItem from="1697433510522" duration="1942000" />
+      <workItem from="1698474366099" duration="23000" />
+      <workItem from="1707376733498" duration="29901000" />
+      <workItem from="1707726985341" duration="30000" />
+      <workItem from="1707730326859" duration="9370000" />
+      <workItem from="1707747408287" duration="485000" />
+      <workItem from="1707747921456" duration="23000" />
+      <workItem from="1707748483978" duration="1487000" />
+      <workItem from="1707819445480" duration="9000" />
+      <workItem from="1707980949113" duration="23112000" />
+      <workItem from="1708007126571" duration="9634000" />
+      <workItem from="1708435555473" duration="29000" />
+      <workItem from="1709105271662" duration="552000" />
+      <workItem from="1709106495676" duration="5000" />
+      <workItem from="1709107404841" duration="27178000" />
+      <workItem from="1709712673523" duration="30358000" />
+      <workItem from="1710153318015" duration="10125000" />
+      <workItem from="1710747515492" duration="32708000" />
+      <workItem from="1710836655688" duration="15437000" />
+      <workItem from="1710877179366" duration="1513000" />
+      <workItem from="1710928438699" duration="35772000" />
+      <workItem from="1711282015074" duration="597000" />
+      <workItem from="1711378696861" duration="479000" />
+      <workItem from="1711379213501" duration="50000" />
+      <workItem from="1711484459672" duration="12000" />
+      <workItem from="1711524933129" duration="31934000" />
+      <workItem from="1711608947490" duration="2272000" />
+      <workItem from="1711624806205" duration="95000" />
+      <workItem from="1711625631314" duration="87000" />
+      <workItem from="1711640454320" duration="1270000" />
+      <workItem from="1711648628033" duration="1493000" />
+      <workItem from="1711974843704" duration="23000" />
+      <workItem from="1712001833232" duration="775000" />
+      <workItem from="1712048056900" duration="899000" />
+      <workItem from="1712830746853" duration="672000" />
+      <workItem from="1712994887428" duration="183000" />
+      <workItem from="1712995098885" duration="41000" />
+      <workItem from="1714217003053" duration="17255000" />
+      <workItem from="1714387477222" duration="20766000" />
+      <workItem from="1714632899677" duration="633000" />
+      <workItem from="1714644918022" duration="6314000" />
+      <workItem from="1714671869828" duration="9492000" />
+      <workItem from="1714726400468" duration="3627000" />
+      <workItem from="1714738078324" duration="1209000" />
+      <workItem from="1714803577055" duration="890000" />
+      <workItem from="1715588790217" duration="1977000" />
+      <workItem from="1715618525343" duration="1641000" />
+      <workItem from="1715704317106" duration="4773000" />
+      <workItem from="1715881582585" duration="25000" />
+      <workItem from="1716539546662" duration="8481000" />
+      <workItem from="1716732057137" duration="1704000" />
+      <workItem from="1717018599287" duration="853000" />
+      <workItem from="1717063196801" duration="33000" />
+      <workItem from="1717092724065" duration="6871000" />
+      <workItem from="1717140620682" duration="582000" />
+      <workItem from="1717187616010" duration="1261000" />
+      <workItem from="1717484270534" duration="77000" />
+      <workItem from="1718647925340" duration="1386000" />
+      <workItem from="1718725160210" duration="590000" />
+      <workItem from="1718872161551" duration="5243000" />
+      <workItem from="1718955666060" duration="598000" />
+      <workItem from="1719209235519" duration="607000" />
+      <workItem from="1719217616694" duration="25000" />
+      <workItem from="1719909080583" duration="22041000" />
+      <workItem from="1719950225534" duration="42115000" />
+      <workItem from="1720085275502" duration="16738000" />
+      <workItem from="1720168940406" duration="15252000" />
+      <workItem from="1720259086948" duration="11961000" />
+      <workItem from="1720440109742" duration="329000" />
+      <workItem from="1720442089932" duration="7022000" />
+      <workItem from="1720552096395" duration="20000" />
+      <workItem from="1721149650342" duration="12645000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -1,0 +1,6 @@
+FROM openjdk:17-jdk-alpine3.14
+RUN apk add -U tzdata
+ENV TZ=Europe/Moscow
+RUN cp  /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+COPY  /*.jar /application.jar
+ENTRYPOINT ["java","-jar","/application.jar"]

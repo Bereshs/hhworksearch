@@ -1,0 +1,44 @@
+body{
+    width: 100%;
+    text-align: -webkit-center;
+    display: inline;
+}
+h2 {
+    text-align: center;
+}
+.header {
+    width: 98%;
+    background-color: dimgrey;
+    padding-left: 1%;
+    margin: 2px;
+    font-weight: bold;
+    border: 1px solid black;
+}
+.main {
+    width: 60%;
+    text-align: left;
+    background-color: darkgray;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.trtwo{
+    background-color: rgb(128, 128, 128);
+    padding: 5px;
+}
+.trone {
+    padding: 5px;
+}
+table {
+    width: 100%;
+}
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+.headerLine {
+    display: inline;
+    width: 100%;
+}
