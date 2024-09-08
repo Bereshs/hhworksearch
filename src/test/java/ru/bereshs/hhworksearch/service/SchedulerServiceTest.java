@@ -19,8 +19,6 @@ class SchedulerServiceTest {
     @Mock
     private HhService service;
     @Mock
-    private SettingsService settingsService;
-    @Mock
     private VacancyEntityService vacancyEntityService;
     @Mock
     private FilterEntityService filterEntityService;
@@ -38,7 +36,6 @@ class SchedulerServiceTest {
 
     @Test
     void dailyLightTaskRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
-        Mockito.when(settingsService.isDemonActive()).thenReturn(true);
         Mockito.when(service.getPageRecommendedVacancy(Mockito.anyInt(), Mockito.any())).thenReturn(getHhVacancyDtoList());
         Mockito.when(service.updateResume(Mockito.any())).thenReturn(getResumeDto());
         schedulerService.dailyLightTaskRequest();
@@ -47,7 +44,6 @@ class SchedulerServiceTest {
 
     @Test
     void dailyFullRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
-        Mockito.when(settingsService.isDemonActive()).thenReturn(true);
         Mockito.when(service.getHhNegotiationsDtoList()).thenReturn(getNegotiationsList());
         schedulerService.dailyFullRequest();
         Mockito.verify(vacancyEntityService, Mockito.times(1)).updateVacancyStatusFromNegotiationsList(Mockito.any());
@@ -55,7 +51,6 @@ class SchedulerServiceTest {
 
     @Test
     void dailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
-        Mockito.when(settingsService.isDemonActive()).thenReturn(true);
         Mockito.when(service.getPageRecommendedVacancyForResume(Mockito.any())).thenReturn(getHhVacancyDtoList());
         schedulerService.dailyRecommendedRequest();
         Mockito.verify(vacancyEntityService, Mockito.times(1)).saveAll(Mockito.any());

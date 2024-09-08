@@ -27,15 +27,12 @@ public class SchedulerService {
     private final KafkaProducer producer;
     private final ResumeEntityService resumeEntityService;
     private final MessageEntityService messageEntityService;
-    private final SettingsService settingsService;
     private final EmployerEntityService employerEntityService;
     private final SkillsEntityService skillsEntityService;
 
     @Loggable
     public void dailyLightTaskRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
-        if (!settingsService.isDemonActive()) {
-            return;
-        }
+
         List<HhVacancyDto> vacancyList = getPageRecommendedVacancy(getKey());
         postNegotiationWithRelevantVacancies(vacancyList);
         updateResume();
@@ -43,20 +40,16 @@ public class SchedulerService {
 
     @Loggable
     public void dailyFullRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
-        if (settingsService.isDemonActive()) {
-            List<HhVacancyDto> vacancyList = getFullHhVacancy();
-            postNegotiationWithRelevantVacancies(vacancyList);
-        }
+        List<HhVacancyDto> vacancyList = getFullHhVacancy();
+        postNegotiationWithRelevantVacancies(vacancyList);
         updateVacancyStatus();
         sendMessageDailyReport();
     }
 
     @Loggable
     public void dailyRecommendedRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
-        if (settingsService.isDemonActive()) {
-            List<HhVacancyDto> vacancyList = service.getPageRecommendedVacancyForResume(resumeEntityService.getDefault()).getItems();
-            postNegotiationWithRelevantVacancies(vacancyList);
-        }
+        List<HhVacancyDto> vacancyList = service.getPageRecommendedVacancyForResume(resumeEntityService.getDefault()).getItems();
+        postNegotiationWithRelevantVacancies(vacancyList);
     }
 
 
@@ -102,7 +95,7 @@ public class SchedulerService {
             producer.produce(response, vacancy.getId());
 
 
-      //      negotiationsService.postNegotiationForVacancy(vacancy);
+            //      negotiationsService.postNegotiationForVacancy(vacancy);
         }
     }
 

@@ -45,6 +45,7 @@ public class ParameterSettingsController {
             }
         }).toList();
 
+        model.addAttribute("valid", !service.isUnCompleted());
         model.addAttribute("parameters", mapper.fromListParameter(list));
         model.addAttribute("useragent", new SimpleDto(null, "USER_AGENT", appConfig.getUserAgent()));
 

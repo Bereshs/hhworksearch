@@ -71,13 +71,12 @@ public class AuthorizationController {
         OAuth2AccessToken token = service.getAccessToken(code);
         keyEntityService.saveToken(key, token);
         createModel(model, token);
-        System.out.println("code " + code);
         return "authorized";
     }
 
 
     @RequestMapping("/authorized")
-    public String authorizedPage(Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String authorizedPage(Model model) throws IOException, ExecutionException, InterruptedException {
         OAuth2AccessToken token = service.getToken();
         try {
             createModel(model, token);

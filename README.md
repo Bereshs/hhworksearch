@@ -38,6 +38,9 @@
 - git,
 
 ### История версий
+#### 0.3.1
+- удален settingsService, controller, repository, entity
+- добавлен footer в /parametersettings
 #### 0.3.0
 - Добавлено управление через web
 - Добавлен openFeignClient для формирования запросов к внутреннему api
