@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header}">...</head>
+<body>
+<div class="main">
+    <div>
+        <div class="header">
+            <p class="headerLine">Детальный отчет</p>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div class="title">
+        <p class="headerLine"> За сегодня</p>
+    </div>
+    <div th:class="sizeFont">
+        <table class="tbl">
+            <tr class="trtwo">
+                <td style="width: 40%">Должность</td>
+                <td style="width: 30%">Работадатель</td>
+                <td class ="notMain">%</td>
+                <td style="width: 10%" class ="notMain">Фильтр</td>
+                <td style="width: 7%" class ="notMain">Дата</td>
+                <td style="width: 5%">Статус</td>
+            </tr>
+            <tr th:each="line,iter: ${list}" th:class="${iter.index%2==1}? 'trtwo': ''">
+                <td style="width: 40%"><a th:href="@{${line.url}}" th:text="${line.name}">Наименование</a></td>
+                <td style="width: 30%"><a th:href="@{${line.url}}" th:text="${line.employerName}">Работадатель</a></td>
+                <td class ="notMain"><a th:href="@{${line.url}}" th:text="${line.percent}">%</a></td>
+                <td  style="width: 10%" class ="notMain"><a th:href="@{${line.url}}" th:text="${line.filterResult}">Фильтр</a></td>
+                <td  style="width: 7%" class ="notMain"><a th:href="@{${line.url}}" th:text="${line.createdAt}">Дата</a></td>
+                <td  style="width: 5%"><a th:href="@{${line.url}}" th:text="${line.status}">Статус</a></td>
+            </tr>
+        </table>
+    </div>
+    <div th:replace="~{fragments/footer}">...</div>
+</div>
+</body>
+</html>

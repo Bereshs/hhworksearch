@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header}">...</head>
+<body>
+<div class="main">
+    <div>
+        <div class="header">
+            <p class="headerLine">Авторизированный модуль</p>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div class="userView">
+        <div class="userData">
+            <div class="title">
+                <p class="headerLine">Данные пользователя</p>
+            </div>
+            <div>
+                <table class="tbl">
+                    <tr class="trtwo">
+                        <td>Id</td>
+                        <td th:text="${hhUserDto.id()}">771222222</td>
+                    </tr>
+                    <tr>
+                        <td>ФИО</td>
+                        <td th:text="${hhUserDto.firstName() +' '+ hhUserDto.lastName()}">Иванов Иван</td>
+                    </tr>
+                    <tr class="trtwo">
+                        <td>Контакты</td>
+                        <td th:text="${hhUserDto.email() +' '+ hhUserDto.phone()}">79090000000 post@mail.ru</td>
+                    </tr>
+                    <tr>
+                        <td>Срок действия токена</td>
+                        <td th:text="${tokenLive}">18.11.2003</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="resume">
+            <div class="title">
+                <p class="headerLine">Резюме</p>
+            </div>
+            <div>
+                <table class="tbl">
+                    <tr th:each="resume: ${resumeList}" class="trtwo">
+                        <td th:text="${resume.title}">Java разработчик</td>
+                        <td> none</td>
+                        <td th:text="${resume.updatedAt}">01.02.2003</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="resume">
+            <div class="title">
+                <p class="headerLine">Статистика работы</p>
+            </div>
+            <div class="title">
+                <p class="headerLine"> <a href="/report">Сегодня</a></p>
+            </div>
+            <div>
+                <table class="tbl">
+                    <tr class="trtwo">
+                        <td style="width: 40%">Всего записей</td>
+                        <td th:text="${daily.total}">0</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%">Отправлено запросов</td>
+                        <td th:text="${daily.requested}">0</td>
+                    </tr>
+                    <tr class="trtwo">
+                        <td style="width: 40%">Приглашений</td>
+                        <td th:text="${daily.invited}">0</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%">Отказов</td>
+                        <td th:text="${daily.discarded}">0</td>
+                    </tr>
+                    <tr >
+                        <td class="trtwo" style="width: 40%">Зарплата</td>
+                        <td class="trtwo" th:text="${daily.salary}">0</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="title">
+                <p class="headerLine"> За все время</p>
+            </div>
+            <div>
+                    <table  class="tbl">
+                        <tr class="trtwo">
+                            <td style="width: 40%">Всего записей</td>
+                            <td th:text="${full.total}">0</td>
+                        </tr>
+                        <tr>
+                            <td>Отправлено запросов</td>
+                            <td th:text="${full.requested}">0</td>
+                        </tr>
+                        <tr class="trtwo">
+                            <td style="width: 40%">Приглашений</td>
+                            <td th:text="${full.invited}">0</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">Отказов</td>
+                            <td th:text="${full.discarded}">0</td>
+                        </tr>
+                        <tr>
+                            <td class="trtwo" style="width: 40%">Зарплата</td>
+                            <td class="trtwo" th:text="${full.salary}">0</td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+
+        <div th:replace="~{fragments/footer}">...</div>
+    </div>
+</div>
+</body>
+</html>

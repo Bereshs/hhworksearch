@@ -5,20 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/frontend/include/header.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/AuthorizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/AuthorizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/hhapiclient/impl/HeadHunterClientRestTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/hhapiclient/impl/HeadHunterClientRestTemplate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/model/KeyEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/model/KeyEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/HhService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/HhService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/KeyEntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/KeyEntityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/editelement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/editelement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/parametersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/parametersettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/TestServicesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/TestServicesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/VacancyClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/VacancyClientServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,10 +19,10 @@
       <list>
         <option value="AnnotationType" />
         <option value="JUnit5 Test Class" />
-        <option value="Record" />
         <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -76,22 +65,26 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "0.3.1",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/bereshs/develop/myProjects/1_productions/HHWorkSearch/src/main/resources",
+    "last_directory_selection": "/home/bereshs/develop/myProjects/1_productions/HHWorkSearch/src/main/java/ru/bereshs/hhworksearch/config/scheduler",
+    "last_opened_file_path": "/home/bereshs/develop/myProjects/1_productions/HHWorkSearch",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.3586207",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="ru.bereshs.hhworksearch.config.scheduler" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/frontend" />
@@ -100,7 +93,10 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/fragments" />
       <recent name="$PROJECT_DIR$/src/main/resources/frontend" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ru.bereshs.hhworksearch.controller" />
@@ -116,6 +112,21 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.HhWorkSearchApplication">
+    <configuration name="AuthorizationControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HHWorkSearch" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.controller" />
+      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.controller.AuthorizationControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AuthorizationControllerTest.authoredPageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HHWorkSearch" />
       <extension name="coverage">
@@ -148,26 +159,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FilterPropertyControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HHWorkSearch" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.bereshs.hhworksearch.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.controller" />
-      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.controller.FilterPropertyControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="VacancyEntityServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="HHWorkSearch" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ru.bereshs.hhworksearch.service.*" />
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.service.VacancyFilterService" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -182,7 +178,7 @@
       <module name="HHWorkSearch" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="ru.bereshs.hhworksearch.service.*" />
+          <option name="PATTERN" value="ru.bereshs.hhworksearch.service.VacancyFilterService" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -203,11 +199,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AuthorizationControllerTest" />
+        <item itemvalue="JUnit.AuthorizationControllerTest.authorizationNoCodePageTest" />
         <item itemvalue="JUnit.VacancyEntityServiceTest.getDaily" />
         <item itemvalue="JUnit.VacancyEntityServiceTest" />
-        <item itemvalue="JUnit.AuthorizationControllerTest.authorizationNoCodePageTest" />
         <item itemvalue="JUnit.AuthorizationControllerTest.authoredPageTest" />
-        <item itemvalue="JUnit.FilterPropertyControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -311,11 +307,46 @@
       <workItem from="1724353609924" duration="692000" />
       <workItem from="1724783248281" duration="120000" />
       <workItem from="1724831596295" duration="117000" />
-      <workItem from="1725686443176" duration="80303000" />
+      <workItem from="1725686443176" duration="148323000" />
+      <workItem from="1726033652961" duration="26022000" />
+      <workItem from="1726131049001" duration="2267000" />
+      <workItem from="1726209677315" duration="127000" />
+      <workItem from="1726566042361" duration="1367000" />
+      <workItem from="1726575104896" duration="3005000" />
+      <workItem from="1726645536454" duration="37305000" />
+      <workItem from="1726722820189" duration="29550000" />
+      <workItem from="1726774528899" duration="3587000" />
+      <workItem from="1726818621278" duration="12774000" />
+      <workItem from="1727001199832" duration="9369000" />
+      <workItem from="1727075978490" duration="9218000" />
+      <workItem from="1727115376429" duration="694000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="0.3.1" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

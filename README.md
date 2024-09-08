@@ -38,6 +38,18 @@
 - git,
 
 ### История версий
+#### 0.3.1
+- поиск происходит по расписанию в пакете scheduler
+- переделана логика фильтра вакансий
+- добавлен Mapstruct
+- RestTemplate заменен на OpenFeignClient
+- исправлены пути в html шаблонах
+- удален authorizationControllerTest, который портил tokens
+- удален settingsService, controller, repository, entity
+- добавлен footer в /parametersettings
+- добавлен ежедневный отчет /report
+- оптимизирован web под различные экраны
+
 #### 0.3.0
 - Добавлено управление через web
 - Добавлен openFeignClient для формирования запросов к внутреннему api

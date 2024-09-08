@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.bereshs.hhworksearch.config.AppConfig;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.mapper.SimpleDtoMapper;
 import ru.bereshs.hhworksearch.model.ParameterEntity;
@@ -22,8 +21,6 @@ public class ParameterSettingsController {
 
     private final ParameterEntityService service;
     private final SimpleDtoMapper mapper;
-
-    private final AppConfig appConfig;
 
 
     @GetMapping("/parametersettings")
@@ -45,8 +42,9 @@ public class ParameterSettingsController {
             }
         }).toList();
 
+        model.addAttribute("valid", !service.isUnCompleted());
         model.addAttribute("parameters", mapper.fromListParameter(list));
-        model.addAttribute("useragent", new SimpleDto(null, "USER_AGENT", appConfig.getUserAgent()));
+        model.addAttribute("useragent", new SimpleDto(null, "USER_AGENT", "hidden"));
 
         return "parametersettings";
     }

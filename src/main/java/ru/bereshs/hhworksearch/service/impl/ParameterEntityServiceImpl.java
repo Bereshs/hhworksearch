@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ParameterEntityServiceImpl implements ParameterEntityService {
     private final ParameterEntityRepository repository;
-
     @Override
     public ParameterEntity getByType(ParameterType type) throws HhWorkSearchException {
         if (type == null) {

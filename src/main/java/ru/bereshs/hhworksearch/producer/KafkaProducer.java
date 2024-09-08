@@ -1,6 +1,4 @@
 package ru.bereshs.hhworksearch.producer;
-
-import com.github.scribejava.core.model.Response;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.model.dto.TelegramMessageDto;
 
@@ -9,5 +7,5 @@ public interface KafkaProducer {
 
     void produceDefault(String text) throws HhWorkSearchException;
 
-    void produce(Response response, String vacancyId) throws HhWorkSearchException;
+    void produce(String response, String vacancyId) throws HhWorkSearchException;
 }

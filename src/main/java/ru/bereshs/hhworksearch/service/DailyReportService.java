@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface DailyReportService {
     ReportDto getReportDto(List<VacancyEntity> vacancyEntities);
-
     String getString(ReportDto reportDto);
-
+    String getDaily();
 }

@@ -1,0 +1,47 @@
+<div>
+    <div class="title">
+        <p class="headerLine" th:text="titletext">Искать ключевые слова</p>
+    </div>
+    <div>
+        <form th:action="@{${action}}" method="post" target="dummyframe">
+            <div class="item-list">
+                <div th:if="${dto.id!=null}">
+                    <label class="item-input">
+                        <p>id</p>
+                        <input type="text" name="id" th:value="${dto.id}" size="10">
+                    </label>
+                </div>
+                <div th:if="${dto.name!=null}">
+                    <label class="item-input">
+                        <p>name</p>
+                        <input type="text" name="name" th:value="${dto.name}">
+                    </label>
+                </div>
+                <div  th:if="${dto.description!=null}">
+                    <label class="item-input">
+                        <p>description</p>
+                        <input th:if="${#strings.length(dto.description)<=60}" type="text" name="description"
+                               th:value="${dto.description}" class="editbox">
+                        <textarea th:if="${#strings.length(dto.description)>60}" name="description"
+                                  th:text="${dto.description}" class="editbox"
+                                  th:rows="${#strings.length(dto.description)/40+1}"></textarea>
+                    </label>
+                </div>
+                <input type="submit" value="сохранить">
+            </div>
+        </form>
+        <button id="dbtn" onclick="sendDelete(this.name)" th:name="${action}" th:data-target="${target}">Удалить</button>
+    </div>
+</div>
+
+<iframe name="dummyframe" id="dummyframe"></iframe>
+<script>
+    function sendDelete(p) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("DELETE", p);
+        xhr.send();
+        var target=document.getElementById("dbtn").getAttribute("data-target");
+        window.location.href = target;
+    }
+
+</script>

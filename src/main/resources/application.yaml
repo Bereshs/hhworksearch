@@ -12,23 +12,33 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
   kafka:
     bootstrap-servers: 192.168.1.10:9094
     topic: tmessage
-  web:
-    resources:
-      static-locations: classpath:/frontend/
-  thymeleaf:
-    prefix: classpath:/frontend/
-    suffix: .html
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: none
+logging:
+  level:
+    ru.bereshs.hhworksearch.openfeign.hhapi: DEBUG
+
 app:
   hh-api-uri: https://api.hh.ru
   hh-api-callback: http://localhost:8080/authorization
-  hh-api-token-uri: https://hh.ru/oauth/token
+  hh-api-token-uri: https://api.hh.ru/token
   hh-vacancy: /vacancy
   hh-resume:  /resume
   hh-per-page-parameter: &per_page=100
   hh-resumes-path: https://api.hh.ru/resumes/
   hh-api-authorization: https://hh.ru/oauth/authorize
+resilience4j:
+  ratelimiter:
+    instances:
+      validateSession:
+        limitForPeriod: 5
+        limitRefreshPeriod: 1s
+        timeoutDuration: 1s
