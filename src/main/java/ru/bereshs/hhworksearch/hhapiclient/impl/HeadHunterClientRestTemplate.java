@@ -20,6 +20,7 @@ import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.hhapiclient.HeadHunterClient;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhErrorDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
+import ru.bereshs.hhworksearch.model.KeyEntity;
 import ru.bereshs.hhworksearch.model.ParameterEntity;
 import ru.bereshs.hhworksearch.model.ParameterType;
 import ru.bereshs.hhworksearch.service.KeyEntityService;
@@ -27,6 +28,8 @@ import ru.bereshs.hhworksearch.service.ParameterEntityService;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -36,10 +39,13 @@ public class HeadHunterClientRestTemplate implements HeadHunterClient {
     @Getter
     private final OAuth20Service authService;
 
+    private final KeyEntityService keyService;
+
     private final AppConfig config;
 
     @Autowired
-    public HeadHunterClientRestTemplate(ParameterEntityService parameterService, AppConfig config) throws HhWorkSearchException {
+    public HeadHunterClientRestTemplate(ParameterEntityService parameterService, KeyEntityService keyService, AppConfig config) throws HhWorkSearchException {
+        this.keyService = keyService;
         this.config = config;
         ParameterEntity optional = parameterService.getByType(ParameterType.CLIENT_ID);
         ParameterEntity clientSecret = parameterService.getByType(ParameterType.CLIENT_SECRET);
@@ -66,6 +72,9 @@ public class HeadHunterClientRestTemplate implements HeadHunterClient {
         return response;
     }
 
+    public boolean isForbidden(Response response) {
+        return response.getCode() == 403;
+    }
 
     @Loggable
     public Response executeWithBody(Verb verb, String uri, OAuth2AccessToken token, Map<String, String> body) throws IOException, ExecutionException, InterruptedException {

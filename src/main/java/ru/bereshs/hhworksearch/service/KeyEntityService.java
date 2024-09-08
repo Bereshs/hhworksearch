@@ -43,4 +43,14 @@ public class KeyEntityService {
     public boolean validateKey(KeyEntity key) {
         return key.isValid();
     }
+
+    public void invalidToken(long id) {
+        KeyEntity key = getByUserId(id);
+        key.setExpiresIn(null);
+        save(key);
+    }
+
+    public void save(KeyEntity key) {
+        keysEntityRepository.saveAndFlush(key);
+    }
 }

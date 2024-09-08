@@ -35,6 +35,9 @@ public class KeyEntity {
     }
 
     public LocalDateTime getExpireTime() {
+        if(expiresIn==null) {
+            return LocalDateTime.now().minusDays(7);
+        }
         return time.plusSeconds(expiresIn);//-3*60*60*24
     }
     public void set(OAuth2AccessToken token) {

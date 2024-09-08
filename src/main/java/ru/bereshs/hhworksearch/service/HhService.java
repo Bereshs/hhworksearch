@@ -146,11 +146,6 @@ public class HhService {
         return headHunterClient.executeObject(Verb.GET, uri, token, HhResumeDto.class);
     }
 
-    /*@Loggable
-    public <T> HhListDto<T> get(String connectionString,  Class<T> type) throws IOException, ExecutionException, InterruptedException {
-        OAuth2AccessToken token = getToken();
-        return headHunterClient.getObjects(Verb.GET, connectionString, token, type);
-    }*/
 
     @Loggable
     public Response postNegotiation(HashMap<String, String> body) {

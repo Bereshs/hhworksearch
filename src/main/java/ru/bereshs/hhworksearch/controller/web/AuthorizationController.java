@@ -71,6 +71,7 @@ public class AuthorizationController {
         OAuth2AccessToken token = service.getAccessToken(code);
         keyEntityService.saveToken(key, token);
         createModel(model, token);
+        System.out.println("code " + code);
         return "authorized";
     }
 
@@ -78,15 +79,25 @@ public class AuthorizationController {
     @RequestMapping("/authorized")
     public String authorizedPage(Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         OAuth2AccessToken token = service.getToken();
-        createModel(model, token);
+        try {
+            createModel(model, token);
+        } catch (HhWorkSearchException e) {
+            keyEntityService.invalidToken(1L);
+            return "redirect:/";
+        }
         return "authorized";
     }
 
-    public void createModel(Model model, OAuth2AccessToken token) throws IOException, ExecutionException, InterruptedException {
+    public void createModel(Model model, OAuth2AccessToken token) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         HhListDto<HhResumeDto> myResumeList = service.getActiveResumes();
 
         HhUserDto hhUserDto = new HhUserDto();
-        hhUserDto.set(service.getMePageBody());
+        var mePageBody = service.getMePageBody();
+
+        if (mePageBody.get("description") != null && mePageBody.get("description").equals("Forbidden")) {
+            throw new HhWorkSearchException("HhService authorization error");
+        }
+        hhUserDto.set(mePageBody);
         List<VacancyEntity> daily = vacancyEntityService.getVacancyEntityByTimeStampAfter(LocalDateTime.now().minusDays(1));
         ReportDto dailyReportDto = reportService.getReportDto(daily);
         List<VacancyEntity> full = vacancyEntityService.getAll();
