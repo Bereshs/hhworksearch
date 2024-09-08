@@ -65,7 +65,7 @@ public class AuthorizationController {
     }
 
     @GetMapping("/authorization")
-    public String authorizationPage(String code, Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String authorizationPage(@RequestParam(value = "code", required = false) String code, Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         if (code == null) return "error";
         KeyEntity key = keyEntityService.getByUserId(1L);
         OAuth2AccessToken token = service.getAccessToken(code);
@@ -76,7 +76,7 @@ public class AuthorizationController {
 
 
     @RequestMapping("/authorized")
-    public String authorizedPage(Model model, @RequestParam(required = false) Integer page) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String authorizedPage(Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         OAuth2AccessToken token = service.getToken();
         createModel(model, token);
         return "authorized";

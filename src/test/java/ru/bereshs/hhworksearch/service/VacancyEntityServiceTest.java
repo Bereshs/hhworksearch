@@ -13,6 +13,7 @@ import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhNegotiationsDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhSimpleListDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
+import ru.bereshs.hhworksearch.model.dto.ReportDto;
 import ru.bereshs.hhworksearch.repository.VacancyEntityRepository;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,8 @@ class VacancyEntityServiceTest {
     @Mock
     private AppMapper mapper;
 
+    @Mock
+    private DailyReportService reportService;
 
     @Test
     void getDaily() {
@@ -46,6 +49,15 @@ class VacancyEntityServiceTest {
                 "\tне подошло 0\n" +
                 "\tсредняя зарплата:";
         Mockito.when(vacancyEntityRepository.getVacancyEntitiesByTimeStampAfter(Mockito.any())).thenReturn(List.of(getVacancyEntity()));
+        Mockito.when(reportService.getReportDto(Mockito.any())).thenReturn(new ReportDto(
+                1L,
+                1L,
+                1L,
+                1L,
+                1L,
+                "salary"
+        ));
+        Mockito.when(reportService.getString(Mockito.any())).thenReturn(expected);
         String actual = vacancyEntityService.getDaily();
         assertTrue(actual.contains(expected));
     }

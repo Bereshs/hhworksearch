@@ -46,9 +46,6 @@ public class VacancyEntityService {
 
         ReportDto reportDto = reportService.getReportDto(vacancyEntities);
 
-//        DailyReportDto dailyReportDto = new DailyReportDto(vacancyEntities);
-//        return dailyReportDto.toString();
-
         return reportService.getString(reportDto);
     }
 

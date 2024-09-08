@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.bereshs.hhworksearch.model.FilterEntity;
+import ru.bereshs.hhworksearch.model.FilterScope;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.dto.FilterDto;
 import ru.bereshs.hhworksearch.service.FilterEntityService;
@@ -67,13 +68,13 @@ class FilterPropertyControllerTest {
         List<String> wordsList =  new ArrayList<>();
         wordsList.add("user");
         FilterDto filterDto = new FilterDto();
-        filterDto.setScope("name");
+        filterDto.setScope("NAME");
         filterDto.setWords(wordsList);
         return filterDto;
     }
     FilterEntity getFilterEntity() {
         FilterEntity filterEntity = new FilterEntity();
-        filterEntity.setScope("name");
+        filterEntity.setScope(FilterScope.NAME);
         filterEntity.setId(1);
         filterEntity.setWord("user");
         return filterEntity;
