@@ -1,0 +1,34 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: HHWorkSearchApplication
+    version: @project.version@
+  datasource:
+    url: jdbc:postgresql://192.168.1.10:5432/postgres
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+  kafka:
+    bootstrap-servers: 192.168.1.10:9094
+    topic: tmessage
+  web:
+    resources:
+      static-locations: classpath:/frontend/
+  thymeleaf:
+    prefix: classpath:/frontend/
+    suffix: .html
+app:
+  hh-api-uri: https://api.hh.ru
+  hh-api-callback: http://localhost:8080/authorization
+  hh-api-token-uri: https://hh.ru/oauth/token
+  hh-vacancy: /vacancy
+  hh-resume:  /resume
+  hh-per-page-parameter: &per_page=100
+  hh-resumes-path: https://api.hh.ru/resumes/
+  hh-api-authorization: https://hh.ru/oauth/authorize

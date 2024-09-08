@@ -12,6 +12,8 @@ import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.config.AppConfig;
 
 import ru.bereshs.hhworksearch.model.KeyEntity;
+import ru.bereshs.hhworksearch.model.ParameterEntity;
+import ru.bereshs.hhworksearch.model.ParameterType;
 import ru.bereshs.hhworksearch.model.ResumeEntity;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.hhapiclient.HeadHunterClient;
@@ -29,14 +31,13 @@ public class HhService {
     private final HeadHunterClient headHunterClient;
     private final AppConfig appConfig;
     private final KeyEntityService keyEntityService;
+    private final ParameterEntityService parameterService;
 
     public OAuth2AccessToken getToken() {
         try {
             return keyEntityService.getToken();
         } catch (HhWorkSearchException e) {
             KeyEntity key = keyEntityService.getByUserId(1L);
-            if (key.getClientId() == null || !key.getClientId().equals(appConfig.getClientId()))
-                key.setClientId(appConfig.getClientId());
             return getToken(key);
         }
     }
@@ -66,16 +67,16 @@ public class HhService {
                 return token;
             }
             if (!key.isValid()) {
-                OAuth2AccessToken token =  getAccessToken(key.getClientId());
+                ParameterEntity clientId = parameterService.getByType(ParameterType.CLIENT_ID);
+                OAuth2AccessToken token = getAccessToken(clientId.getData());
                 keyEntityService.saveToken(key, token);
                 return token;
             }
-        } catch (IOException | ExecutionException | InterruptedException e) {
+        } catch (IOException | ExecutionException | InterruptedException | HhWorkSearchException e) {
             throw new RuntimeException(e);
         }
         return null;
     }
-
 
 
     public OAuth2AccessToken getRefreshToken(String refreshToken) throws IOException, ExecutionException, InterruptedException {

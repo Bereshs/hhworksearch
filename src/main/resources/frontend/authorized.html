@@ -9,14 +9,20 @@
 </head>
 <body>
 <div class="main">
-    <h2>Авторизированный модуль</h2>
+    <div>
+        <div class="header">
+            <p class="headerLine">Авторизированный модуль</p>
+        </div>
+        <div>
+        </div>
+    </div>
     <div class="userView">
         <div class="userData">
-            <div class="header">
-            <p class="headerLine">Данные пользователя</p>
+            <div class="title">
+                <p class="headerLine">Данные пользователя</p>
             </div>
             <div class="userTable">
-                <table><caption>userTable</caption><th>userTable</th>
+                <table>
                     <tr class="trtwo">
                         <td>Id</td>
                         <td th:text="${hhUserDto.getId}">771222222</td>
@@ -36,23 +42,12 @@
                 </table>
             </div>
         </div>
-        <div class="management">
-            <p>Управление</p>
-            <div class="managementTable">
-                <table><caption>managementTable</caption><th>managementTable</th>
-                    <tr class="trtwo">
-                        <td>Авто обновление</td>
-                        <td>Да</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
         <div class="resume">
-            <div class="header">
-                <p class="headerLine" >Резюме</p>
+            <div class="title">
+                <p class="headerLine">Резюме</p>
             </div>
             <div class="resumeTable">
-                <table><caption>ResumeTable</caption><th>ResumeTable</th>
+                <table>
                     <tr th:each="resume: ${resumeList}" class="trtwo">
                         <td th:text="${resume.title}">Java разработчик</td>
                         <td> none</td>
@@ -60,32 +55,72 @@
                     </tr>
                 </table>
             </div>
-            <div class="vacancy">
-                <div class="header">
-                    <a thif="vacancyList.page>0" th:href="${'/authorized?page='+(vacancyList.page-1)}" class="headerLine"
-                       href="/authorized/?page=0">Назад</a>
-                    <p th:text="${'Вакансии ('+vacancyList.getItems().size()+') pages '+vacancyList.pages}" class="headerLine"></p>
-                    <a thif="vacancyList.pages>vacancyList.page" th:href="${'/authorized?page='+(vacancyList.page+1)}" class="headerLine"
-                       href="/authorized/?page=0"> Далее</a>
-                </div>
-                <div class="vacancyTab  le">
-                    <table><caption>vacancyTable</caption><th>vacancyTable</th>
-                        <tr th:each="vacancy: ${vacancyList.getItems()}" class="trtwo">
-                            <td><a th:href="${vacancy.alternateUrl}"
-                                   th:text="${vacancy.name +' ('+vacancy.counters.value()+')'}">Java
-                                разработчик</a></td>
-                            <td th:text="${vacancy.area.name}">Москва</td>
-                            <td><a th:href="@{${vacancy.url}}">Откликнуться</a>
-                            <td><a th:href="@{${vacancy.employer.url}}" th:text="${vacancy.employer.name} ">Газпром</a>
-                            </td>
-                            <td th:text="${vacancy.salary}"> none</td>
-                            <td th:text="${vacancy.createdAt}">01.02.2003</td>
+        </div>
+        <div class="resume">
+            <div class="title">
+                <p class="headerLine">Статистика работы</p>
+            </div>
+            <div class="title">
+                <p class="headerLine"> Сегодня</p>
+            </div>
+            <div class="resumeTable">
+                <div class="userTable">
+                    <table>
+                        <tr class="trtwo">
+                            <td style="width: 40%">Всего записей</td>
+                            <td th:text="${daily.total}">0</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">Отправлено запросов</td>
+                            <td th:text="${daily.requested}">0</td>
+                        </tr>
+                        <tr class="trtwo">
+                            <td style="width: 40%">Приглашений</td>
+                            <td th:text="${daily.invited}">0</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">Отказов</td>
+                            <td th:text="${daily.discarded}">0</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">Зарплата</td>
+                            <td th:text="${daily.salary}">0</td>
                         </tr>
                     </table>
                 </div>
             </div>
-
+            <div class="title">
+                <p class="headerLine"> За все время</p>
+            </div>
+            <div class="resumeTable">
+                <div class="userTable">
+                    <table>
+                        <tr class="trtwo">
+                            <td style="width: 40%">Всего записей</td>
+                            <td th:text="${full.total}">0</td>
+                        </tr>
+                        <tr>
+                            <td>Отправлено запросов</td>
+                            <td th:text="${full.requested}">0</td>
+                        </tr>
+                        <tr class="trtwo">
+                            <td style="width: 40%">Приглашений</td>
+                            <td th:text="${full.invited}">0</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">Отказов</td>
+                            <td th:text="${full.discarded}">0</td>
+                        </tr>
+                        <tr>
+                            <td style="width: 40%">Зарплата</td>
+                            <td th:text="${full.salary}">0</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
+
+        <div th:replace="~{/include/footer}">...</div>
     </div>
 </div>
 </body>

@@ -19,12 +19,14 @@ public class FilterPropertyController {
 
     private final FilterEntityService<VacancyEntity> filterEntityService;
 
+    @Deprecated
     @Operation(summary = "Получение списка всех фильтров")
     @GetMapping("/api/filter")
     public List<FilterEntity> getAllFilter() {
         return filterEntityService.getAll();
     }
 
+    @Deprecated
     @Operation(summary = "Запись нового фильтра")
     @PostMapping ("/api/filter")
     public String addFilter(@RequestBody FilterDto filterDto) {
@@ -32,6 +34,7 @@ public class FilterPropertyController {
         return "ok";
     }
 
+    @Deprecated
     @Operation(summary = "Удаление фильтра")
     @DeleteMapping("/api/filter")
     public String removeFilter(@RequestBody FilterDto filterDto) {

@@ -1,33 +1,29 @@
-package ru.bereshs.hhworksearch.model.dto;
+package ru.bereshs.hhworksearch.service.impl;
 
-
-import lombok.Setter;
+import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
+import ru.bereshs.hhworksearch.model.dto.ReportDto;
+import ru.bereshs.hhworksearch.service.DailyReportService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Setter
-public class DailyReportDto {
+@Service
+public class DailyReportServiceImpl implements DailyReportService {
 
-    private long requested;
-    private long invited;
-    private long discarded;
-    private long founded;
-    private int total;
-    private List<SalaryList> salary;
-
-    public DailyReportDto(List<VacancyEntity> vacancyEntities) {
+    public ReportDto getReportDto(List<VacancyEntity> vacancyEntities) {
         var report = vacancyEntities.stream().collect(Collectors.groupingBy(VacancyEntity::getStatus, Collectors.counting()));
-        total = vacancyEntities.size();
-        requested = getLongOrNull(report, VacancyStatus.REQUEST);
-        invited = getLongOrNull(report, VacancyStatus.INVITATION)+getLongOrNull(report, VacancyStatus.invitation);
-        discarded = getLongOrNull(report, VacancyStatus.DISCARD)+getLongOrNull(report, VacancyStatus.discard);
-        founded = getLongOrNull(report, VacancyStatus.FOUND)+getLongOrNull(report, VacancyStatus.found);
-        salary = getSalary(vacancyEntities);
+        Long total = (long) vacancyEntities.size();
+        Long requested = getLongOrNull(report, VacancyStatus.REQUEST);
+        Long invited = getLongOrNull(report, VacancyStatus.INVITATION) + getLongOrNull(report, VacancyStatus.invitation);
+        Long discarded = getLongOrNull(report, VacancyStatus.DISCARD) + getLongOrNull(report, VacancyStatus.discard);
+        Long founded = getLongOrNull(report, VacancyStatus.FOUND) + getLongOrNull(report, VacancyStatus.found);
+        String salary = getStringFromList(getSalary(vacancyEntities));
+
+        return new ReportDto(requested, invited, discarded, founded, total, salary);
     }
 
     public List<SalaryList> getSalary(List<VacancyEntity> vacancyEntities) {
@@ -54,20 +50,20 @@ public class DailyReportDto {
         return report.get(status) != null ? report.get(status) : 0L;
     }
 
-    private String  getStringFromList(List<SalaryList> salary) {
-        StringBuilder stringBuilder =  new StringBuilder();
+    private String getStringFromList(List<SalaryList> salary) {
+        StringBuilder stringBuilder = new StringBuilder();
         salary.forEach(stringBuilder::append);
         return stringBuilder.toString();
     }
-    @Override
-    public String toString() {
+
+    public String getString(ReportDto reportDto) {
         return "Ежедневный отчет:\n" +
-                "\tвсего записей " + total + "\n" +
-                "\tотправлено запросов " + requested + "\n" +
-                "\tприглашений " + invited + "\n" +
-                "\tотказов " + discarded + "\n" +
-                "\tне подошло " + founded + "\n" +
-                "\tсредняя зарплата:\n " + getStringFromList(salary);
+                "\tвсего записей " + reportDto.total() + "\n" +
+                "\tотправлено запросов " + reportDto.requested() + "\n" +
+                "\tприглашений " + reportDto.invited() + "\n" +
+                "\tотказов " + reportDto.discarded() + "\n" +
+                "\tне подошло " + reportDto.founded() + "\n" +
+                "\tсредняя зарплата:\n " + reportDto.salary();
     }
 
     public static class SalaryList {
@@ -84,4 +80,5 @@ public class DailyReportDto {
             return "\t\t" + experience + ": " + salary + "\n";
         }
     }
+
 }

@@ -1,4 +1,4 @@
-# HHWorkSearch версия 0.2.0
+# HHWorkSearch версия 0.3.0
 
 ## Сервис помощи поиска работы с использованием HeadHunter API
 
@@ -22,15 +22,6 @@
 - /swagger-ui.html - полное описание
 
 ### Начало работы
-Создайте в корне приложения файл security.properties<br>
-указав корректные значения:
-```
-app.client-id=
-app.client-secret=
-app.telegram-token=
-app.telegram-chat-id=
-app.user-agent=
-```
 
 Откройте в браузере http://localhost:8080/ и разешите приложению доступ к hh.ru
 
@@ -46,4 +37,14 @@ app.user-agent=
 - maven,
 - git,
 
-
+### История версий
+#### 0.3.0
+- Добавлено управление через web
+- Добавлен openFeignClient для формирования запросов к внутреннему api
+- Добавлены rest для openFeignClient RestFilterController, RestMessageController, RestSkillController, путь "/api/client"
+- Добавлены web контроллеры EditElementController, FilterSettingsController, NegotiationSettingController
+- старые контроллеры FilterPropertyController, ResumeController, VacancyController помечены как @Deprecated
+- FilterScope изменен на Enum
+- properties заменен на yaml
+- DailyReportDo заменен на DailyReportService ReportDto
+- удален seurity.properties настройка через web: /parametersettings

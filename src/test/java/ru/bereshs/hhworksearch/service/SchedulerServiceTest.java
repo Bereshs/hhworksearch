@@ -46,7 +46,7 @@ class SchedulerServiceTest {
     }
 
     @Test
-    void dailyFullRequest() throws IOException, ExecutionException, InterruptedException {
+    void dailyFullRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         Mockito.when(settingsService.isDemonActive()).thenReturn(true);
         Mockito.when(service.getHhNegotiationsDtoList()).thenReturn(getNegotiationsList());
         schedulerService.dailyFullRequest();
@@ -54,7 +54,7 @@ class SchedulerServiceTest {
     }
 
     @Test
-    void dailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException {
+    void dailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         Mockito.when(settingsService.isDemonActive()).thenReturn(true);
         Mockito.when(service.getPageRecommendedVacancyForResume(Mockito.any())).thenReturn(getHhVacancyDtoList());
         schedulerService.dailyRecommendedRequest();

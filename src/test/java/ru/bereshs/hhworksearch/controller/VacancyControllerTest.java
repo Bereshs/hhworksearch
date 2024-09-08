@@ -107,7 +107,7 @@ class VacancyControllerTest {
     @Test
     void getVacancyMessageTest() throws Exception {
         Mockito.when(hhService.getVacancyById(Mockito.any())).thenReturn(getVacancyDto());
-        Mockito.when(negotiationsService.getMessageById(Mockito.anyLong())).thenReturn(getMessage());
+        Mockito.when(negotiationsService.getById(Mockito.anyLong())).thenReturn(getMessage());
 
         SkillEntity skillEntity = new SkillEntity("beer");
         List<SkillEntity> skillEntityList = new ArrayList<>();

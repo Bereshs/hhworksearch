@@ -8,7 +8,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.config.AppConfig;
+import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
+import ru.bereshs.hhworksearch.model.ParameterType;
 import ru.bereshs.hhworksearch.model.dto.TelegramMessageDto;
+import ru.bereshs.hhworksearch.service.ParameterEntityService;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +24,7 @@ public class KafkaProducerImpl implements KafkaProducer {
     private String kafkaTopic;
 
     private final KafkaTemplate<Long, TelegramMessageDto> kafkaTemplate;
+    private final ParameterEntityService parameterService;
 
     private final AppConfig appConfig;
 
@@ -30,12 +34,15 @@ public class KafkaProducerImpl implements KafkaProducer {
         kafkaTemplate.send(kafkaTopic, telegramMessageDto);
     }
 
-    public void produceDefault(String text) {
-        TelegramMessageDto messageDto = new TelegramMessageDto(appConfig.getTelegramToken(), appConfig.getTelegramChatId(), text, LocalDateTime.now());
+    public void produceDefault(String text) throws HhWorkSearchException {
+        String telegramToken = parameterService.getByType(ParameterType.TELEGRAM_TOKEN).getData();
+        String telegramChatId = parameterService.getByType(ParameterType.TELEGRAM_CHAT_ID).getData();
+
+        TelegramMessageDto messageDto = new TelegramMessageDto(telegramToken, telegramChatId, text, LocalDateTime.now());
         produce(messageDto);
     }
 
-    public void produce(Response response, String vacancyId) {
+    public void produce(Response response, String vacancyId) throws HhWorkSearchException {
         if (!response.isSuccessful()) {
             String text = "Необходимо участие vacancy Id: " + vacancyId + "\n" + "https://krasnodar.hh.ru/vacancy/" + vacancyId;
             produceDefault(text);

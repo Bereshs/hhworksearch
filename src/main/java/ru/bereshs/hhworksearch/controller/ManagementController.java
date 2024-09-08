@@ -42,7 +42,7 @@ public class ManagementController {
 
     @Operation(summary = "Ежедневный отчет")
     @GetMapping("/api/negotiations/daily")
-    public String dailyReport() {
+    public String dailyReport() throws HhWorkSearchException {
         String message = vacancyEntityService.getDaily();
         kafkaProducer.produceDefault(message);
         return message;
@@ -57,14 +57,14 @@ public class ManagementController {
 
     @Operation(summary = "Отчет в 18:30")
     @GetMapping("/api/negotiations/18")
-    public String dailyRecommendedScheduler() throws IOException, ExecutionException, InterruptedException {
+    public String dailyRecommendedScheduler() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         schedulerService.dailyRecommendedRequest();
         return "ok";
     }
 
     @Operation(summary = "Отчет в 19:30")
     @GetMapping("/api/negotiations/19")
-    public String dailyFullScheduler() throws InterruptedException, IOException, ExecutionException {
+    public String dailyFullScheduler() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
         schedulerService.dailyFullRequest();
         return "ok";
     }

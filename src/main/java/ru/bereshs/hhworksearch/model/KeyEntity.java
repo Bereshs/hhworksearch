@@ -29,11 +29,14 @@ public class KeyEntity {
         if (expiresIn == null || authorizationCode == null) {
             return false;
         }
-        LocalDateTime expireTime = time.plusSeconds(expiresIn-3*60*60*24);
+        LocalDateTime expireTime = getExpireTime();
         return LocalDateTime.now()
                 .isBefore(expireTime);
     }
 
+    public LocalDateTime getExpireTime() {
+        return time.plusSeconds(expiresIn);//-3*60*60*24
+    }
     public void set(OAuth2AccessToken token) {
         setAccessToken(token.getAccessToken());
         setRefreshToken(token.getRefreshToken());

@@ -1,12 +1,10 @@
 package ru.bereshs.hhworksearch.mapper;
 
-import com.github.scribejava.core.model.OAuth2AccessToken;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhResumeDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhSalaryDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhSimpleListDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
 import ru.bereshs.hhworksearch.model.*;
-import ru.bereshs.hhworksearch.model.dto.DailyReportDto;
 import ru.bereshs.hhworksearch.model.dto.SettingsDto;
 
 import java.util.List;
@@ -15,7 +13,6 @@ public interface AppMapper {
     SettingsDto toSettingsDto(SettingsEntity settings);
 
     EmployerEntity toEmployerEntity(HhSimpleListDto listDto);
-
 
     ResumeEntity toResumeEntity(HhResumeDto resumeDto);
 

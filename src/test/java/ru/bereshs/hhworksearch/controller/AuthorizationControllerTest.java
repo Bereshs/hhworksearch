@@ -9,13 +9,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.bereshs.hhworksearch.config.AppConfig;
+import ru.bereshs.hhworksearch.controller.web.AuthorizationController;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
 import ru.bereshs.hhworksearch.service.KeyEntityService;
 import ru.bereshs.hhworksearch.service.HhService;
 import ru.bereshs.hhworksearch.service.ResumeEntityService;
 
-
-import java.util.HashMap;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

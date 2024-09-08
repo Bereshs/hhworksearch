@@ -42,7 +42,7 @@ public class SchedulerService {
     }
 
     @Loggable
-    public void dailyFullRequest() throws InterruptedException, IOException, ExecutionException {
+    public void dailyFullRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
         if (settingsService.isDemonActive()) {
             List<HhVacancyDto> vacancyList = getFullHhVacancy();
             postNegotiationWithRelevantVacancies(vacancyList);
@@ -52,7 +52,7 @@ public class SchedulerService {
     }
 
     @Loggable
-    public void dailyRecommendedRequest() throws InterruptedException, IOException, ExecutionException {
+    public void dailyRecommendedRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
         if (settingsService.isDemonActive()) {
             List<HhVacancyDto> vacancyList = service.getPageRecommendedVacancyForResume(resumeEntityService.getDefault()).getItems();
             postNegotiationWithRelevantVacancies(vacancyList);
@@ -65,12 +65,12 @@ public class SchedulerService {
         vacancyEntityService.updateVacancyStatusFromNegotiationsList(negotiationsList);
     }
 
-    private void sendMessageDailyReport() {
+    private void sendMessageDailyReport() throws HhWorkSearchException {
         String message = vacancyEntityService.getDaily();
         producer.produceDefault(message);
     }
 
-    private void postNegotiationWithRelevantVacancies(List<HhVacancyDto> vacancyList) throws InterruptedException, IOException, ExecutionException {
+    private void postNegotiationWithRelevantVacancies(List<HhVacancyDto> vacancyList) throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
         if (vacancyList.isEmpty()) return;
         var filtered = getRelevantVacancies(vacancyList);
         vacancyEntityService.saveAll(filtered);
@@ -86,7 +86,7 @@ public class SchedulerService {
 
     }
 
-    private void postNegotiations(List<HhVacancyDto> filtered) throws InterruptedException, IOException, ExecutionException {
+    private void postNegotiations(List<HhVacancyDto> filtered) throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
         for (HhVacancyDto element : filtered) {
             var vacancyEntity = vacancyEntityService.getById(element.getId());
             if (vacancyEntity.isPresent() && !vacancyEntity.get().isNotRequest()) {

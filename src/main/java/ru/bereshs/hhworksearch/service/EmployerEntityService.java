@@ -18,7 +18,7 @@ public class EmployerEntityService {
     private final AppMapper mapper;
 
 
-    EmployerEntity getByHhId(String hhId) {
+    public EmployerEntity getByHhId(String hhId) {
         return employerEntityRepository.getByHhId(hhId);
     }
 

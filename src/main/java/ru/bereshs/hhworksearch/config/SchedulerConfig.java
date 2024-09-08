@@ -25,12 +25,12 @@ public class SchedulerConfig {
     }
 
     @Scheduled(cron = "0 30 19 * * *")
-    public void scheduleDailyFullRequest() throws InterruptedException, IOException, ExecutionException {
+    public void scheduleDailyFullRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
         service.dailyFullRequest();
     }
 
     @Scheduled(cron = "0 30 18 * * *")
-    public void scheduleDailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException {
+    public void scheduleDailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         service.dailyRecommendedRequest();
     }
 

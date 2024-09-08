@@ -12,10 +12,10 @@ import ru.bereshs.hhworksearch.hhapiclient.dto.HhSimpleListDto;
 @Getter
 @Table(name = "employer")
 @NoArgsConstructor
-public class EmployerEntity {
+public class EmployerEntity implements Comparable<EmployerEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String hhId;
     @JsonProperty("name")
     private String name;
@@ -23,4 +23,9 @@ public class EmployerEntity {
     private String url;
     @JsonProperty("alternate_url")
     private String alternateUrl;
+
+    @Override
+    public int compareTo(EmployerEntity employerEntity) {
+        return getHhId().compareTo(employerEntity.getHhId());
+    }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class SettingsController {
+public class SettingsRestController {
 
     private final SettingsService service;
     private final AppMapper mapper;

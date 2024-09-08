@@ -10,14 +10,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @Schema(description = "Фильтр")
-public class FilterEntity {
+public class FilterEntity implements Comparable<FilterEntity> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String scope;
+
+    @Enumerated(EnumType.STRING)
+    private FilterScope scope;
     private String word;
 
     public String toString() {
         return "FilterEntity{scope=" + scope + ", word=" + word + "}";
+    }
+
+    @Override
+    public int compareTo(FilterEntity filterEntity) {
+        return word.compareTo(filterEntity.getWord());
     }
 }

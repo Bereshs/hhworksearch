@@ -27,6 +27,26 @@ public class MessageEntityService {
         return body;
     }
 
+    public void update(Long id, MessageEntity message) throws HhWorkSearchException {
+        if (id == null || message == null) {
+            throw new RuntimeException("Wrong parameters");
+        }
+        MessageEntity messageDb = getById(id);
+
+        if (message.getFooter() != null && !message.getFooter().equals(messageDb.getFooter())) {
+            messageDb.setFooter(message.getFooter());
+        }
+
+        if (message.getHeader() != null && !message.getHeader().equals(messageDb.getHeader())) {
+            messageDb.setHeader(message.getHeader());
+        }
+
+        save(messageDb);
+    }
+
+    public List<MessageEntity> getAll() {
+        return messageEntityRepository.findAll();
+    }
 
     public String getNegotiationMessage(FilteredVacancy vacancy, List<SkillEntity> skills) {
         MessageEntity message = getMessage(1);
@@ -38,13 +58,13 @@ public class MessageEntityService {
 
     private MessageEntity getMessage(long id) {
         try {
-            return getMessageById(id);
+            return getById(id);
         } catch (HhWorkSearchException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public MessageEntity getMessageById(long id) throws HhWorkSearchException {
+    public MessageEntity getById(long id) throws HhWorkSearchException {
         return messageEntityRepository.findById(id).orElseThrow(() -> new HhWorkSearchException("Wrong message id"));
     }
 
@@ -53,10 +73,13 @@ public class MessageEntityService {
     }
 
     public void patchMessageById(long id, MessageEntity messageDto) throws HhWorkSearchException {
-        MessageEntity message = getMessageById(id);
+        MessageEntity message = getById(id);
         message.setHeader(messageDto.getHeader());
         message.setFooter(messageDto.getFooter());
         save(message);
     }
 
+    public void delete(MessageEntity message) {
+        messageEntityRepository.delete(message);
+    }
 }

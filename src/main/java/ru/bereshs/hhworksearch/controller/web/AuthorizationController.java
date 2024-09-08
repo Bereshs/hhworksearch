@@ -1,4 +1,4 @@
-package ru.bereshs.hhworksearch.controller;
+package ru.bereshs.hhworksearch.controller.web;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import lombok.AllArgsConstructor;
@@ -9,17 +9,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.bereshs.hhworksearch.config.AppConfig;
-import ru.bereshs.hhworksearch.model.KeyEntity;
-import ru.bereshs.hhworksearch.model.ResumeEntity;
+import ru.bereshs.hhworksearch.model.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhResumeDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhUserDto;
+import ru.bereshs.hhworksearch.model.dto.ReportDto;
 import ru.bereshs.hhworksearch.service.*;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @Controller
@@ -28,14 +31,24 @@ import java.util.concurrent.ExecutionException;
 public class AuthorizationController {
 
     private final HhService service;
-    private final AppConfig config;
     private final KeyEntityService keyEntityService;
-    private final ResumeEntityService resumeEntityService;
-
+    private final DateTimeFormatter formatter;
+    private final DailyReportService reportService;
+    private final VacancyEntityService vacancyEntityService;
+    private final ParameterEntityService parameterService;
+    private final AppConfig config;
 
     @GetMapping("/")
-    public String mainPage(Model model) {
+    public String mainPage(Model model) throws HhWorkSearchException {
         KeyEntity key = keyEntityService.getByUserId(1L);
+
+        if (parameterService.isUnCompleted()) {
+            return "redirect:/parametersettings";
+        }
+
+
+        ParameterEntity parameter = parameterService.getByType(ParameterType.CLIENT_ID);
+
 
         if (keyEntityService.validateKey(key)) {
             HhUserDto hhUserDto = new HhUserDto();
@@ -43,7 +56,11 @@ public class AuthorizationController {
             return "redirect:/authorized";
         }
 
-        model.addAttribute("connectionString", config.getAuthorizationConnectionString());
+
+        String connectionString = config.getHhApiAuthorization() + "?response_type=code&" + "client_id=" + parameter.getData();
+
+        model.addAttribute("tokenLive", key.getExpireTime().format(formatter));
+        model.addAttribute("connectionString", connectionString);
         return "/index";
     }
 
@@ -66,20 +83,20 @@ public class AuthorizationController {
     }
 
     public void createModel(Model model, OAuth2AccessToken token) throws IOException, ExecutionException, InterruptedException {
-        ResumeEntity defaultResume = resumeEntityService.getDefault();
         HhListDto<HhResumeDto> myResumeList = service.getActiveResumes();
 
         HhUserDto hhUserDto = new HhUserDto();
         hhUserDto.set(service.getMePageBody());
+        List<VacancyEntity> daily = vacancyEntityService.getVacancyEntityByTimeStampAfter(LocalDateTime.now().minusDays(1));
+        ReportDto dailyReportDto = reportService.getReportDto(daily);
+        List<VacancyEntity> full = vacancyEntityService.getAll();
 
-        HhListDto<HhVacancyDto> vacancyList = service.getPageRecommendedVacancyForResume(defaultResume);
-        vacancyList.setItems(vacancyList.getItems());
-
-        model.addAttribute("tokenLive", Instant.ofEpochSecond(token.getExpiresIn()));
+        ReportDto fullReportDto = reportService.getReportDto(full);
+        model.addAttribute("tokenLive", formatter.format(Instant.ofEpochSecond(token.getExpiresIn())));
         model.addAttribute("hhUserDto", hhUserDto);
         model.addAttribute("resumeList", myResumeList.getItems());
-        model.addAttribute("vacancyList", vacancyList);
-
+        model.addAttribute("daily", dailyReportDto);
+        model.addAttribute("full", fullReportDto);
     }
 
 

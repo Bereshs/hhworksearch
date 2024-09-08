@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.context.ActiveProfiles;
 import ru.bereshs.hhworksearch.config.KafkaProducerConfig;
 import ru.bereshs.hhworksearch.config.SchedulerConfig;
-import ru.bereshs.hhworksearch.controller.AuthorizationController;
+import ru.bereshs.hhworksearch.controller.web.AuthorizationController;
 import ru.bereshs.hhworksearch.controller.ManagementController;
 import ru.bereshs.hhworksearch.hhapiclient.impl.HeadHunterClientRestTemplate;
 import ru.bereshs.hhworksearch.producer.KafkaProducerImpl;

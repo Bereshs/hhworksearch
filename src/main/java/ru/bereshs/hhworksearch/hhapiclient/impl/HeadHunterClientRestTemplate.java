@@ -16,36 +16,39 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.config.AppConfig;
+import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.hhapiclient.HeadHunterClient;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhErrorDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
+import ru.bereshs.hhworksearch.model.ParameterEntity;
+import ru.bereshs.hhworksearch.model.ParameterType;
 import ru.bereshs.hhworksearch.service.KeyEntityService;
+import ru.bereshs.hhworksearch.service.ParameterEntityService;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 @Service
 public class HeadHunterClientRestTemplate implements HeadHunterClient {
-    private final AppConfig config;
+
     @Getter
     private final OAuth20Service authService;
 
-
+    private final AppConfig config;
 
     @Autowired
-    public HeadHunterClientRestTemplate(AppConfig config) {
+    public HeadHunterClientRestTemplate(ParameterEntityService parameterService, AppConfig config) throws HhWorkSearchException {
         this.config = config;
+        ParameterEntity optional = parameterService.getByType(ParameterType.CLIENT_ID);
+        ParameterEntity clientSecret = parameterService.getByType(ParameterType.CLIENT_SECRET);
 
-        if (config.getClientSecret().length() < 5) {
+        if (clientSecret.getData().length() < 5) {
             this.authService = null;
         } else {
-            authService = new ServiceBuilder(config.getClientId())
-                    .apiSecret(config.getClientSecret())
+            authService = new ServiceBuilder(optional.getData())
+                    .apiSecret(clientSecret.getData())
                     .callback(config.getHhApiCallback())
                     .build(HHApi.instance());
         }
@@ -62,7 +65,6 @@ public class HeadHunterClientRestTemplate implements HeadHunterClient {
         Response response = authService.execute(request);
         return response;
     }
-
 
 
     @Loggable

@@ -8,22 +8,37 @@ h2 {
 }
 .header {
     width: 98%;
-    background-color: dimgrey;
     padding-left: 1%;
     margin: 2px;
+    border: 1px solid #596e79;
     font-weight: bold;
-    border: 1px solid black;
+    font-size: 18px;
+    text-align: -webkit-center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #dfd3c3;
 }
+
+.title{
+    width: 98%;
+    background-color: #c7b198;
+    padding-left: 1%;
+    margin: 2px;
+    border: 1px solid #596e79;
+    font-weight: bold;
+}
+
+
 .main {
     width: 60%;
     text-align: left;
-    background-color: darkgray;
+    background-color: #f0ece2;
     padding: 5px;
-    border: 1px solid black;
+    border: 1px solid #596e79;
     border-radius: 5px;
 }
 .trtwo{
-    background-color: rgb(128, 128, 128);
+    background-color: #dfd3c3;
     padding: 5px;
 }
 .trone {
@@ -42,3 +57,29 @@ a:link {
     display: inline;
     width: 100%;
 }
+.headerLineMany{
+    display: ruby;
+}
+
+.item-list{
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid #596e79;
+    border-radius: 5px;
+    background-color: #dfd3c3;
+    width: fit-content;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.item-main{
+    display: ruby;
+    width: 100%;
+}
+
+.item-center{
+    text-align: -webkit-center;
+    padding-bottom: 5px;
+    padding-top: 7px;
+}
+

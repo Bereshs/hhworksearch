@@ -27,6 +27,24 @@ public class SkillsEntityService {
         return skillsEntityRepository.getSkillsEntityByName(name).orElseThrow(() -> new HhWorkSearchException("Skill name: " + name + " not found in database"));
     }
 
+    public void update(Long id, SkillEntity entity) throws HhWorkSearchException {
+        SkillEntity entityDb;
+        if (id.equals(0L)) {
+            entityDb = new SkillEntity();
+        } else {
+            entityDb = getById(id);
+        }
+
+        if (entity.getName() != null && !entity.getName().equals(entityDb.getName())) {
+            entityDb.setName(entity.getName());
+        }
+
+        if (entity.getDescription() != null && !entity.getDescription().equals(entityDb.getDescription())) {
+            entityDb.setDescription(entity.getDescription());
+        }
+        save(entityDb);
+    }
+
     public void save(SkillEntity entity) {
         skillsEntityRepository.save(entity);
     }
@@ -34,7 +52,6 @@ public class SkillsEntityService {
     public void saveAll(List<SkillEntity> entityList) {
         skillsEntityRepository.saveAll(entityList);
     }
-
 
 
     public List<SkillEntity> findAll() {
@@ -71,9 +88,6 @@ public class SkillsEntityService {
     }
 
 
-
-
-
     public List<SkillEntity> extractVacancySkills(FilteredVacancy vacancy) {
         List<SkillEntity> skills = findAll();
         List<SkillEntity> result = new ArrayList<>();
@@ -106,4 +120,7 @@ public class SkillsEntityService {
         return result;
     }
 
+    public void delete(SkillEntity skill) {
+        skillsEntityRepository.delete(skill);
+    }
 }

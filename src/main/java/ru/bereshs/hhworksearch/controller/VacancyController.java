@@ -67,12 +67,13 @@ public class VacancyController {
         return "ok";
     }
 
+    @Deprecated
     @Operation(summary = "Сопроводительное письмо для вакансии")
     @GetMapping("/api/vacancy/{id}/message")
     public String getVacancyMessage(@PathVariable String id) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         HhVacancyDto vacancyDto = service.getVacancyById(id);
 
-        MessageEntity message = messageEntityService.getMessageById(1);
+        MessageEntity message = messageEntityService.getById(1);
         List<SkillEntity> skills = skillsEntityService.extractVacancySkills(vacancyDto);
         return message.getMessage(
                 skillsEntityService.updateList(skills),

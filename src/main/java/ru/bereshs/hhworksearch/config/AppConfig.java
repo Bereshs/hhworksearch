@@ -3,6 +3,7 @@ package ru.bereshs.hhworksearch.config;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -15,8 +16,7 @@ import static java.util.Objects.isNull;
 @Component
 @ConfigurationProperties(prefix = "app")
 @PropertySource({
-        "classpath:application.properties",
-        "classpath:security.properties"
+        "classpath:application.yaml"
 })
 
 public class AppConfig {
@@ -30,12 +30,12 @@ public class AppConfig {
     String hhApiTokenUri;
     String hhPerPageParameter;
     String hhResumesPath;
-    String clientId;
-    String clientSecret;
-    String telegramToken;
-    String telegramChatId;
-    String userAgent;
     String hhApiAuthorization;
+
+    @Value("${spring.application.name}")
+    private String appName;
+    @Value("${spring.application.version}")
+    private String appVersion;
 
 
     public String getVacancyConnectionString(Integer page, String key) {
@@ -65,7 +65,6 @@ public class AppConfig {
                 "order_by=updated_at" + hhPerPageParameter;
     }
 
-
     public String getResumeViewsConnectionString(String resumeId) {
         return hhResumesPath + resumeId + "/views";
     }
@@ -91,8 +90,10 @@ public class AppConfig {
         return "https://api.hh.ru/negotiations";
     }
     public String getMeConnectionString() {return "https://api.hh.ru/me";}
-    public String getAuthorizationConnectionString() {
-        return getHhApiAuthorization()+"?response_type=code&"
-                +"client_id="+getClientId();
+
+
+    public String getUserAgent() {
+        return appName+"-"+appVersion;
     }
 }
+

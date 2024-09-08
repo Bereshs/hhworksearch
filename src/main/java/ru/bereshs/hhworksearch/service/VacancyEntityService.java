@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.mapper.AppMapper;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
-import ru.bereshs.hhworksearch.model.dto.DailyReportDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhNegotiationsDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
+import ru.bereshs.hhworksearch.model.dto.ReportDto;
 import ru.bereshs.hhworksearch.repository.VacancyEntityRepository;
 
 import java.time.LocalDateTime;
@@ -22,6 +22,7 @@ public class VacancyEntityService {
 
     private final VacancyEntityRepository vacancyEntityRepository;
     private final AppMapper mapper;
+    private final DailyReportService reportService;
 
     public List<VacancyEntity> getVacancyListFromListDto(HhListDto<HhNegotiationsDto> negotiationsList) {
         return negotiationsList.getItems().stream().map(entity -> {
@@ -36,10 +37,19 @@ public class VacancyEntityService {
         save(vacancy);
     }
 
+    public List<VacancyEntity> getVacancyEntityByTimeStampAfter(LocalDateTime date) {
+        return vacancyEntityRepository.getVacancyEntitiesByTimeStampAfter(date);
+    }
+
     public String getDaily() {
-        var vacancyEntities = vacancyEntityRepository.getVacancyEntitiesByTimeStampAfter(LocalDateTime.now().minusDays(1));
-        DailyReportDto dailyReportDto = new DailyReportDto(vacancyEntities);
-        return dailyReportDto.toString();
+        var vacancyEntities = getVacancyEntityByTimeStampAfter(LocalDateTime.now().minusDays(1));
+
+        ReportDto reportDto = reportService.getReportDto(vacancyEntities);
+
+//        DailyReportDto dailyReportDto = new DailyReportDto(vacancyEntities);
+//        return dailyReportDto.toString();
+
+        return reportService.getString(reportDto);
     }
 
     public Optional<VacancyEntity> getByHhId(String hhId) {
@@ -122,4 +132,7 @@ public class VacancyEntityService {
         });
     }
 
+    public List<VacancyEntity> getAll() {
+        return vacancyEntityRepository.findAll();
+    }
 }

@@ -29,6 +29,7 @@ public class ResumeController {
     private final ResumeEntityService resumeEntityService;
 
 
+    @Deprecated
     @Operation(summary = "Отправка списка скилов")
     @PostMapping("/api/resume/skill_set")
     public String postSkillSet(@RequestBody List<SkillEntity> skills) {
@@ -36,6 +37,7 @@ public class ResumeController {
         return "ok";
     }
 
+    @Deprecated
     @Operation(summary = "Изменение скила")
     @PatchMapping("/api/resume/skill_set/{id}")
     public String patchSkillEntityById(@PathVariable long id, @RequestBody SkillEntity entityDto) throws HhWorkSearchException {
@@ -43,6 +45,7 @@ public class ResumeController {
         return "ok";
     }
 
+    @Deprecated
     @Operation(summary = "Получение списка скилов")
     @GetMapping("/api/resume/skill_set")
     public HhListDto<SkillEntity> getSkillsSet() {
@@ -50,6 +53,7 @@ public class ResumeController {
     }
 
 
+    @Deprecated
     @Operation(summary = "Добавления сопроводительного письма")
     @PostMapping("/api/resume/message")
     public String postMessage(@RequestBody MessageEntity messageDto) {
@@ -57,6 +61,7 @@ public class ResumeController {
         return "ok";
     }
 
+    @Deprecated
     @Operation(summary = "Изменение сопроводительного письма")
     @PatchMapping("/api/resume/message/{id}")
     public String patchMessageById(@RequestBody MessageEntity messageDto, @PathVariable long id) throws HhWorkSearchException {

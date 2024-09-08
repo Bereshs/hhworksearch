@@ -10,7 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import ru.bereshs.hhworksearch.config.KafkaProducerConfig;
 import ru.bereshs.hhworksearch.config.SchedulerConfig;
-import ru.bereshs.hhworksearch.controller.AuthorizationController;
+import ru.bereshs.hhworksearch.controller.web.AuthorizationController;
 import ru.bereshs.hhworksearch.controller.ManagementController;
 import ru.bereshs.hhworksearch.model.FilterScope;
 import ru.bereshs.hhworksearch.hhapiclient.impl.HeadHunterClientRestTemplate;
@@ -54,9 +54,9 @@ class FilterEntityServiceTest {
     private List<FilterEntity> filterEntityListExperience;
 
     private VacancyEntity vacancy;
-    private final String filterScopeExperienceParameter = FilterScope.EXPERIENCE.toString().toLowerCase();
+    private final FilterScope filterScopeExperienceParameter = FilterScope.EXPERIENCE;
     private static final String BETWEEN_1_AND_3 ="between1and3";
-    private final String filterScopeNameParameter = FilterScope.NAME.toString().toLowerCase();
+    private final FilterScope filterScopeNameParameter = FilterScope.NAME;
 
     @BeforeEach
     void setup() {

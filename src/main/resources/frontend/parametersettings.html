@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>bereshs HeadHunter WorkSearch interface</title>
+    <meta name="description" content="Панель управления HeadHunter workSearch">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="css/style.css?3">
+</head>
+<body>
+<div class="main">
+    <div>
+        <div class="header">
+            <p class="headerLine">Настройки параметров работы приложения</p>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div class="resume">
+        <div class="title">
+            <p class="headerLine"> Все значения должны быть заполнены</p>
+        </div>
+        <div class="resumeTable">
+            <div class="userTable">
+                <table>
+                    <tr class="trtwo">
+                        <td style="width: 40%" th:text="${useragent.name}">Параметер</td>
+                        <td th:text="${useragent.description}"></td>
+                    </tr>
+                    <tr class="trtwo" th:each="str: ${parameters}">
+                        <td style="width: 40%" th:text="${str.name}">Параметер</td>
+                        <td><a th:href="@{'/editelement?name=parameter&id='+${str.id}+'&scope='+${str.name}}"
+                               th:text="${str.description}"></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
