@@ -17,7 +17,8 @@
         <div>
             <div class="item-main">
                 <div th:each="str: ${keyWords}">
-                    <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"  th:text="${str.name}">one</a>
+                    <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"
+                       th:text="${str.name}">one</a>
                 </div>
             </div>
             <div class="item-main">
@@ -32,7 +33,8 @@
         <div>
             <div class="item-main">
                 <div th:each="str: ${experience}">
-                    <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"  th:text="${str.name}">one</a>
+                    <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"
+                       th:text="${str.name}">one</a>
                 </div>
             </div>
             <div class="item-main">
@@ -46,11 +48,11 @@
         </div>
         <div class="item-main">
             <div th:each="str: ${name}">
-                <a th:href="@{'/editelement?name=filter&id='+${str.id}}"  class="item-list"  th:text="${str.name}">one</a>
+                <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list" th:text="${str.name}">one</a>
             </div>
         </div>
         <div class="item-main">
-            <a th:href="@{'/editelement?name=filter&id=0&scope=NAME'}"class="item-list">...</a>
+            <a th:href="@{'/editelement?name=filter&id=0&scope=NAME'}" class="item-list">...</a>
         </div>
     </div>
     <div>
@@ -60,7 +62,8 @@
         <div>
             <div class="item-main">
                 <div th:each="str: ${description}">
-                    <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"  th:text="${str.name}">one</a>
+                    <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"
+                       th:text="${str.name}">one</a>
                 </div>
             </div>
             <div class="item-main">
@@ -75,7 +78,8 @@
         <div>
             <div class="item-main">
                 <div th:each="str: ${employer}">
-                <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"  th:text="${str.name}">one</a>
+                    <a th:href="@{'/editelement?name=filter&id='+${str.id}}" class="item-list"
+                       th:text="${str.name}">one</a>
                 </div>
             </div>
         </div>

@@ -25,8 +25,8 @@
 
         </div>
         <div>
-            <div class="item-main">
-                <a th:href="@{'/editelement?name=header&id='+${header.id}}" class="item-list" th:text="${header.description}">Это только пример</a>
+            <div class="item-list">
+                <a th:href="@{'/editelement?name=header&id='+${header.id}}" th:text="${header.description}">Это только пример</a>
             </div>
         </div>
         <div th:if="${header.description!='Нет данных'}" class="item-main">
@@ -38,11 +38,11 @@
             <p class="headerLine">Навыки</p>
         </div>
         <div>
-            <div class="item-main" th:each="skill: ${skills}">
-                <a th:href="@{'/editelement?name=skill&id='+${skill.id}}"  class="item-list" th:text="${skill.description}">Это только пример</a>
+            <div class="item-list" th:each="skill: ${skills}">
+                <a th:href="@{'/editelement?name=skill&id='+${skill.id}}"   th:text="${skill.description}">Это только пример</a>
             </div>
-            <div class="item-main">
-                <a th:href="@{'/editelement?name=skill&id=0'}" class="item-list">...</a>
+            <div class="item-list">
+                <a th:href="@{'/editelement?name=skill&id=0'}">...</a>
             </div>
         </div>
     </div>
@@ -51,8 +51,8 @@
                 <p class="headerLine">Окончание </p>
         </div>
         <div>
-            <div class="item-main">
-                <a th:href="@{'/editelement?name=footer&id='+${footer.id}}" class="item-list" th:text="${footer.description}">Это только пример</a>
+            <div class="item-list">
+                <a th:href="@{'/editelement?name=footer&id='+${footer.id}}" th:text="${footer.description}">Это только пример</a>
             </div>
             <div th:if="${footer.description!='Нет данных'}" class="item-main">
                 <a th:href="@{'/editelement?name=footer&id=0'}" class="item-list">...</a>

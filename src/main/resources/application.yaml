@@ -26,7 +26,7 @@ spring:
 app:
   hh-api-uri: https://api.hh.ru
   hh-api-callback: http://localhost:8080/authorization
-  hh-api-token-uri: https://hh.ru/oauth/token
+  hh-api-token-uri: https://api.hh.ru/token
   hh-vacancy: /vacancy
   hh-resume:  /resume
   hh-per-page-parameter: &per_page=100

@@ -93,7 +93,7 @@ public class AppConfig {
 
 
     public String getUserAgent() {
-        return appName+"-"+appVersion;
+        return appName;
     }
 }
 

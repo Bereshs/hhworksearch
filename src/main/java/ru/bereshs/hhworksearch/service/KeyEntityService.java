@@ -37,8 +37,9 @@ public class KeyEntityService {
     public void saveToken(KeyEntity key, OAuth2AccessToken token) {
         key.set(token);
         key.setTime(LocalDateTime.now());
-        keysEntityRepository.save(key);
+        save(key);
     }
+
 
     public boolean validateKey(KeyEntity key) {
         return key.isValid();
@@ -53,4 +54,5 @@ public class KeyEntityService {
     public void save(KeyEntity key) {
         keysEntityRepository.saveAndFlush(key);
     }
+
 }

@@ -19,7 +19,9 @@ import ru.bereshs.hhworksearch.service.*;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -76,14 +78,18 @@ public class AuthorizationController {
 
 
     @RequestMapping("/authorized")
-    public String authorizedPage(Model model) throws IOException, ExecutionException, InterruptedException {
+    public String authorizedPage(Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
         OAuth2AccessToken token = service.getToken();
-        try {
+    /*    try {
             createModel(model, token);
         } catch (HhWorkSearchException e) {
             keyEntityService.invalidToken(1L);
             return "redirect:/";
         }
+
+*/
+        createModel(model, token);
+
         return "authorized";
     }
 
@@ -97,7 +103,7 @@ public class AuthorizationController {
             throw new HhWorkSearchException("HhService authorization error");
         }
         hhUserDto.set(mePageBody);
-        List<VacancyEntity> daily = vacancyEntityService.getVacancyEntityByTimeStampAfter(LocalDateTime.now().minusDays(1));
+        List<VacancyEntity> daily = vacancyEntityService.getVacancyEntityByTimeStampAfter(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT));
         ReportDto dailyReportDto = reportService.getReportDto(daily);
         List<VacancyEntity> full = vacancyEntityService.getAll();
 

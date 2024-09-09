@@ -15,8 +15,8 @@
             <div class="title">
                 <p class="headerLine">Данные пользователя</p>
             </div>
-            <div class="userTable">
-                <table>
+            <div>
+                <table class="tbl">
                     <tr class="trtwo">
                         <td>Id</td>
                         <td th:text="${hhUserDto.getId}">771222222</td>
@@ -40,8 +40,8 @@
             <div class="title">
                 <p class="headerLine">Резюме</p>
             </div>
-            <div class="resumeTable">
-                <table>
+            <div>
+                <table class="tbl">
                     <tr th:each="resume: ${resumeList}" class="trtwo">
                         <td th:text="${resume.title}">Java разработчик</td>
                         <td> none</td>
@@ -57,38 +57,35 @@
             <div class="title">
                 <p class="headerLine"> Сегодня</p>
             </div>
-            <div class="resumeTable">
-                <div class="userTable">
-                    <table>
-                        <tr class="trtwo">
-                            <td style="width: 40%">Всего записей</td>
-                            <td th:text="${daily.total}">0</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Отправлено запросов</td>
-                            <td th:text="${daily.requested}">0</td>
-                        </tr>
-                        <tr class="trtwo">
-                            <td style="width: 40%">Приглашений</td>
-                            <td th:text="${daily.invited}">0</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Отказов</td>
-                            <td th:text="${daily.discarded}">0</td>
-                        </tr>
-                        <tr>
-                            <td style="width: 40%">Зарплата</td>
-                            <td th:text="${daily.salary}">0</td>
-                        </tr>
-                    </table>
-                </div>
+            <div>
+                <table class="tbl">
+                    <tr class="trtwo">
+                        <td style="width: 40%">Всего записей</td>
+                        <td th:text="${daily.total}">0</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%">Отправлено запросов</td>
+                        <td th:text="${daily.requested}">0</td>
+                    </tr>
+                    <tr class="trtwo">
+                        <td style="width: 40%">Приглашений</td>
+                        <td th:text="${daily.invited}">0</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%">Отказов</td>
+                        <td th:text="${daily.discarded}">0</td>
+                    </tr>
+                    <tr >
+                        <td class="trtwo" style="width: 40%">Зарплата</td>
+                        <td class="trtwo" th:text="${daily.salary}">0</td>
+                    </tr>
+                </table>
             </div>
             <div class="title">
                 <p class="headerLine"> За все время</p>
             </div>
-            <div class="resumeTable">
-                <div class="userTable">
-                    <table>
+            <div>
+                    <table  class="tbl">
                         <tr class="trtwo">
                             <td style="width: 40%">Всего записей</td>
                             <td th:text="${full.total}">0</td>
@@ -106,11 +103,10 @@
                             <td th:text="${full.discarded}">0</td>
                         </tr>
                         <tr>
-                            <td style="width: 40%">Зарплата</td>
-                            <td th:text="${full.salary}">0</td>
+                            <td class="trtwo" style="width: 40%">Зарплата</td>
+                            <td class="trtwo" th:text="${full.salary}">0</td>
                         </tr>
                     </table>
-                </div>
             </div>
         </div>
 
