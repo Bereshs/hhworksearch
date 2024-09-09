@@ -17,12 +17,7 @@ spring:
   kafka:
     bootstrap-servers: 192.168.1.10:9094
     topic: tmessage
-  web:
-    resources:
-      static-locations: classpath:/frontend/
-  thymeleaf:
-    prefix: classpath:/frontend/
-    suffix: .html
+
 app:
   hh-api-uri: https://api.hh.ru
   hh-api-callback: http://localhost:8080/authorization

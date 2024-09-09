@@ -6,13 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/editelement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/editelement.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/parametersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/parametersettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/HhWorkSearchApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/HhWorkSearchApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/authorized.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/editbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/editbox.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/editelement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/editelement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/filtersettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/negotiationsettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/parametersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/parametersettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/vacancy.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/vacancy.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +101,8 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates/fragments" />
       <recent name="$PROJECT_DIR$/src/main/resources/frontend" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
@@ -306,7 +315,7 @@
       <workItem from="1724353609924" duration="692000" />
       <workItem from="1724783248281" duration="120000" />
       <workItem from="1724831596295" duration="117000" />
-      <workItem from="1725686443176" duration="110780000" />
+      <workItem from="1725686443176" duration="113423000" />
     </task>
     <servers />
   </component>
