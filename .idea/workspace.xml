@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/AuthorizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/AuthorizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/bereshs/hhworksearch/controller/AuthorizationControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/bereshs/hhworksearch/service/SchedulerServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ru/bereshs/hhworksearch/service/SchedulerServiceTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -302,7 +297,7 @@
       <workItem from="1724353609924" duration="692000" />
       <workItem from="1724783248281" duration="120000" />
       <workItem from="1724831596295" duration="117000" />
-      <workItem from="1725686443176" duration="109801000" />
+      <workItem from="1725686443176" duration="110114000" />
     </task>
     <servers />
   </component>
