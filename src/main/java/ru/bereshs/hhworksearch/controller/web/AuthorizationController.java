@@ -84,6 +84,9 @@ public class AuthorizationController {
             createModel(model, token);
             return "authorized";
         } catch (HhworkSearchTokenException ex) {
+            ParameterEntity parameter = parameterService.getByType(ParameterType.CLIENT_ID);
+            String connectionString = config.getHhApiAuthorization() + "?response_type=code&" + "client_id=" + parameter.getData();
+            model.addAttribute("connectionString", connectionString);
             model.addAttribute("tokenLive", ex.getMessage());
             return "/index";
         }
@@ -96,7 +99,7 @@ public class AuthorizationController {
         var mePageBody = service.getMePageBody();
 
         if (mePageBody.get("description") != null && mePageBody.get("description").equals("Forbidden")) {
-            throw new HhWorkSearchException("HhService authorization error");
+            throw new HhworkSearchTokenException("HhService authorization error");
         }
         hhUserDto.set(mePageBody);
         List<VacancyEntity> daily = vacancyEntityService.getVacancyEntityByTimeStampAfter(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT));

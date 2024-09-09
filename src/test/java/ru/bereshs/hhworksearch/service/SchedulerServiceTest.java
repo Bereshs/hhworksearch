@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.hhapiclient.dto.*;
 import ru.bereshs.hhworksearch.producer.KafkaProducer;
 
@@ -35,7 +36,7 @@ class SchedulerServiceTest {
     private KafkaProducer producer;
 
     @Test
-    void dailyLightTaskRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    void dailyLightTaskRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         Mockito.when(service.getPageRecommendedVacancy(Mockito.anyInt(), Mockito.any())).thenReturn(getHhVacancyDtoList());
         Mockito.when(service.updateResume(Mockito.any())).thenReturn(getResumeDto());
         schedulerService.dailyLightTaskRequest();
@@ -43,21 +44,21 @@ class SchedulerServiceTest {
     }
 
     @Test
-    void dailyFullRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    void dailyFullRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         Mockito.when(service.getHhNegotiationsDtoList()).thenReturn(getNegotiationsList());
         schedulerService.dailyFullRequest();
         Mockito.verify(vacancyEntityService, Mockito.times(1)).updateVacancyStatusFromNegotiationsList(Mockito.any());
     }
 
     @Test
-    void dailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    void dailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         Mockito.when(service.getPageRecommendedVacancyForResume(Mockito.any())).thenReturn(getHhVacancyDtoList());
         schedulerService.dailyRecommendedRequest();
         Mockito.verify(vacancyEntityService, Mockito.times(1)).saveAll(Mockito.any());
     }
 
     @Test
-    void updateVacancyStatus() throws IOException, ExecutionException, InterruptedException {
+    void updateVacancyStatus() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         Mockito.when(service.getHhNegotiationsDtoList()).thenReturn(getNegotiationsList());
         schedulerService.updateVacancyStatus();
         Mockito.verify(vacancyEntityService, Mockito.times(1)).updateVacancyStatusFromNegotiationsList(Mockito.any());
