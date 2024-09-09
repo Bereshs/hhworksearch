@@ -15,14 +15,6 @@ import java.time.LocalDateTime;
 public class AppMapperImpl implements AppMapper {
 
     @Override
-    public SettingsDto toSettingsDto(SettingsEntity settings) {
-        SettingsDto settingsDto = new SettingsDto();
-        settingsDto.setName(settings.getName());
-        settingsDto.setValue(settings.getValue());
-        return settingsDto;
-    }
-
-    @Override
     public EmployerEntity toEmployerEntity(HhSimpleListDto employerDto) {
         EmployerEntity entity = new EmployerEntity();
         entity.setHhId(employerDto.getId());
@@ -44,14 +36,6 @@ public class AppMapperImpl implements AppMapper {
         resume.setNextPublish(HhLocalDateTime.decodeLocalData(resumeDto.getNextPublishAt()));
 
         return resume;
-    }
-
-    @Override
-    public SettingsEntity toSettingsEntity(SettingsDto settingsDto) {
-        SettingsEntity settings = new SettingsEntity();
-        settings.setName(settingsDto.getName());
-        settings.setValue(settingsDto.getValue());
-        return settings;
     }
 
     @Override

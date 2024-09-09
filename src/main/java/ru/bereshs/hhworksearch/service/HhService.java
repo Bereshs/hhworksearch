@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.config.AppConfig;
 
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.model.KeyEntity;
 import ru.bereshs.hhworksearch.model.ParameterEntity;
 import ru.bereshs.hhworksearch.model.ParameterType;
@@ -33,16 +34,7 @@ public class HhService {
     private final KeyEntityService keyEntityService;
     private final ParameterEntityService parameterService;
 
-    public OAuth2AccessToken getToken() {
-        try {
-            return keyEntityService.getToken();
-        } catch (HhWorkSearchException e) {
-            KeyEntity key = keyEntityService.getByUserId(1L);
-            return getToken(key);
-        }
-    }
-
-    public HhResumeDto updateResume(ResumeEntity resume) throws IOException, ExecutionException, InterruptedException {
+    public HhResumeDto updateResume(ResumeEntity resume) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         if (resume.getNextPublish() == null || resume.getNextPublish().isBefore(LocalDateTime.now())) {
             postUpdateResume(resume.getHhId());
         }
@@ -50,7 +42,7 @@ public class HhService {
         return getResumeById(resume.getHhId());
     }
 
-    public List<HhVacancyDto> getFullVacancyInformation(List<HhVacancyDto> list) throws IOException, ExecutionException, InterruptedException {
+    public List<HhVacancyDto> getFullVacancyInformation(List<HhVacancyDto> list) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         List<HhVacancyDto> result = new ArrayList<>();
         for (HhVacancyDto element : list) {
             var vacancyDto = getVacancyById(element.getId());
@@ -59,27 +51,33 @@ public class HhService {
         return result;
     }
 
-    public OAuth2AccessToken getToken(KeyEntity key) {
+    public OAuth2AccessToken getToken() throws HhworkSearchTokenException {
         try {
-            if (!key.isValid() && key.getRefreshToken() != null) {
-                OAuth2AccessToken token = getRefreshToken(key.getRefreshToken());
-                keyEntityService.saveToken(key, token);
-                return token;
+            KeyEntity key = keyEntityService.getByUserId(1L);
+
+            if (keyEntityService.validateKey(key)) {
+                return keyEntityService.getToken();
             }
-            if (!key.isValid()) {
-                ParameterEntity clientId = parameterService.getByType(ParameterType.CLIENT_ID);
-                OAuth2AccessToken token = getAccessToken(clientId.getData());
+            if (LocalDateTime.now().isBefore(key.getExpireIn()) && key.getRefreshToken() != null) {
+                if(key.getRefreshToken().equals("refreshToken")){
+                    throw new HhworkSearchTokenException("Broken keyEntity");
+                }
+                OAuth2AccessToken token = getRefreshAccessToken(key.getRefreshToken());
                 keyEntityService.saveToken(key, token);
-                return token;
+                return key.getOAuth2AccessToken();
             }
-        } catch (IOException | ExecutionException | InterruptedException | HhWorkSearchException e) {
-            throw new RuntimeException(e);
+            ParameterEntity clientId = parameterService.getByType(ParameterType.CLIENT_ID);
+            OAuth2AccessToken token = getAccessToken(clientId.getData());
+            keyEntityService.saveToken(key, token);
+            return token;
+        } catch (HhWorkSearchException | IOException | ExecutionException | InterruptedException ex) {
+
+            throw new HhworkSearchTokenException("Token exception");
         }
-        return null;
     }
 
 
-    public OAuth2AccessToken getRefreshToken(String refreshToken) throws IOException, ExecutionException, InterruptedException {
+    public OAuth2AccessToken getRefreshAccessToken(String refreshToken) throws IOException, ExecutionException, InterruptedException {
         return headHunterClient.requestRefreshToken(refreshToken);
     }
 
@@ -88,7 +86,7 @@ public class HhService {
     }
 
     @Loggable
-    public List<HhVacancyDto> getRecommendedVacancy(String key) throws IOException, ExecutionException, InterruptedException {
+    public List<HhVacancyDto> getRecommendedVacancy(String key) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         HhListDto<HhVacancyDto> tempList = getPageRecommendedVacancy(0, key);
         List<HhVacancyDto> vacancyList = new ArrayList<>(tempList.getItems());
         for (int i = 1; i < tempList.getPages(); i++) {
@@ -98,14 +96,14 @@ public class HhService {
         return vacancyList;
     }
 
-    public HhVacancyDto getVacancyById(String vacancyId) throws IOException, ExecutionException, InterruptedException {
+    public HhVacancyDto getVacancyById(String vacancyId) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getVacancyConnectionString(vacancyId);
         return headHunterClient.executeObject(Verb.GET, uri, token, HhVacancyDto.class);
     }
 
     @Loggable
-    public HhListDto<HhNegotiationsDto> getHhNegotiationsDtoList() throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhNegotiationsDto> getHhNegotiationsDtoList() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getNegotiationsConnectionString();
         return headHunterClient.getObjects(Verb.GET, uri, token, HhNegotiationsDto.class);
@@ -113,34 +111,34 @@ public class HhService {
     }
 
     @Loggable
-    public HhListDto<HhViewsResume> getHhViewsResumeDtoList(String resumeId) throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhViewsResume> getHhViewsResumeDtoList(String resumeId) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getResumeViewsConnectionString(resumeId);
         return headHunterClient.getObjects(Verb.GET, uri, token, HhViewsResume.class);
     }
 
     @Loggable
-    public HhListDto<HhVacancyDto> getPageRecommendedVacancy(int page, String key) throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhVacancyDto> getPageRecommendedVacancy(int page, String key) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getVacancyConnectionString(page, key);
         return headHunterClient.getObjects(Verb.GET, uri, token, HhVacancyDto.class);
     }
 
     @Loggable
-    public HhListDto<HhVacancyDto> getPageRecommendedVacancyForResume(ResumeEntity resume) throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhVacancyDto> getPageRecommendedVacancyForResume(ResumeEntity resume) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getVacancyLikeResumeConnectionString(resume, 0);
         return headHunterClient.getObjects(Verb.GET, uri, token, HhVacancyDto.class);
     }
 
     @Loggable
-    public HhListDto<HhResumeDto> getActiveResumes() throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhResumeDto> getActiveResumes() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getResumesConnectionString();
         return headHunterClient.getObjects(Verb.GET, uri, token, HhResumeDto.class);
     }
 
-    public HhResumeDto getResumeById(String resumeId) throws IOException, ExecutionException, InterruptedException {
+    public HhResumeDto getResumeById(String resumeId) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getResumeByIdConnectrinString(resumeId);
         return headHunterClient.executeObject(Verb.GET, uri, token, HhResumeDto.class);
@@ -148,7 +146,7 @@ public class HhService {
 
 
     @Loggable
-    public Response postNegotiation(HashMap<String, String> body) {
+    public Response postNegotiation(HashMap<String, String> body) throws HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getNegotiationPostConnetcionString();
         try (Response response = headHunterClient.executeWithBody(Verb.POST, uri, token, body)) {
@@ -160,7 +158,7 @@ public class HhService {
 
 
     @Loggable
-    public HashMap<String, ?> getMePageBody() throws IOException, ExecutionException, InterruptedException {
+    public HashMap<String, ?> getMePageBody() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getMeConnectionString();
         return stringToMap(headHunterClient.execute(Verb.GET, uri, token).getBody());
@@ -168,7 +166,7 @@ public class HhService {
     }
 
     @Loggable
-    public void postUpdateResume(String id) throws IOException, ExecutionException, InterruptedException {
+    public void postUpdateResume(String id) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         OAuth2AccessToken token = getToken();
         String uri = appConfig.getPostResume(id);
         var result = headHunterClient.execute(Verb.POST, uri, token);

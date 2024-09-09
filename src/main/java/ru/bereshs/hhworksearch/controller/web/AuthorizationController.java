@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.bereshs.hhworksearch.config.AppConfig;
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.model.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
@@ -24,7 +25,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @Controller
@@ -61,13 +61,13 @@ public class AuthorizationController {
 
         String connectionString = config.getHhApiAuthorization() + "?response_type=code&" + "client_id=" + parameter.getData();
 
-        model.addAttribute("tokenLive", key.getExpireTime().format(formatter));
+        model.addAttribute("tokenLive", key.getExpireIn().format(formatter));
         model.addAttribute("connectionString", connectionString);
         return "/index";
     }
 
     @GetMapping("/authorization")
-    public String authorizationPage(@RequestParam(value = "code", required = false) String code, Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String authorizationPage(@RequestParam(value = "code", required = false) String code, Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         if (code == null) return "error";
         KeyEntity key = keyEntityService.getByUserId(1L);
         OAuth2AccessToken token = service.getAccessToken(code);
@@ -79,21 +79,17 @@ public class AuthorizationController {
 
     @RequestMapping("/authorized")
     public String authorizedPage(Model model) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
-        OAuth2AccessToken token = service.getToken();
-    /*    try {
+        try {
+            OAuth2AccessToken token = service.getToken();
             createModel(model, token);
-        } catch (HhWorkSearchException e) {
-            keyEntityService.invalidToken(1L);
-            return "redirect:/";
+            return "authorized";
+        } catch (HhworkSearchTokenException ex) {
+            model.addAttribute("tokenLive", ex.getMessage());
+            return "/index";
         }
-
-*/
-        createModel(model, token);
-
-        return "authorized";
     }
 
-    public void createModel(Model model, OAuth2AccessToken token) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public void createModel(Model model, OAuth2AccessToken token) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         HhListDto<HhResumeDto> myResumeList = service.getActiveResumes();
 
         HhUserDto hhUserDto = new HhUserDto();

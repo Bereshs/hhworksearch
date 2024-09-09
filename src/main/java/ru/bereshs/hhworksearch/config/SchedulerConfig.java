@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.service.*;
 
 import java.io.IOException;
@@ -20,17 +21,17 @@ public class SchedulerConfig {
     private final SchedulerService service;
 
     @Scheduled(cron = "0 0 9-18 * * *")
-    public void scheduleDayLightTask() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public void scheduleDayLightTask() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         service.dailyLightTaskRequest();
     }
 
     @Scheduled(cron = "0 30 19 * * *")
-    public void scheduleDailyFullRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
+    public void scheduleDailyFullRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
         service.dailyFullRequest();
     }
 
     @Scheduled(cron = "0 30 18 * * *")
-    public void scheduleDailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public void scheduleDailyRecommendedRequest() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         service.dailyRecommendedRequest();
     }
 

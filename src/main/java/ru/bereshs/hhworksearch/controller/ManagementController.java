@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.hhapiclient.dto.*;
 import ru.bereshs.hhworksearch.producer.KafkaProducer;
 import ru.bereshs.hhworksearch.service.*;
@@ -27,14 +28,14 @@ public class ManagementController {
 
     @Operation(summary = "Получение списка откликов")
     @GetMapping("/api/negotiations")
-    public HhListDto<HhNegotiationsDto> getNegotiationsList() throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhNegotiationsDto> getNegotiationsList() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         return service.getHhNegotiationsDtoList();
     }
 
 
     @Operation(summary = "Обработка сообщений")
     @PostMapping("/api/negotiations")
-    public String updateNegotiations() throws IOException, ExecutionException, InterruptedException {
+    public String updateNegotiations() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         var negotiationsList = service.getHhNegotiationsDtoList();
         vacancyEntityService.updateVacancyStatusFromNegotiationsList(negotiationsList);
         return "ok";
@@ -50,21 +51,21 @@ public class ManagementController {
 
     @Operation(summary = "Дневной ежечасный запрос")
     @GetMapping("/api/negotiations/hour")
-    public String hourScheduler() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String hourScheduler() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         schedulerService.dailyLightTaskRequest();
         return "ok";
     }
 
     @Operation(summary = "Отчет в 18:30")
     @GetMapping("/api/negotiations/18")
-    public String dailyRecommendedScheduler() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String dailyRecommendedScheduler() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         schedulerService.dailyRecommendedRequest();
         return "ok";
     }
 
     @Operation(summary = "Отчет в 19:30")
     @GetMapping("/api/negotiations/19")
-    public String dailyFullScheduler() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
+    public String dailyFullScheduler() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
         schedulerService.dailyFullRequest();
         return "ok";
     }

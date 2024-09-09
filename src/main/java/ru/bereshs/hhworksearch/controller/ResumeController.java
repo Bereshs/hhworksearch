@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.model.MessageEntity;
 import ru.bereshs.hhworksearch.model.ResumeEntity;
 import ru.bereshs.hhworksearch.model.SkillEntity;
@@ -72,7 +73,7 @@ public class ResumeController {
 
     @Operation(summary = "Обновление резюме по Id")
     @PostMapping("/api/resume/{id}/publish")
-    public String updateResume(@PathVariable String id) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String updateResume(@PathVariable String id) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         ResumeEntity resume = resumeEntityService.getByHhid(id);
         HhResumeDto resumeDto  = service.updateResume(resume);
         resumeEntityService.setNextPublish(resume, resumeDto.getNextPublishAt());
@@ -81,14 +82,14 @@ public class ResumeController {
 
     @Operation(summary = "Просмотры моего резюме")
     @GetMapping("/api/resume/views")
-    public HhListDto<HhViewsResume> getViewsResumeList() throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhViewsResume> getViewsResumeList() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         ResumeEntity resume = resumeEntityService.getDefault();
         return new HhListDto<>(service.getHhViewsResumeDtoList(resume.getHhId()).getItems());
     }
 
     @Operation(summary = "Мои резюме с hh.ru")
     @GetMapping("/api/resume/mine")
-    public HhListDto<HhResumeDto> getMineResumes() throws IOException, ExecutionException, InterruptedException {
+    public HhListDto<HhResumeDto> getMineResumes() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         return service.getActiveResumes();
     }
 
@@ -103,7 +104,7 @@ public class ResumeController {
 
     @Operation(summary = "Просмотр резюме")
     @GetMapping("/api/resume/{resumeId}")
-    public HhResumeDto getResumeById(@PathVariable String resumeId) throws IOException, ExecutionException, InterruptedException {
+    public HhResumeDto getResumeById(@PathVariable String resumeId) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         return service.getResumeById(resumeId);
     }
 

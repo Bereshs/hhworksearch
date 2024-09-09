@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.model.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
@@ -35,7 +36,7 @@ public class VacancyController {
 
     @Operation(summary = "Рекомендованные мне вакансии")
     @GetMapping("/api/vacancy/recommended")
-    public List<HhVacancyDto> getRecommendedVacancyList() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public List<HhVacancyDto> getRecommendedVacancyList() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         var vacancyList = getVacancyEntityList();
         var filteredList = filterEntityService.doFilterNameAndExperience(vacancyList);
         return saveUniqueList(filteredList);
@@ -44,13 +45,13 @@ public class VacancyController {
 
     @Operation(summary = "Просмотр вакансии")
     @GetMapping("/api/vacancy/{id}")
-    public HhVacancyDto viewVacancyPage(@PathVariable String id) throws  IOException, ExecutionException, InterruptedException {
+    public HhVacancyDto viewVacancyPage(@PathVariable String id) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         return service.getVacancyById(id);
     }
 
     @Operation(summary = "Отправка отклика на вакансию")
     @PostMapping("/api/vacancy/{vacancyId}/resume/{resumeId}")
-    public String postNegotiation(@PathVariable String vacancyId, @PathVariable String resumeId) throws HhWorkSearchException, IOException, ExecutionException, InterruptedException {
+    public String postNegotiation(@PathVariable String vacancyId, @PathVariable String resumeId) throws HhWorkSearchException, IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         VacancyEntity vacancyEntity = vacancyEntityService.getById(vacancyId).orElseThrow(() -> new HhWorkSearchException("Wrong vacancyId"));
         if (!vacancyEntity.isNotRequest()) {
             throw new HhWorkSearchException("Negotiation on vacancy already requested");
@@ -70,7 +71,7 @@ public class VacancyController {
     @Deprecated
     @Operation(summary = "Сопроводительное письмо для вакансии")
     @GetMapping("/api/vacancy/{id}/message")
-    public String getVacancyMessage(@PathVariable String id) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    public String getVacancyMessage(@PathVariable String id) throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         HhVacancyDto vacancyDto = service.getVacancyById(id);
 
         MessageEntity message = messageEntityService.getById(1);
@@ -83,7 +84,7 @@ public class VacancyController {
 
 
 
-    private List<HhVacancyDto> getVacancyEntityList() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    private List<HhVacancyDto> getVacancyEntityList() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         String key = filterEntityService.getKey();
         var list = service.getRecommendedVacancy(key);
         var employerList = employerEntityService.extractEmployers(list);

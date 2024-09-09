@@ -4,6 +4,7 @@ import com.github.scribejava.core.model.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.aop.Loggable;
+import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.model.ResumeEntity;
 import ru.bereshs.hhworksearch.model.SkillEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
@@ -31,7 +32,7 @@ public class SchedulerService {
     private final SkillsEntityService skillsEntityService;
 
     @Loggable
-    public void dailyLightTaskRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
+    public void dailyLightTaskRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
 
         List<HhVacancyDto> vacancyList = getPageRecommendedVacancy(getKey());
         postNegotiationWithRelevantVacancies(vacancyList);
@@ -39,7 +40,7 @@ public class SchedulerService {
     }
 
     @Loggable
-    public void dailyFullRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
+    public void dailyFullRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
         List<HhVacancyDto> vacancyList = getFullHhVacancy();
         postNegotiationWithRelevantVacancies(vacancyList);
         updateVacancyStatus();
@@ -47,13 +48,13 @@ public class SchedulerService {
     }
 
     @Loggable
-    public void dailyRecommendedRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
+    public void dailyRecommendedRequest() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
         List<HhVacancyDto> vacancyList = service.getPageRecommendedVacancyForResume(resumeEntityService.getDefault()).getItems();
         postNegotiationWithRelevantVacancies(vacancyList);
     }
 
 
-    public void updateVacancyStatus() throws InterruptedException, IOException, ExecutionException {
+    public void updateVacancyStatus() throws InterruptedException, IOException, ExecutionException, HhworkSearchTokenException {
         var negotiationsList = service.getHhNegotiationsDtoList();
         vacancyEntityService.updateVacancyStatusFromNegotiationsList(negotiationsList);
     }
@@ -63,7 +64,7 @@ public class SchedulerService {
         producer.produceDefault(message);
     }
 
-    private void postNegotiationWithRelevantVacancies(List<HhVacancyDto> vacancyList) throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
+    private void postNegotiationWithRelevantVacancies(List<HhVacancyDto> vacancyList) throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
         if (vacancyList.isEmpty()) return;
         var filtered = getRelevantVacancies(vacancyList);
         vacancyEntityService.saveAll(filtered);
@@ -72,14 +73,14 @@ public class SchedulerService {
     }
 
 
-    private void updateResume() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException {
+    private void updateResume() throws IOException, ExecutionException, InterruptedException, HhWorkSearchException, HhworkSearchTokenException {
         ResumeEntity resume = resumeEntityService.getDefault();
         HhResumeDto resumeDto = service.updateResume(resume);
         resumeEntityService.setNextPublish(resume, resumeDto.getNextPublishAt());
 
     }
 
-    private void postNegotiations(List<HhVacancyDto> filtered) throws InterruptedException, IOException, ExecutionException, HhWorkSearchException {
+    private void postNegotiations(List<HhVacancyDto> filtered) throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
         for (HhVacancyDto element : filtered) {
             var vacancyEntity = vacancyEntityService.getById(element.getId());
             if (vacancyEntity.isPresent() && !vacancyEntity.get().isNotRequest()) {
@@ -100,7 +101,7 @@ public class SchedulerService {
     }
 
     @Loggable
-    private List<HhVacancyDto> getRelevantVacancies(List<HhVacancyDto> vacancyList) throws InterruptedException, IOException, ExecutionException {
+    private List<HhVacancyDto> getRelevantVacancies(List<HhVacancyDto> vacancyList) throws InterruptedException, IOException, ExecutionException, HhworkSearchTokenException {
         List<HhVacancyDto> filtered = filterEntityService.doFilterNameAndExperience(vacancyList);
         List<HhVacancyDto> list = vacancyEntityService.getUnique(filtered);
         var full = service.getFullVacancyInformation(list);
@@ -123,7 +124,7 @@ public class SchedulerService {
             var listEmployer = employerEntityService.extractEmployers(list);
             employerEntityService.saveAll(listEmployer);
             return list;
-        } catch (IOException | ExecutionException e) {
+        } catch (IOException | ExecutionException | HhworkSearchTokenException e) {
             throw new RuntimeException(e);
         }
     }
@@ -131,7 +132,7 @@ public class SchedulerService {
     private List<HhVacancyDto> getPageRecommendedVacancy(String key) throws InterruptedException {
         try {
             return service.getPageRecommendedVacancy(0, key).getItems();
-        } catch (IOException | ExecutionException e) {
+        } catch (IOException | ExecutionException | HhworkSearchTokenException e) {
             throw new RuntimeException(e);
         }
     }

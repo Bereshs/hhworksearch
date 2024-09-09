@@ -68,8 +68,7 @@ public class HeadHunterClientRestTemplate implements HeadHunterClient {
     public Response execute(Verb verb, String uri, OAuth2AccessToken token) throws IOException, ExecutionException, InterruptedException {
         OAuthRequest request = new OAuthRequest(verb, uri);
         authService.signRequest(token, request);
-        Response response = authService.execute(request);
-        return response;
+        return authService.execute(request);
     }
 
     public boolean isForbidden(Response response) {

@@ -27,7 +27,13 @@ public class LoggingAspect {
         } else if (result instanceof String) {
             log.info("{}: method completed at {} ms and returned string with content {}", methodName, duration, result);
         } else if (result instanceof Response) {
-            log.info("{}: method completed at {} ms and returned response with message {}", methodName, duration, ((Response) result).getMessage());
+            Response response = (Response) result;
+            String message = response.getCode() + ": " + response.getMessage();
+            if (response.getCode() > 300) {
+                message += " body: " + response.getBody();
+            }
+            log.info("{}: method completed at {} ms and returned response with message {}", methodName, duration,
+                    message);
         } else {
             log.info("{}: method completed at {} ms", methodName, duration);
         }

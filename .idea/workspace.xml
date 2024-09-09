@@ -5,22 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/openfeign/HhFeignClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/exception/HhworkSearchTokenException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/aop/LoggingAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/aop/LoggingAspect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/config/SchedulerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/config/SchedulerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/ManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/ResumeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/ResumeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/VacancyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/VacancyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/exception/RestExceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/exception/RestExceptionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/AuthorizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/AuthorizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/openfeign/InnerFeignClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/openfeign/InnerFeignClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/hhapiclient/impl/HeadHunterClientRestTemplate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/hhapiclient/impl/HeadHunterClientRestTemplate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/mapper/AppMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/mapper/AppMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/mapper/AppMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/mapper/AppMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/model/KeyEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/model/KeyEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/model/SettingsEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/model/dto/SettingsDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/model/dto/SettingsDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/repository/KeyEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/repository/KeyEntityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/HhService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/HhService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/KeyEntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/KeyEntityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/include/editbox.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/include/editbox.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/include/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/include/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/include/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/include/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/SchedulerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/SchedulerService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +37,8 @@
         <option value="JUnit5 Test Class" />
         <option value="Record" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -102,6 +105,7 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/frontend" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -313,7 +317,7 @@
       <workItem from="1724353609924" duration="692000" />
       <workItem from="1724783248281" duration="120000" />
       <workItem from="1724831596295" duration="117000" />
-      <workItem from="1725686443176" duration="94565000" />
+      <workItem from="1725686443176" duration="108835000" />
     </task>
     <servers />
   </component>

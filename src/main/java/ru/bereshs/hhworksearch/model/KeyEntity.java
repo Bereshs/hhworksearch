@@ -4,6 +4,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 
 import java.time.LocalDateTime;
 
@@ -14,38 +15,45 @@ import java.time.LocalDateTime;
 public class KeyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private LocalDateTime time;
-    private String authorizationCode;
+    private Long id;
+    private LocalDateTime timeStamp;
     private String accessToken;
     private String refreshToken;
-    private Integer expiresIn;
-    private String tokenType;
-    private String scope;
-    private String clientId;
-    private String rowResponse;
+    private Long expiresIn;
     private Long userId;
-    public boolean isValid() {
-        if (expiresIn == null || authorizationCode == null) {
-            return false;
-        }
-        LocalDateTime expireTime = getExpireTime();
-        return LocalDateTime.now()
-                .isBefore(expireTime);
-    }
 
-    public LocalDateTime getExpireTime() {
-        if(expiresIn==null) {
+
+    public LocalDateTime getExpireIn() {
+        if (expiresIn == null) {
             return LocalDateTime.now().minusDays(7);
         }
-        return time.plusSeconds(expiresIn);//-3*60*60*24
+        return timeStamp.plusSeconds(expiresIn);
     }
-    public void set(OAuth2AccessToken token) {
+
+    public void set(OAuth2AccessToken token) throws HhWorkSearchException {
+        if (token == null ||
+                token.getRefreshToken() == null ||
+                token.getAccessToken() == null ||
+                token.getAccessToken().equals("accessToken") ||
+                token.getRefreshToken().equals("refreshToken") ||
+                token.getExpiresIn() == null) {
+            throw new HhWorkSearchException("Bad token credentials: accessToken: " + token.getAccessToken()
+                    + ",refreshToken: " + token.getRefreshToken() + ", expiresIn: " + token.getExpiresIn());
+        }
+
         setAccessToken(token.getAccessToken());
         setRefreshToken(token.getRefreshToken());
-        setExpiresIn(token.getExpiresIn());
-        setTokenType(token.getTokenType());
-        setScope(token.getScope());
-        setRowResponse(token.getRawResponse());
+        setExpiresIn(Long.valueOf(token.getExpiresIn()));
     }
+
+    public OAuth2AccessToken getOAuth2AccessToken() {
+        return new OAuth2AccessToken(getAccessToken(),
+                null,
+                expiresIn.intValue(),
+                getRefreshToken(),
+                null,
+                null);
+    }
+
 }
+
