@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="" />
+    <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/authorized.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/editelement.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/editelement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/filtersettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/negotiationsettings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/frontend/parametersettings.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/frontend/parametersettings.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,8 +94,8 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/resources/frontend" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="ru.bereshs.hhworksearch.controller" />
@@ -297,7 +306,7 @@
       <workItem from="1724353609924" duration="692000" />
       <workItem from="1724783248281" duration="120000" />
       <workItem from="1724831596295" duration="117000" />
-      <workItem from="1725686443176" duration="110114000" />
+      <workItem from="1725686443176" duration="110780000" />
     </task>
     <servers />
   </component>
