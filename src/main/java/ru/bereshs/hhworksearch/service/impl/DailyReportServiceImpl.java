@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 public class DailyReportServiceImpl implements DailyReportService {
 
     public ReportDto getReportDto(List<VacancyEntity> vacancyEntities) {
+        if (vacancyEntities == null || vacancyEntities.isEmpty()) {
+            return null;
+        }
+
         var report = vacancyEntities.stream().collect(Collectors.groupingBy(VacancyEntity::getStatus, Collectors.counting()));
         Long total = (long) vacancyEntities.size();
         Long requested = getLongOrNull(report, VacancyStatus.REQUEST);
@@ -27,6 +31,10 @@ public class DailyReportServiceImpl implements DailyReportService {
     }
 
     public List<SalaryList> getSalary(List<VacancyEntity> vacancyEntities) {
+        if (vacancyEntities == null || vacancyEntities.isEmpty()) {
+            return null;
+        }
+
         List<String> experienceList = getExperienceList(vacancyEntities);
         List<SalaryList> salaryList = new ArrayList<>();
         experienceList.forEach(experience -> {
@@ -37,26 +45,42 @@ public class DailyReportServiceImpl implements DailyReportService {
     }
 
     public List<String> getExperienceList(List<VacancyEntity> entities) {
+        if (entities == null || entities.isEmpty()) {
+            return null;
+        }
         return entities.stream().map(VacancyEntity::getExperience).distinct().toList();
     }
 
     public int getSalaryForExperience(List<VacancyEntity> entities, String experience) {
+        if (entities == null || experience == null || entities.isEmpty()) {
+            return 0;
+        }
         return (int) entities.stream().filter(entity -> entity.getExperience().equals(experience))
-                .filter(entity -> entity.getSalary().getTo() > 0L)
-                .mapToLong(entity -> entity.getSalary().getTo()).average().orElse(0D);
+                .filter(entity -> entity.getSalary() != null && entity.getSalary() > 0L)
+                .mapToLong(VacancyEntity::getSalary).average().orElse(0D);
     }
 
     private long getLongOrNull(Map<VacancyStatus, Long> report, VacancyStatus status) {
+        if (report == null || report.isEmpty() || status == null) {
+            return 0L;
+        }
+
         return report.get(status) != null ? report.get(status) : 0L;
     }
 
     private String getStringFromList(List<SalaryList> salary) {
+        if (salary == null) {
+            return "";
+        }
         StringBuilder stringBuilder = new StringBuilder();
         salary.forEach(stringBuilder::append);
         return stringBuilder.toString();
     }
 
     public String getString(ReportDto reportDto) {
+        if (reportDto == null) {
+            return null;
+        }
         return "Ежедневный отчет:\n" +
                 "\tвсего записей " + reportDto.total() + "\n" +
                 "\tотправлено запросов " + reportDto.requested() + "\n" +

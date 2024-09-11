@@ -3,20 +3,19 @@ package ru.bereshs.hhworksearch.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.yaml.snakeyaml.util.EnumUtils;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.mapper.SimpleDtoMapper;
 import ru.bereshs.hhworksearch.model.FilterEntity;
 import ru.bereshs.hhworksearch.model.FilterScope;
 import ru.bereshs.hhworksearch.model.dto.SimpleDto;
-import ru.bereshs.hhworksearch.service.FilterEntityService;
+import ru.bereshs.hhworksearch.service.impl.FilterEntityServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
 public class RestFilterController {
 
 
-    private final FilterEntityService service;
+    private final FilterEntityServiceImpl service;
     private final SimpleDtoMapper mapper;
 
     @DeleteMapping("/api/client/filter/{id}/")

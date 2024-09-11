@@ -15,7 +15,6 @@ import ru.bereshs.hhworksearch.service.FilterEntityService;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @AllArgsConstructor
@@ -56,7 +55,7 @@ public class FilterSettingsController {
         model.addAttribute("description", description);
 
 
-        return "/filtersettings";
+        return "filtersettings";
     }
 
     List<SimpleDto> simpleDtoFilter(List<FilterEntity> filter, FilterScope scope) {

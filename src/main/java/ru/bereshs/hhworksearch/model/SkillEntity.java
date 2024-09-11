@@ -27,6 +27,11 @@ public class SkillEntity {
         this.name = name;
     }
 
+    public SkillEntity(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public String toString() {
         return name + "-" + description;
     }

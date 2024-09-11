@@ -12,10 +12,8 @@ import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.config.AppConfig;
 
 import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
-import ru.bereshs.hhworksearch.model.KeyEntity;
-import ru.bereshs.hhworksearch.model.ParameterEntity;
-import ru.bereshs.hhworksearch.model.ParameterType;
-import ru.bereshs.hhworksearch.model.ResumeEntity;
+import ru.bereshs.hhworksearch.mapper.VacancyMapper;
+import ru.bereshs.hhworksearch.model.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.hhapiclient.HeadHunterClient;
 import ru.bereshs.hhworksearch.hhapiclient.dto.*;
@@ -33,6 +31,7 @@ public class HhService {
     private final AppConfig appConfig;
     private final KeyEntityService keyEntityService;
     private final ParameterEntityService parameterService;
+    private final VacancyMapper mapper;
 
     public HhResumeDto updateResume(ResumeEntity resume) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
         if (resume.getNextPublish() == null || resume.getNextPublish().isBefore(LocalDateTime.now())) {
@@ -42,11 +41,11 @@ public class HhService {
         return getResumeById(resume.getHhId());
     }
 
-    public List<HhVacancyDto> getFullVacancyInformation(List<HhVacancyDto> list) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
-        List<HhVacancyDto> result = new ArrayList<>();
-        for (HhVacancyDto element : list) {
-            var vacancyDto = getVacancyById(element.getId());
-            result.add(vacancyDto);
+    public List<VacancyEntity> getFullVacancyInformation(List<VacancyEntity> list) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
+        List<VacancyEntity> result = new ArrayList<>();
+        for (VacancyEntity element : list) {
+            var vacancyDto = getVacancyById(element.getHhId());
+            result.add(mapper.toVacancyEntity(vacancyDto));
         }
         return result;
     }
@@ -59,7 +58,7 @@ public class HhService {
                 return keyEntityService.getToken();
             }
             if (LocalDateTime.now().isBefore(key.getExpireIn()) && key.getRefreshToken() != null) {
-                if(key.getRefreshToken().equals("refreshToken")){
+                if (key.getRefreshToken().equals("refreshToken")) {
                     throw new HhworkSearchTokenException("Broken keyEntity");
                 }
                 OAuth2AccessToken token = getRefreshAccessToken(key.getRefreshToken());
@@ -108,13 +107,6 @@ public class HhService {
         String uri = appConfig.getNegotiationsConnectionString();
         return headHunterClient.getObjects(Verb.GET, uri, token, HhNegotiationsDto.class);
 
-    }
-
-    @Loggable
-    public HhListDto<HhViewsResume> getHhViewsResumeDtoList(String resumeId) throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
-        OAuth2AccessToken token = getToken();
-        String uri = appConfig.getResumeViewsConnectionString(resumeId);
-        return headHunterClient.getObjects(Verb.GET, uri, token, HhViewsResume.class);
     }
 
     @Loggable

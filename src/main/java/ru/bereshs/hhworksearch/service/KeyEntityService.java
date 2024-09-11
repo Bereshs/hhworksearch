@@ -31,6 +31,9 @@ public class KeyEntityService {
     }
 
     public void saveToken(KeyEntity key, OAuth2AccessToken token) throws HhWorkSearchException {
+        if (key == null || token == null) {
+            throw new HhWorkSearchException("Wrong parameters");
+        }
         key.set(token);
         if (validateKey(key)) {
             save(key);
@@ -39,7 +42,8 @@ public class KeyEntityService {
 
 
     public boolean validateKey(KeyEntity key) {
-        return key.getExpireIn() != null
+        return key != null
+                && key.getExpireIn() != null
                 && LocalDateTime.now().isBefore(key.getExpireIn())
                 && key.getAccessToken() != null
                 && key.getRefreshToken() != null
@@ -47,7 +51,10 @@ public class KeyEntityService {
                 && !key.getRefreshToken().equals("refreshToken");
     }
 
-    public void save(KeyEntity key) {
+    public void save(KeyEntity key)  {
+        if(key==null) {
+           return;
+        }
         key.setTimeStamp(LocalDateTime.now());
         keysEntityRepository.saveAndFlush(key);
     }

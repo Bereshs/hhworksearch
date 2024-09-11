@@ -7,12 +7,12 @@ import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.mapper.SimpleDtoMapper;
 import ru.bereshs.hhworksearch.model.MessageEntity;
 import ru.bereshs.hhworksearch.model.dto.SimpleDto;
-import ru.bereshs.hhworksearch.service.MessageEntityService;
+import ru.bereshs.hhworksearch.service.impl.MessageEntityServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
 public class RestMessageController {
-    private final MessageEntityService service;
+    private final MessageEntityServiceImpl service;
     private final SimpleDtoMapper mapper;
 
     @GetMapping("/api/client/footer/{id}/")
@@ -24,7 +24,7 @@ public class RestMessageController {
             return new SimpleDto(null, null, "Ваш текст");
         }
 
-        MessageEntity message = service.getById(id);
+        MessageEntity message = service.getById(id).orElseThrow(() -> new HhWorkSearchException("Wrong id"));
         if(message.getFooter()==null) {
             message.setFooter("Нет данных");
         }
@@ -58,7 +58,7 @@ public class RestMessageController {
             message.setFooter(dto.description());
             service.save(message);
         } else {
-            MessageEntity message = service.getById(id);
+            MessageEntity message = service.getById(id).orElseThrow(() -> new HhWorkSearchException("Wrong id"));
             message.setFooter(dto.description());
             service.update(id, message);
         }
@@ -76,7 +76,7 @@ public class RestMessageController {
             return new SimpleDto(null, null, "Ваш текст");
         }
 
-        MessageEntity message = service.getById(id);
+        MessageEntity message = service.getById(id).orElseThrow(()->new HhWorkSearchException("Wrong id"));
 
         if(message.getHeader()==null) {
             message.setHeader("Нет данных");
@@ -96,7 +96,7 @@ public class RestMessageController {
             message.setHeader(dto.description());
             service.save(message);
         } else {
-            MessageEntity message = service.getById(id);
+            MessageEntity message = service.getById(id).orElseThrow(()->new HhWorkSearchException("Wrong id"));
             message.setHeader(dto.description());
             service.update(id, message);
         }
@@ -108,7 +108,7 @@ public class RestMessageController {
             throw new HhWorkSearchException("Wrong parameters");
         }
 
-        MessageEntity message = service.getById(id);
+        MessageEntity message = service.getById(id).orElseThrow(()-> new HhWorkSearchException("Wrong id"));
 
         service.delete(message);
 

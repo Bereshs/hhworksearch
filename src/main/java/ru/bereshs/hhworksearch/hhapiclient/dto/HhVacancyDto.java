@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import ru.bereshs.hhworksearch.model.FilteredVacancy;
-import ru.bereshs.hhworksearch.hhapiclient.HhLocalDateTime;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,7 +14,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 @Slf4j
-public class HhVacancyDto implements HasEmployer, FilteredVacancy {
+public class HhVacancyDto implements HasEmployer {
     String id;
     String name;
     HhSimpleListDto area;
@@ -37,11 +35,13 @@ public class HhVacancyDto implements HasEmployer, FilteredVacancy {
     List<HhSimpleListDto> skills;
 
     public String getExperience() {
-        if (experience==null) {
+        if (experience == null) {
             experience = new HhSimpleListDto();
         }
         return experience.getId();
     }
+
+
 
     public void setDescription(String description) {
         if (description == null) {
@@ -59,7 +59,7 @@ public class HhVacancyDto implements HasEmployer, FilteredVacancy {
         return counters;
     }
 
-    @Override
+
     public List<String> getSkillStringList() {
         if (skills == null) {
             return null;
@@ -67,8 +67,13 @@ public class HhVacancyDto implements HasEmployer, FilteredVacancy {
         return skills.stream().map(HhSimpleListDto::getName).toList();
     }
 
+
     @Override
     public String toString() {
-        return "name:" + name + " description:" + description;
+        return "name:" + name
+                + " description:" + description
+                + " counters " + counters
+                + " skills " + skills;
     }
+
 }

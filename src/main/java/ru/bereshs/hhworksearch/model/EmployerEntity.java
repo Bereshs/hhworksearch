@@ -21,8 +21,6 @@ public class EmployerEntity implements Comparable<EmployerEntity> {
     private String name;
     @JsonProperty("url")
     private String url;
-    @JsonProperty("alternate_url")
-    private String alternateUrl;
 
     @Override
     public int compareTo(EmployerEntity employerEntity) {

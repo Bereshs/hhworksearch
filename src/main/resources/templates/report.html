@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header}">...</head>
+<body>
+<div class="main">
+    <div>
+        <div class="header">
+            <p class="headerLine">Детальный отчет</p>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div class="title">
+        <p class="headerLine"> За сегодня</p>
+    </div>
+    <div>
+        <table class="tbl">
+            <tr class="trtwo">
+                <td>Должность</td>
+                <td>Работадатель</td>
+                <td>%</td>
+                <td>Фильтр</td>
+                <td>Дата</td>
+                <td>Статус</td>
+            </tr>
+            <tr th:each="line,iter: ${list}" th:class="${iter.index%2==1}? 'trtwo': ''">
+                <td><a th:href="@{${line.url}}" th:text="${line.name}">Наименование</a></td>
+                <td><a th:href="@{${line.url}}" th:text="${line.employerName}">Работадатель</a></td>
+                <td><a th:href="@{${line.url}}" th:text="${line.percent}">%</a></td>
+                <td><a th:href="@{${line.url}}" th:text="${line.filterResult}">Фильтр</a></td>
+                <td><a th:href="@{${line.url}}" th:text="${line.createdAt}">Дата</a></td>
+                <td><a th:href="@{${line.url}}" th:text="${line.status}">Статус</a></td>
+            </tr>
+        </table>
+    </div>
+    <div th:replace="~{fragments/footer}">...</div>
+</div>
+</body>
+</html>

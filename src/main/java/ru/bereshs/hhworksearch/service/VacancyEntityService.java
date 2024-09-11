@@ -3,7 +3,8 @@ package ru.bereshs.hhworksearch.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.aop.Loggable;
-import ru.bereshs.hhworksearch.mapper.AppMapper;
+
+import ru.bereshs.hhworksearch.mapper.VacancyMapper;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhNegotiationsDto;
@@ -21,21 +22,8 @@ import java.util.Optional;
 public class VacancyEntityService {
 
     private final VacancyEntityRepository vacancyEntityRepository;
-    private final AppMapper mapper;
+    private final VacancyMapper mapper;
     private final DailyReportService reportService;
-
-    public List<VacancyEntity> getVacancyListFromListDto(HhListDto<HhNegotiationsDto> negotiationsList) {
-        return negotiationsList.getItems().stream().map(entity -> {
-            VacancyEntity vacancy = mapper.toVacancyEntity(entity.getVacancy());
-            vacancy.setStatus(entity.getState().getId());
-            return vacancy;
-        }).toList();
-    }
-
-    public void updateStatus(VacancyEntity vacancy, VacancyStatus status) {
-        vacancy.setStatus(status);
-        save(vacancy);
-    }
 
     public List<VacancyEntity> getVacancyEntityByTimeStampAfter(LocalDateTime date) {
         return vacancyEntityRepository.getVacancyEntitiesByTimeStampAfter(date);
@@ -54,28 +42,14 @@ public class VacancyEntityService {
     }
 
     @Loggable
-    public List<HhVacancyDto> getUnique(List<HhVacancyDto> vacancyList) {
-        return vacancyList.stream().filter(element -> vacancyEntityRepository.getByHhId(element.getId()).isEmpty()).toList();
+    public List<VacancyEntity> getUnique(List<VacancyEntity> vacancyList) {
+        return vacancyList.stream().filter(element -> vacancyEntityRepository.getByHhId(element.getHhId()).isEmpty()).toList();
     }
 
-    public void updateTimeStamp(List<HhVacancyDto> vacancyEntityList) {
-        vacancyEntityList.forEach(this::updateVacancyTimeStamp);
-    }
-
-    private void updateVacancyTimeStamp(HhVacancyDto element) {
-        var vacancyOpt = getByHhId(element.getId());
-        vacancyOpt.ifPresent(vacancy -> updateResponses(vacancy, element.getCounters().getTotalResponses()));
-    }
-
-    private void updateResponses(VacancyEntity vacancy, int responses) {
-        vacancy.setStatus(VacancyStatus.UPDATED);
-        vacancy.setResponses(responses);
-        save(vacancy);
-    }
-
-    public void saveAll(List<HhVacancyDto> vacancyEntityList) {
-        for (HhVacancyDto element : vacancyEntityList) {
-            VacancyEntity vacancy = getByVacancyDto(element);
+    public void saveAll(List<VacancyEntity> vacancyEntityList) {
+        for (VacancyEntity element : vacancyEntityList) {
+            VacancyEntity vacancy = getByHhId(element.getHhId()).orElse(element);
+            mapper.updateVacancyEntity(vacancy, element);
             save(vacancy);
         }
     }
@@ -89,24 +63,14 @@ public class VacancyEntityService {
         return mapper.toVacancyEntity(vacancyDto);
     }
 
-    public void updateVacancyStatusFromNegotiationsList(HhListDto<HhNegotiationsDto> negotiationsList) {
-        List<VacancyEntity> list = getVacancyListFromListDto(negotiationsList);
+    public void updateVacancyStatusFromNegotiationsList(List<VacancyEntity> list) {
         list.forEach(element -> {
-            Optional<VacancyEntity> entity = getByHhId(element.getHhId());
-            updateStatusVacancyEntity(entity, element.getStatus());
+            VacancyEntity entity = getByHhId(element.getHhId()).orElse(element);
+            mapper.updateVacancyEntity(entity, element);
+            save(entity);
         });
     }
 
-    public void updateStatusVacancyEntity(Optional<VacancyEntity> entity, VacancyStatus status) {
-        if (entity.isPresent()) {
-            VacancyEntity vacancyExt = entity.get();
-            if (!vacancyExt.getStatus().equals(status)) {
-                vacancyExt.setStatus(status);
-                save(vacancyExt);
-            }
-        }
-
-    }
 
     public Optional<VacancyEntity> getById(String id) {
         return vacancyEntityRepository.getByHhId(id);
@@ -117,12 +81,12 @@ public class VacancyEntityService {
         vacancyEntityRepository.save(vacancy);
     }
 
-    public void changeAllStatus(List<HhVacancyDto> list, VacancyStatus status) {
+    public void changeAllStatus(List<VacancyEntity> list, VacancyStatus status) {
         list.forEach(element -> changeVacancyStatus(element, status));
     }
 
-    private void changeVacancyStatus(HhVacancyDto element, VacancyStatus status) {
-        var vacancyOpt = getByHhId(element.getId());
+    private void changeVacancyStatus(VacancyEntity element, VacancyStatus status) {
+        var vacancyOpt = getByHhId(element.getHhId());
         vacancyOpt.ifPresent(vacancy -> {
             vacancy.setStatus(status);
             save(vacancy);

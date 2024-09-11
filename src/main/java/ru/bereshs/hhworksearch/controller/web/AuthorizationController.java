@@ -82,6 +82,7 @@ public class AuthorizationController {
         try {
             OAuth2AccessToken token = service.getToken();
             createModel(model, token);
+
             return "authorized";
         } catch (HhworkSearchTokenException ex) {
             ParameterEntity parameter = parameterService.getByType(ParameterType.CLIENT_ID);

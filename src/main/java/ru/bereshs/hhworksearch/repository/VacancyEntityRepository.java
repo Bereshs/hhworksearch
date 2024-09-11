@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface VacancyEntityRepository extends JpaRepository<VacancyEntity, Integer> {
+public interface VacancyEntityRepository extends JpaRepository<VacancyEntity, Long> {
     Optional<VacancyEntity> getByHhId(String hhid);
 
     VacancyEntity findFirstBy(Sort sort);

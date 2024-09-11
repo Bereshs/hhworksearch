@@ -7,6 +7,7 @@ import lombok.Setter;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Entity
 @Table(name = "keys")
@@ -46,10 +47,11 @@ public class KeyEntity {
         setExpiresIn(Long.valueOf(token.getExpiresIn()));
     }
 
+
     public OAuth2AccessToken getOAuth2AccessToken() {
         return new OAuth2AccessToken(getAccessToken(),
                 null,
-                expiresIn.intValue(),
+                (int) getExpireIn().toEpochSecond(ZoneOffset.ofHours(3)),
                 getRefreshToken(),
                 null,
                 null);

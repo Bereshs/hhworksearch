@@ -39,6 +39,8 @@
 
 ### История версий
 #### 0.3.1
+- исправлены пути в html шаблонах
+- удален authorizationControllerTest, который портил tokens
 - удален settingsService, controller, repository, entity
 - добавлен footer в /parametersettings
 #### 0.3.0

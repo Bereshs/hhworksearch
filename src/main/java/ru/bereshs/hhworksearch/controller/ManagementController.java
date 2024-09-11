@@ -1,6 +1,5 @@
 package ru.bereshs.hhworksearch.controller;
 
-import com.github.scribejava.core.model.OAuth2AccessToken;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -9,10 +8,17 @@ import org.springframework.web.bind.annotation.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.hhapiclient.dto.*;
+import ru.bereshs.hhworksearch.mapper.VacancyMapper;
+import ru.bereshs.hhworksearch.model.FilterScope;
+import ru.bereshs.hhworksearch.model.VacancyEntity;
+import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.producer.KafkaProducer;
 import ru.bereshs.hhworksearch.service.*;
+import ru.bereshs.hhworksearch.service.impl.SkillEntityServiceImpl;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.SortedMap;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -24,6 +30,9 @@ public class ManagementController {
     private final VacancyEntityService vacancyEntityService;
     private final KafkaProducer kafkaProducer;
     private final SchedulerService schedulerService;
+    private final VacancyMapper mapper;
+    private final SkillEntityServiceImpl skillsEntityService;
+    private final VacancyFilterService vacancyFilterService;
 
 
     @Operation(summary = "Получение списка откликов")
@@ -36,7 +45,7 @@ public class ManagementController {
     @Operation(summary = "Обработка сообщений")
     @PostMapping("/api/negotiations")
     public String updateNegotiations() throws IOException, ExecutionException, InterruptedException, HhworkSearchTokenException {
-        var negotiationsList = service.getHhNegotiationsDtoList();
+        var negotiationsList = service.getHhNegotiationsDtoList().getItems().stream().map(mapper::toVacancyEntity).toList();
         vacancyEntityService.updateVacancyStatusFromNegotiationsList(negotiationsList);
         return "ok";
     }
@@ -68,6 +77,24 @@ public class ManagementController {
     public String dailyFullScheduler() throws InterruptedException, IOException, ExecutionException, HhWorkSearchException, HhworkSearchTokenException {
         schedulerService.dailyFullRequest();
         return "ok";
+    }
+
+    @GetMapping("/api/test")
+    public VacancyEntity getVacancyEntity() throws HhworkSearchTokenException, IOException, ExecutionException, InterruptedException {
+
+        List<HhVacancyDto> list  = service.getRecommendedVacancy("java");
+
+        HhVacancyDto vacancyDto = service.getVacancyById("104059180");
+
+
+
+        VacancyEntity vacancy = mapper.toVacancyEntity(vacancyDto);
+
+   //     System.out.println(vacancy.getSkillStringList());
+        return
+//                mapper.toVacancyEntity(dto);
+                vacancy;
+//        mapper.toVacancyEntity(vacancy);
     }
 
 

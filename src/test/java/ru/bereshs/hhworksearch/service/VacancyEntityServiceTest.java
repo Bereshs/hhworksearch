@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.bereshs.hhworksearch.mapper.AppMapper;
+import ru.bereshs.hhworksearch.mapper.VacancyMapper;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.hhapiclient.dto.HhListDto;
@@ -34,7 +34,7 @@ class VacancyEntityServiceTest {
     private VacancyEntityService vacancyEntityService;
 
     @Mock
-    private AppMapper mapper;
+    private VacancyMapper mapper;
 
     @Mock
     private DailyReportService reportService;
@@ -64,18 +64,6 @@ class VacancyEntityServiceTest {
 
 
     @Test
-    void saveAll() {
-        HhVacancyDto vacancy = getVacancyDto();
-        List<HhVacancyDto> list = new ArrayList<>();
-        list.add(vacancy);
-        list.add(vacancy);
-        Mockito.when(mapper.toVacancyEntity(Mockito.any())).thenReturn(getVacancyEntity());
-        vacancyEntityService.saveAll(list);
-        Mockito.verify(vacancyEntityRepository, Mockito.times(2)).save(Mockito.any(VacancyEntity.class));
-    }
-
-
-    @Test
     void getByVacancyDto() {
         HhVacancyDto vacancyDto = getVacancyDto();
         VacancyEntity vacancy = getVacancyEntity();
@@ -84,23 +72,7 @@ class VacancyEntityServiceTest {
         assertEquals(entity.getDescription(), vacancyDto.getDescription());
     }
 
-    @Test
-    void updateStatusVacancyStatusFromNegotiationList() {
-        Optional<VacancyEntity> vacancy = Optional.of(getVacancyEntity());
-        HhListDto<HhNegotiationsDto> negotiations = new HhListDto<>(List.of(getHhNegotiationsDto()));
-        Mockito.when(vacancyEntityRepository.getByHhId(Mockito.any())).thenReturn(Optional.of(getVacancyEntity()));
-        Mockito.when(mapper.toVacancyEntity(Mockito.any())).thenReturn(getVacancyEntity());
-        vacancyEntityService.updateVacancyStatusFromNegotiationsList(negotiations);
-        Mockito.verify(vacancyEntityRepository, Mockito.times(1)).save(Mockito.any());
-    }
 
-    @Test
-    void changeVacancyStatus() {
-        Mockito.when(vacancyEntityRepository.getByHhId(Mockito.any())).thenReturn(Optional.of(getVacancyEntity()));
-        List<HhVacancyDto> list = List.of(getVacancyDto());
-        vacancyEntityService.changeAllStatus(list, VacancyStatus.UPDATED);
-        Mockito.verify(vacancyEntityRepository, Mockito.times(1)).save(Mockito.any());
-    }
 
     HhVacancyDto getVacancyDto() {
         HhSimpleListDto emploer = new HhSimpleListDto();
@@ -123,7 +95,6 @@ class VacancyEntityServiceTest {
         HhVacancyDto vacancyDto = getVacancyDto();
         vacancy.setDescription(vacancyDto.getDescription());
         vacancy.setName(vacancyDto.getName());
-        vacancy.setCreatedAt(vacancyDto.getCreatedAt());
         vacancy.setPublished(vacancyDto.getCreatedAt());
         vacancy.setExperience(vacancyDto.getExperience());
         vacancy.setStatus(VacancyStatus.REQUEST);
