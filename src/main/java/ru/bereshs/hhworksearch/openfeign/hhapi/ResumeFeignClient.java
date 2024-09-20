@@ -15,9 +15,9 @@ public interface ResumeFeignClient {
     ListDto<ResumeDto> getResumeList();
 
     @RequestMapping(value = "/resumes/{id}", method = RequestMethod.GET)
-    ResumeDto getResumeById(@PathVariable String id);
+    ResumeDto getResumeById(@PathVariable("id") String id);
 
     @RequestMapping(value = "/resumes/{id}/publish", method = RequestMethod.POST)
-    ResumeDto updateResumeById(@PathVariable String id);
+    ResumeDto updateResumeById(@PathVariable("id") String id);
 
 }
