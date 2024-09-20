@@ -9,7 +9,10 @@ import ru.bereshs.hhworksearch.model.ResumeEntity;
 import ru.bereshs.hhworksearch.model.SkillEntity;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.openfeign.hhapi.NegotiationsFeignClient;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.ListDto;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationMessageDto;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.PathParams;
 import ru.bereshs.hhworksearch.service.MessageEntityService;
 import ru.bereshs.hhworksearch.service.SkillEntityService;
 
@@ -54,5 +57,14 @@ public class NegotiationsClientService {
         result.put("resume_id", messageDto.resume_id());
         result.put("vacancy_id", messageDto.vacancy_id());
         return result;
+    }
+
+    @Loggable
+    public ListDto<NegotiationRs> getAllNegotiations() {
+        return negotiationsFeignClient.getAllNegotiations(PathParams.builder()
+                .per_page(100)
+                .period(1)
+                .page(0)
+                .build());
     }
 }

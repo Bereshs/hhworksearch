@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import ru.bereshs.hhworksearch.aop.Loggable;
-import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.service.*;
 
 @Configuration
@@ -19,17 +17,17 @@ public class GetVacanciesScheduler {
 
     @Scheduled(cron = "0 0 9-18 * * *")
     public void scheduleDayLightTask()  {
-        service.dailyHourRequest();
+        service.dailyHourSearchSimilar();
     }
 
     @Scheduled(cron = "0 30 19 * * *")
     public void scheduleDailyFullRequest()  {
-        service.dailyFullRequest();
+        service.dailyFullSearchSimilar();
     }
 
     @Scheduled(cron = "0 30 18 * * *")
     public void scheduleDailyRecommendedRequest() {
-        service.dailySearchRequest();
+        service.dailySearchAll();
     }
 
 

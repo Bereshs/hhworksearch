@@ -100,6 +100,7 @@ public class VacancyClientServiceImpl implements VacancyClientService {
         return result;
     }
 
+    @Loggable
     public void updateVacancyStatus(List<NegotiationRs> negotiationRsList) {
         List<VacancyEntity> listFromNegotiations = negotiationRsList.stream().map(mapper::toVacancyEntity).toList();
         service.updateVacancyStatusList(listFromNegotiations);
@@ -110,6 +111,7 @@ public class VacancyClientServiceImpl implements VacancyClientService {
         return list.stream().filter(filter::isSuitVacancy).toList();
     }
 
+    @Loggable
     public void updateStatusVacancies(List<VacancyEntity> list, VacancyStatus status) {
 
         service.setStatusOnList(list, VacancyStatus.REQUEST);
@@ -121,6 +123,7 @@ public class VacancyClientServiceImpl implements VacancyClientService {
     }
 
     @Override
+    @Loggable
     public List<VacancyEntity> getVacancyWithStatus(VacancyStatus vacancyStatus) {
         return service.getVacancyWithStatus(vacancyStatus);
     }

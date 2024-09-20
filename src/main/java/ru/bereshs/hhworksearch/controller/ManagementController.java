@@ -6,12 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
-import ru.bereshs.hhworksearch.exception.HhworkSearchTokenException;
 import ru.bereshs.hhworksearch.producer.KafkaProducer;
 import ru.bereshs.hhworksearch.service.*;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @Slf4j
@@ -35,21 +31,21 @@ public class ManagementController {
     @Operation(summary = "Дневной ежечасный запрос")
     @GetMapping("/api/negotiations/hour")
     public String hourScheduler()  {
-        schedulerService.dailyHourRequest();
+        schedulerService.dailyHourSearchSimilar();
         return "ok";
     }
 
     @Operation(summary = "Отчет в 18:30")
     @GetMapping("/api/negotiations/18")
     public String dailyRecommendedScheduler() {
-        schedulerService.dailySearchRequest();
+        schedulerService.dailySearchAll();
         return "ok";
     }
 
     @Operation(summary = "Отчет в 19:30")
     @GetMapping("/api/negotiations/19")
     public String dailyFullScheduler(){
-        schedulerService.dailyFullRequest();
+        schedulerService.dailyFullSearchSimilar();
         return "ok";
     }
 

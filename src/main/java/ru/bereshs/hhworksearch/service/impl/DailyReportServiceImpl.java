@@ -2,6 +2,7 @@ package ru.bereshs.hhworksearch.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.model.dto.ReportDto;
@@ -20,6 +21,7 @@ public class DailyReportServiceImpl implements DailyReportService {
 
     private final VacancyEntityService vacancyEntityService;
 
+    @Loggable
     public String getDaily() {
         var vacancyEntities = vacancyEntityService.getVacancyEntityByTimeStampAfter(LocalDateTime.now().minusDays(1));
         ReportDto reportDto = getReportDto(vacancyEntities);

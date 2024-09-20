@@ -26,7 +26,7 @@ public class GetVacanciesSchedulerService {
 
 
     @Loggable
-    public void dailyHourRequest() {
+    public void dailyHourSearchSimilar() {
         ResumeEntity defaultResume = resumeClientService.getDefaultResume();
         List<VacancyEntity> list = vacancyClientService.toVacancyEntity(
                 vacancyClientService.getPageSimilarVacancies(defaultResume.getHhId(), PathParams.builder().build()).items()
@@ -34,37 +34,24 @@ public class GetVacanciesSchedulerService {
 
         List<VacancyEntity> full = vacancyClientService.updateOnClient(list);
         List<VacancyEntity> filtered = vacancyClientService.filterList(full);
-
         vacancyClientService.saveAll(filtered);
-//        postNegotiations(filtered);
-
-//        vacancyClientService.updateStatusVacancies(list, VacancyStatus.REQUEST);
     }
 
     @Loggable
-    public void dailyFullRequest() {
+    public void dailyFullSearchSimilar() {
         ResumeEntity defaultResume = resumeClientService.getDefaultResume();
         List<VacancyEntity> list = vacancyClientService.getAllPageSimilarVacancies(defaultResume.getHhId());
         List<VacancyEntity> filtered = vacancyClientService.filterList(list);
-
-        //      postNegotiations(filtered);
-
-        vacancyClientService.updateVacancyStatus(negotiationsFeignClient.getAllNegotiations().items());
         vacancyClientService.saveAll(filtered);
     }
 
 
     @Loggable
-    public void dailySearchRequest() {
+    public void dailySearchAll() {
 
         List<VacancyEntity> list = vacancyClientService.getAllPageVacancies(filterEntityService.getKey());
         List<VacancyEntity> filtered = vacancyClientService.filterList(list);
-
         vacancyClientService.saveAll(filtered);
-
-        //    postNegotiations(filtered);
-
-        //    vacancyClientService.updateStatusVacancies(filtered, VacancyStatus.REQUEST);
     }
 
 

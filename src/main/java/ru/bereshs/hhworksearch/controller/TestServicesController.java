@@ -10,6 +10,8 @@ import ru.bereshs.hhworksearch.model.ResumeEntity;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.openfeign.hhapi.VacancyFeignClient;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.ListDto;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.PathParams;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.VacancyRs;
 import ru.bereshs.hhworksearch.service.GetVacanciesSchedulerService;
@@ -36,7 +38,7 @@ public class TestServicesController {
     private final VacancyFeignClient client;
 
     @GetMapping("/api/test")
-    VacancyRs getVacancyEntityList() throws HhWorkSearchException {
+    List<NegotiationRs> getVacancyEntityList() throws HhWorkSearchException {
 
 /*
         ResumeEntity resume = resumeClientService.getDefaultResume();
@@ -63,12 +65,18 @@ public class TestServicesController {
 
 //        vacancyClientService.updateStatusVacancies(found, VacancyStatus.REQUEST);
 
-        VacancyRs vacancyRs = vacancyClientService.getOnClientByHhId("106290730");
+//        VacancyRs vacancyRs = vacancyClientService.getOnClientByHhId("106290730");
 
-        List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
+//        List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
 //        service.postNegotiations(list);
-        vacancyClientService.updateStatusVacancies(list, VacancyStatus.REQUEST);
+//        vacancyClientService.updateStatusVacancies(list, VacancyStatus.REQUEST);
 
-        return vacancyRs;
+
+
+        List<NegotiationRs> list =  negotiationsClientService.getAllNegotiations().items().stream().filter(e->
+                !e.state().id().equalsIgnoreCase(VacancyStatus.RESPONSE.name())).toList();
+        vacancyClientService.updateVacancyStatus(list);
+
+        return list;
     }
 }

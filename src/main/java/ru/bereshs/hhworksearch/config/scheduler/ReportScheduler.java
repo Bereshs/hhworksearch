@@ -20,4 +20,5 @@ public class ReportScheduler {
     public void scheduleDailyReport() throws HhWorkSearchException {
         producer.produceDefault(reportService.getDaily());
     }
+
 }

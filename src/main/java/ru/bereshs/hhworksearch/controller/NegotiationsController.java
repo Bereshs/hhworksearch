@@ -9,6 +9,7 @@ import ru.bereshs.hhworksearch.mapper.VacancyRsMapper;
 import ru.bereshs.hhworksearch.openfeign.hhapi.NegotiationsFeignClient;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.ListDto;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.PathParams;
 import ru.bereshs.hhworksearch.service.VacancyEntityService;
 
 @Controller
@@ -22,14 +23,14 @@ public class NegotiationsController {
     @Operation(summary = "Получение списка откликов")
     @GetMapping("/api/negotiations")
     public ListDto<NegotiationRs> getNegotiationsList() {
-        return negotiationsFeignClient.getAllNegotiations();
+        return negotiationsFeignClient.getAllNegotiations(PathParams.builder().build());
     }
 
 
     @Operation(summary = "Обработка сообщений")
     @PostMapping("/api/negotiations")
     public String updateNegotiations() {
-        var negotiationsList = negotiationsFeignClient.getAllNegotiations().items().stream().map(mapper::toVacancyEntity).toList();
+        var negotiationsList = negotiationsFeignClient.getAllNegotiations(PathParams.builder().build()).items().stream().map(mapper::toVacancyEntity).toList();
         vacancyEntityService.updateVacancyStatusList(negotiationsList);
         return "ok";
     }

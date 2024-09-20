@@ -48,8 +48,11 @@ public class VacancyEntityServiceImpl implements VacancyEntityService {
     public void updateVacancyStatusList(List<VacancyEntity> list) {
         list.forEach(element -> {
             VacancyEntity entity = getByHhId(element.getHhId()).orElse(element);
-            mapper.updateVacancyEntity(entity, element);
-            save(entity);
+            if (!element.getStatus().equals(entity.getStatus())) {
+                mapper.updateVacancyEntity(entity, element);
+                save(entity);
+
+            }
         });
     }
 
