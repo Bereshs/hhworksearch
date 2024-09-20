@@ -1,14 +1,12 @@
 package ru.bereshs.hhworksearch.mapper;
 
 import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jmx.export.annotation.ManagedOperation;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhNegotiationsDto;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
+import org.springframework.jmx.export.annotation.ManagedOperationParameter;
 import ru.bereshs.hhworksearch.model.EmployerEntity;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.dto.VacancyDto;
-import ru.bereshs.hhworksearch.service.EmployerEntityService;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.VacancyRs;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -30,11 +28,12 @@ public interface VacancyMapper {
     void updateVacancyDto(@MappingTarget VacancyDto target, EmployerEntity employer);
 
 
+
     List<VacancyDto> toVacancyDtoList(List<VacancyEntity> list);
 
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "name", expression = "java(vacancyDto.getName().toLowerCase())")
+    @Mapping(target = "name", expression = "java(vacancyDto.name().toLowerCase())")
     @Mapping(source = "id", target = "hhId")
     @Mapping(source = "alternateUrl", target = "url")
     @Mapping(source = "counters.totalResponses", target = "responses")
@@ -42,21 +41,21 @@ public interface VacancyMapper {
     @Mapping(source = "employer.id", target = "employerId")
     @Mapping(expression = "java(ru.bereshs.hhworksearch.model.VacancyStatus.FOUND)", target = "status")
     @Mapping(source = "salary.currency", target = "currency")
-    @Mapping(expression = "java(java.time.LocalDateTime.parse(vacancyDto.getPublishedAt().substring(0, vacancyDto.getPublishedAt().length() - 5)))", target = "published")
-    @Mapping(target = "salary", expression = "java(vacancyDto.getSalary()==null?0:vacancyDto.getSalary().getFrom()>0 && vacancyDto.getSalary().getTo()>0?(vacancyDto.getSalary().getTo()+vacancyDto.getSalary().getFrom())/2 : " +
-            "vacancyDto.getSalary().getFrom()>0?vacancyDto.getSalary().getFrom():vacancyDto.getSalary().getTo())")
-    @Mapping(target = "description", expression = "java(vacancyDto.getDescription()!=null?vacancyDto.getDescription().replaceAll(\"[^A-Za-zА-Яа-я0-9\\s]\",\"\").replaceAll(\"  \",\"\"):null)")
-    VacancyEntity toVacancyEntity(HhVacancyDto vacancyDto);
+    @Mapping(expression = "java(java.time.LocalDateTime.parse(vacancyDto.publishedAt().substring(0, vacancyDto.publishedAt().length() - 5)))", target = "published")
+    @Mapping(target = "salary", expression = "java(vacancyDto.salary()==null?0:vacancyDto.salary().from()>0 && vacancyDto.salary().to()>0?(vacancyDto.salary().to()+vacancyDto.salary().from())/2 : " +
+            "vacancyDto.salary().from()>0?vacancyDto.salary().from():vacancyDto.salary().to())")
+    @Mapping(target = "description", expression = "java(vacancyDto.description()!=null?vacancyDto.description().replaceAll(\"[^A-Za-zА-Яа-я0-9\\s]\",\"\").replaceAll(\"  \",\"\"):null)")
+    @Mapping(target = "experience", source = "experience.id")
+    VacancyEntity toVacancyEntity(VacancyRs vacancyDto);
 
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "status", expression = "java(ru.bereshs.hhworksearch.model.VacancyStatus.valueOf(dto.getState().getId().toUpperCase()))")
-    @Mapping(source = "vacancy.id", target = "hhId")
+
+
+
     @Mapping(target = "name", ignore = true)
-    @Mapping(source = "vacancy.employer.id", target = "employerId")
-    VacancyEntity toVacancyEntity(HhNegotiationsDto dto);
-
-    List<VacancyEntity> toListVacancyEntity(List<HhVacancyDto> vacancyList);
-
+    @Mapping(target = "url", ignore = true)
+    @Mapping(target = "description", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", source = "status")
     void updateVacancyEntity(@MappingTarget VacancyEntity target, VacancyEntity source);
 
     default String toString(List<String> str) {

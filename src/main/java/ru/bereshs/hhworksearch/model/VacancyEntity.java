@@ -6,12 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhSalaryDto;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhSimpleListDto;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Setter
 @Getter
@@ -37,6 +34,7 @@ public class VacancyEntity  {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private VacancyStatus status;
+    @UpdateTimestamp
     private LocalDateTime timeStamp;
     private Integer salary;
     private String currency;

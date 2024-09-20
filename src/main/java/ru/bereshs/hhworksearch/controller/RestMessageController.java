@@ -7,12 +7,13 @@ import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.mapper.SimpleDtoMapper;
 import ru.bereshs.hhworksearch.model.MessageEntity;
 import ru.bereshs.hhworksearch.model.dto.SimpleDto;
+import ru.bereshs.hhworksearch.service.MessageEntityService;
 import ru.bereshs.hhworksearch.service.impl.MessageEntityServiceImpl;
 
 @RestController
 @RequiredArgsConstructor
 public class RestMessageController {
-    private final MessageEntityServiceImpl service;
+    private final MessageEntityService service;
     private final SimpleDtoMapper mapper;
 
     @GetMapping("/api/client/footer/{id}/")

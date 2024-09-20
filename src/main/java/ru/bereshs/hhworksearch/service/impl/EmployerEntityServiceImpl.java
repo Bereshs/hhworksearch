@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.mapper.EmployerMapper;
 import ru.bereshs.hhworksearch.model.EmployerEntity;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhVacancyDto;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.ListDto;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.VacancyRs;
 import ru.bereshs.hhworksearch.repository.EmployerEntityRepository;
 import ru.bereshs.hhworksearch.service.EmployerEntityService;
+
 import java.util.List;
 
 @Service
@@ -22,13 +24,12 @@ public class EmployerEntityServiceImpl implements EmployerEntityService {
     }
 
 
-    public List<EmployerEntity> extractEmployers(List<HhVacancyDto> list) {
-        return list.stream().map(entity -> mapper.toEmployerEntity(entity.getEmployer())).toList();
-    }
-
-    public void saveAll(List<EmployerEntity> list) {
-        list.stream().filter(employer -> !existsByHhId(employer.getHhId()))
-                .forEach(this::save);
+    public void saveAllIfNotExist(List<EmployerEntity> list) {
+        list.forEach(e -> {
+            if (!existsByHhId(e.getHhId())) {
+                save(e);
+            }
+        });
     }
 
     public void save(EmployerEntity entity) {
@@ -43,6 +44,17 @@ public class EmployerEntityServiceImpl implements EmployerEntityService {
             return false;
         }
         return repository.existsByHhId(hhId);
+    }
+
+    @Override
+    public List<EmployerEntity> toEmployerEntityList(ListDto<VacancyRs> list) {
+        return mapper.toEmployerEntityList(list.items().stream().map(VacancyRs::employer).toList());
+    }
+
+    @Override
+    public void saveNewEmployers(ListDto<VacancyRs> list) {
+        List<EmployerEntity> entityList = toEmployerEntityList(list);
+        saveAllIfNotExist(entityList);
     }
 
 }

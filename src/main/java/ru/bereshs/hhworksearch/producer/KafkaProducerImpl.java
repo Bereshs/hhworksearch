@@ -1,13 +1,10 @@
 package ru.bereshs.hhworksearch.producer;
-
-import com.github.scribejava.core.model.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.aop.Loggable;
-import ru.bereshs.hhworksearch.config.AppConfig;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.model.ParameterType;
 import ru.bereshs.hhworksearch.model.dto.TelegramMessageDto;
@@ -26,7 +23,7 @@ public class KafkaProducerImpl implements KafkaProducer {
     private final KafkaTemplate<Long, TelegramMessageDto> kafkaTemplate;
     private final ParameterEntityService parameterService;
 
-    private final AppConfig appConfig;
+
 
     @Override
     @Loggable
@@ -42,10 +39,10 @@ public class KafkaProducerImpl implements KafkaProducer {
         produce(messageDto);
     }
 
-    public void produce(Response response, String vacancyId) throws HhWorkSearchException {
-        if (!response.isSuccessful()) {
+    public void produce(String response, String vacancyId) throws HhWorkSearchException {
+    /*    if (!response.isSuccessful()) {
             String text = "Необходимо участие vacancy Id: " + vacancyId + "\n" + "https://krasnodar.hh.ru/vacancy/" + vacancyId;
             produceDefault(text);
         }
-    }
+   */ }
 }

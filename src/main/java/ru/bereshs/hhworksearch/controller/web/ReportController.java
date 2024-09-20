@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.bereshs.hhworksearch.mapper.VacancyMapper;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
-import ru.bereshs.hhworksearch.model.dto.VacancyDto;
 import ru.bereshs.hhworksearch.service.*;
 
 import java.time.LocalDate;
@@ -32,7 +31,7 @@ public class ReportController {
                         .peek(e -> {
                             e.setFilterResult(vacancyFilterService.getFilterResult(e));
                             long totalSkills = e.getSkillStringList() == null ? 0 : e.getSkillStringList().split(",").length;
-                            long suiteSkills = skillEntityService.extractVacancySkills(e).size();
+                            long suiteSkills = skillEntityService.foundAllSkills(e).size();
                             e.setPercent(totalSkills > 0 ? suiteSkills / totalSkills : 0);
                         }).toList();
 

@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.bereshs.hhworksearch.hhapiclient.HhLocalDateTime;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhResumeDto;
 
 import java.time.LocalDateTime;
 
@@ -25,10 +23,10 @@ public class ResumeEntity {
     private LocalDateTime timeStamp;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String accessType;
     @Column(columnDefinition = "TEXT")
     private String description;
     private LocalDateTime nextPublish;
+    private String skills;
 
 
 }

@@ -61,23 +61,40 @@ h2 {
     width: 500px;
 }
 
-@media screen and (max-width: 600px) {
+.sizeFont{
+    font-size: 14px;
+}
+
+.notMain{
+    display: table-cell;
+}
+@media screen and (max-width: 950px) {
     .main {
         width: 80%;
     }
     .editbox{
         width: 300px;
     }
+    .sizeFont{
+        font-size: 12px;
+    }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 620px) {
     .main {
         width: 96%;
     }
     .editbox{
         width: 200px;
     }
+    .sizeFont{
+        font-size: 10px;
+    }
 }
-
+@media screen and (max-width: 620px) {
+    .notMain{
+        display: none;
+    }
+}
 .trtwo {
     background-color:  var(--light-color);
     padding: 5px;

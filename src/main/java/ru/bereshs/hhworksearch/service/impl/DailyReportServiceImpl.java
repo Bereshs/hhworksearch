@@ -1,22 +1,34 @@
 package ru.bereshs.hhworksearch.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.model.dto.ReportDto;
 import ru.bereshs.hhworksearch.service.DailyReportService;
+import ru.bereshs.hhworksearch.service.VacancyEntityService;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class DailyReportServiceImpl implements DailyReportService {
+
+    private final VacancyEntityService vacancyEntityService;
+
+    public String getDaily() {
+        var vacancyEntities = vacancyEntityService.getVacancyEntityByTimeStampAfter(LocalDateTime.now().minusDays(1));
+        ReportDto reportDto = getReportDto(vacancyEntities);
+        return getString(reportDto);
+    }
 
     public ReportDto getReportDto(List<VacancyEntity> vacancyEntities) {
         if (vacancyEntities == null || vacancyEntities.isEmpty()) {
-            return null;
+            return new ReportDto(0L,0L,0L,0L,0L,"");
         }
 
         var report = vacancyEntities.stream().collect(Collectors.groupingBy(VacancyEntity::getStatus, Collectors.counting()));
@@ -55,7 +67,7 @@ public class DailyReportServiceImpl implements DailyReportService {
         if (entities == null || experience == null || entities.isEmpty()) {
             return 0;
         }
-        return (int) entities.stream().filter(entity -> entity.getExperience().equals(experience))
+        return (int) entities.stream().filter(entity -> entity.getExperience() != null && entity.getExperience().equals(experience))
                 .filter(entity -> entity.getSalary() != null && entity.getSalary() > 0L)
                 .mapToLong(VacancyEntity::getSalary).average().orElse(0D);
     }

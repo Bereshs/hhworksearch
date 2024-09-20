@@ -1,6 +1,4 @@
 package ru.bereshs.hhworksearch.model;
-
-import com.github.scribejava.core.model.OAuth2AccessToken;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,31 +29,8 @@ public class KeyEntity {
         return timeStamp.plusSeconds(expiresIn);
     }
 
-    public void set(OAuth2AccessToken token) throws HhWorkSearchException {
-        if (token == null ||
-                token.getRefreshToken() == null ||
-                token.getAccessToken() == null ||
-                token.getAccessToken().equals("accessToken") ||
-                token.getRefreshToken().equals("refreshToken") ||
-                token.getExpiresIn() == null) {
-            throw new HhWorkSearchException("Bad token credentials: accessToken: " + token.getAccessToken()
-                    + ",refreshToken: " + token.getRefreshToken() + ", expiresIn: " + token.getExpiresIn());
-        }
-
-        setAccessToken(token.getAccessToken());
-        setRefreshToken(token.getRefreshToken());
-        setExpiresIn(Long.valueOf(token.getExpiresIn()));
-    }
 
 
-    public OAuth2AccessToken getOAuth2AccessToken() {
-        return new OAuth2AccessToken(getAccessToken(),
-                null,
-                (int) getExpireIn().toEpochSecond(ZoneOffset.ofHours(3)),
-                getRefreshToken(),
-                null,
-                null);
-    }
 
 }
 

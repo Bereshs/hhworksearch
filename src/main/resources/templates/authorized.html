@@ -19,15 +19,15 @@
                 <table class="tbl">
                     <tr class="trtwo">
                         <td>Id</td>
-                        <td th:text="${hhUserDto.getId}">771222222</td>
+                        <td th:text="${hhUserDto.id()}">771222222</td>
                     </tr>
                     <tr>
                         <td>ФИО</td>
-                        <td th:text="${hhUserDto.getFirstName +' '+ hhUserDto.getLastName}">Иванов Иван</td>
+                        <td th:text="${hhUserDto.firstName() +' '+ hhUserDto.lastName()}">Иванов Иван</td>
                     </tr>
                     <tr class="trtwo">
                         <td>Контакты</td>
-                        <td th:text="${hhUserDto.getEmail +' '+ hhUserDto.getPhone}">79090000000 post@mail.ru</td>
+                        <td th:text="${hhUserDto.email() +' '+ hhUserDto.phone()}">79090000000 post@mail.ru</td>
                     </tr>
                     <tr>
                         <td>Срок действия токена</td>

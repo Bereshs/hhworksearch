@@ -18,9 +18,7 @@ import java.util.Optional;
 public class MessageEntityServiceImpl implements MessageEntityService {
 
     private final MessageEntityRepository repository;
-
     private final MessageMapper mapper;
-
 
     public HashMap<String, String> getNegotiationBody(List<SkillEntity> skills, String resumeId, VacancyEntity vacancy) throws HhWorkSearchException {
         String message = getNegotiationMessage(vacancy, skills);

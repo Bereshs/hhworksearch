@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.bereshs.hhworksearch.hhapiclient.dto.HhSimpleListDto;
 
 @Entity
 @Setter

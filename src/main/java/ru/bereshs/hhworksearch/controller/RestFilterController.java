@@ -8,6 +8,7 @@ import ru.bereshs.hhworksearch.mapper.SimpleDtoMapper;
 import ru.bereshs.hhworksearch.model.FilterEntity;
 import ru.bereshs.hhworksearch.model.FilterScope;
 import ru.bereshs.hhworksearch.model.dto.SimpleDto;
+import ru.bereshs.hhworksearch.service.FilterEntityService;
 import ru.bereshs.hhworksearch.service.impl.FilterEntityServiceImpl;
 
 @RestController
@@ -15,7 +16,7 @@ import ru.bereshs.hhworksearch.service.impl.FilterEntityServiceImpl;
 public class RestFilterController {
 
 
-    private final FilterEntityServiceImpl service;
+    private final FilterEntityService service;
     private final SimpleDtoMapper mapper;
 
     @DeleteMapping("/api/client/filter/{id}/")

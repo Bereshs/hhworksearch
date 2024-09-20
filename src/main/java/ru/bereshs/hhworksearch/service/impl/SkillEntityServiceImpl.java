@@ -2,6 +2,7 @@ package ru.bereshs.hhworksearch.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.common.quota.ClientQuotaAlteration;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.mapper.SkillMapper;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
@@ -10,10 +11,7 @@ import ru.bereshs.hhworksearch.model.SkillEntity;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.service.SkillEntityService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +19,18 @@ import java.util.Optional;
 public class SkillEntityServiceImpl implements SkillEntityService {
     private final SkillsEntityRepository repository;
     private final SkillMapper mapper;
+
+    @Override
+    public List<SkillEntity> getSkillEntityList(List<String> skills) {
+        return skills.stream().map(e -> {
+            Optional<SkillEntity> optional = getSkillEntityByName(e);
+            return optional.orElse(null);
+        }).filter(Objects::nonNull).toList();
+    }
+
+    public Optional<SkillEntity> getSkillEntityByName(String name) {
+        return repository.getSkillEntityByName(name);
+    }
 
     public Optional<SkillEntity> getById(Long id) throws HhWorkSearchException {
         if (id == null) {
@@ -58,14 +68,13 @@ public class SkillEntityServiceImpl implements SkillEntityService {
     }
 
 
-    public List<SkillEntity> extractVacancySkills(VacancyEntity vacancy) {
-        List<SkillEntity> skills = findAll();
-        return skills.stream().filter(e -> vacancy.getSkillStringList() != null && vacancy.getSkillStringList().contains(e.getName())).distinct().toList();
-    }
-
-
     public List<String> foundAllSkills(VacancyEntity vacancy) {
-        List<String> result = new ArrayList<>(Arrays.stream(vacancy.getSkillStringList().split(",")).toList());
+        Set<String> result;
+        if (vacancy.getSkillStringList().length() > 2) {
+            result = new TreeSet<>(Set.of(vacancy.getSkillStringList().split(",")));
+        } else {
+            result = new TreeSet<>();
+        }
         result.addAll(foundAllSkills(vacancy.getName()));
         result.addAll(foundAllSkills(vacancy.getDescription()));
         return result.stream().distinct().toList();

@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public interface SkillEntityService {
 
+    List<SkillEntity> getSkillEntityList(List<String> skills);
     Optional<SkillEntity> getById(Long id) throws HhWorkSearchException;
     void update(Long id, SkillEntity entity) throws HhWorkSearchException;
 
@@ -17,8 +18,6 @@ public interface SkillEntityService {
 
     List<SkillEntity> findAll();
     void delete(SkillEntity skill) throws HhWorkSearchException;
-
-    List<SkillEntity> extractVacancySkills(VacancyEntity vacancy);
     List<String> foundAllSkills(VacancyEntity vacancy);
     List<String> foundAllSkills(String text);
 
