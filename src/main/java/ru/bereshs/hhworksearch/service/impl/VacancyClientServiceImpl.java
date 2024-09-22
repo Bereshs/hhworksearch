@@ -127,4 +127,19 @@ public class VacancyClientServiceImpl implements VacancyClientService {
     public List<VacancyEntity> getVacancyWithStatus(VacancyStatus vacancyStatus) {
         return service.getVacancyWithStatus(vacancyStatus);
     }
+
+    public void updateStatusVacancy(VacancyEntity vacancy, VacancyStatus status) {
+        Optional<VacancyEntity> o = service.getByHhId(vacancy.getHhId());
+        if (o.isEmpty()) {
+            return;
+        }
+        VacancyEntity v = o.get();
+        v.setStatus(status);
+        service.save(vacancy);
+    }
+
+    @Override
+    public void save(VacancyEntity e) {
+        service.save(e);
+    }
 }

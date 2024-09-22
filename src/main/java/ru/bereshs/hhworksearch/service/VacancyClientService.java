@@ -36,4 +36,8 @@ public interface VacancyClientService {
     public void saveAll(List<VacancyEntity> list);
 
     List<VacancyEntity> getVacancyWithStatus(VacancyStatus vacancyStatus);
+    void updateStatusVacancy(VacancyEntity vacancy, VacancyStatus status);
+
+    void save(VacancyEntity e);
+
 }

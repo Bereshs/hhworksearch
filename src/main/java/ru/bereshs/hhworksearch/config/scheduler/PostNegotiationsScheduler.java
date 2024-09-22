@@ -24,6 +24,5 @@ public class PostNegotiationsScheduler {
     public void scheduleDayPostNegotiations() throws HhWorkSearchException {
         List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
         service.postNegotiations(list);
-        vacancyClientService.updateStatusVacancies(list, VacancyStatus.REQUEST);
     }
 }

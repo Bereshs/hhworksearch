@@ -21,7 +21,7 @@ public class UpdateVacanciesStatusScheduler {
     private final NegotiationsClientService negotiationsClientService;
     private final VacancyClientService vacancyClientService;
 
-    @Scheduled(cron = "0 40 19 * * *")
+    @Scheduled(cron = "0 3 8-20 * * *")
     public void scheduleUpdateVacancies() {
         List<NegotiationRs> list = negotiationsClientService.getAllNegotiations().items().stream().filter(e ->
                 !e.state().id().equalsIgnoreCase(VacancyStatus.RESPONSE.name())).toList();

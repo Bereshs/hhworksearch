@@ -17,8 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GetVacanciesSchedulerService {
 
-    private final NegotiationsFeignClient negotiationsFeignClient;
-
     private final ResumeClientService resumeClientService;
     private final VacancyClientService vacancyClientService;
 

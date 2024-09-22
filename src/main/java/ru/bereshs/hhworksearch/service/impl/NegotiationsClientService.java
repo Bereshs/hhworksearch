@@ -1,5 +1,6 @@
 package ru.bereshs.hhworksearch.service.impl;
 
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.model.ResumeEntity;
 import ru.bereshs.hhworksearch.model.SkillEntity;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
+import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.openfeign.hhapi.NegotiationsFeignClient;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.ListDto;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationMessageDto;
@@ -15,6 +17,7 @@ import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.PathParams;
 import ru.bereshs.hhworksearch.service.MessageEntityService;
 import ru.bereshs.hhworksearch.service.SkillEntityService;
+import ru.bereshs.hhworksearch.service.VacancyClientService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +32,7 @@ public class NegotiationsClientService {
     private final MessageEntityService messageEntityService;
     private final SkillEntityService skillsEntityService;
     private final ResumeClientService resumeClientService;
-
+    private final VacancyClientService vacancyClientService;
 
     @Loggable
     public void postNegotiations(List<VacancyEntity> filteredNotRequested) throws HhWorkSearchException {
@@ -39,14 +42,19 @@ public class NegotiationsClientService {
         ResumeEntity defaultResume = resumeClientService.getDefaultResume();
         for (VacancyEntity e : filteredNotRequested) {
             List<String> skills = skillsEntityService.foundAllSkills(e);
-
             if (skills == null || skills.isEmpty()) {
                 return;
             }
             List<SkillEntity> skillEntities = skillsEntityService.getSkillEntityList(skills);
             String txt = messageEntityService.getNegotiationMessage(e, skillEntities);
             NegotiationMessageDto messageDto = new NegotiationMessageDto(txt, defaultResume.getHhId(), e.getHhId());
-            negotiationsFeignClient.postMessageToVacancy(getMapBody(messageDto));
+            try {
+                negotiationsFeignClient.postMessageToVacancy(getMapBody(messageDto));
+                vacancyClientService.updateStatusVacancy(e, VacancyStatus.REQUEST);
+            } catch (FeignException ex) {
+                vacancyClientService.updateStatusVacancy(e, VacancyStatus.ERROR);
+                log.info("post negotiations error v:id {}, error: {}",e.getHhId(), ex.getMessage());
+            }
         }
 
     }

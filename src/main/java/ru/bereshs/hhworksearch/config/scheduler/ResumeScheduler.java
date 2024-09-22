@@ -14,7 +14,7 @@ public class ResumeScheduler {
 
     private final ResumeClientService service;
 
-    @Scheduled(cron = "0 5 8-17 * * *")
+    @Scheduled(cron = "0 58 8-17 * * *")
     public void scheduleDayUpdateResume()  {
         service.updateResume();
     }

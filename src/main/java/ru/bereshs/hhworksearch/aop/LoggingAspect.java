@@ -18,12 +18,15 @@ public class LoggingAspect {
         long startTime = System.currentTimeMillis();
         Object result = proceedingJoinPoint.proceed();
         long duration = (System.currentTimeMillis() - startTime);
-        String methodName = proceedingJoinPoint.getTarget().getClass().getName() + "." + proceedingJoinPoint.getSignature().getName();
+        String methodName = proceedingJoinPoint.getTarget().getClass().getName().replaceAll("ru.bereshs.hhworksearch.", "") + "." + proceedingJoinPoint.getSignature().getName();
+
 
         if (result instanceof List<?>) {
             log.info("{}: method completed at {} ms and returned list with size {} elements", methodName, duration, ((List<?>) result).size());
         } else if (result instanceof String) {
             log.info("{}: method completed at {} ms and returned string with content {}", methodName, duration, result);
+        } else {
+            log.info("{}: method completed at {} ms as void", methodName, duration);
         }
 
         return result;

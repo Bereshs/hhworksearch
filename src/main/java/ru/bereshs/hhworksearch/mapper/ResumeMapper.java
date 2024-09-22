@@ -23,9 +23,17 @@ public interface ResumeMapper {
     @Mapping(target = "skills", source = "skillSet")
     ResumeEntity toResumeEntity(ResumeDto dto);
 
-
-
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "hhId", source = "id")
+    @Mapping(target = "default", ignore = true)
+    @Mapping(target = "timeStamp", ignore = true)
+    @Mapping(target = "createdAt", dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ")
+    @Mapping(target = "updatedAt", dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ")
+    @Mapping(target = "nextPublish", dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ")
+    @Mapping(target = "description", source = "skills")
+    @Mapping(target = "skills", source = "skillSet")
     void updateResumeEntity(@MappingTarget ResumeEntity target, ResumeDto source);
+
     default String toString(List<String> list) {
         if (list == null) {
             return "";

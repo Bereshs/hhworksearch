@@ -50,6 +50,7 @@ public interface VacancyRsMapper {
     @Mapping(target = "salary", ignore = true)
     @Mapping(target = "url", ignore = true)
     @Mapping(target = "skillStringList", expression = "java(toList(rs.skills()))")
+    @Mapping(target = "description", source = "description")
     void updateVacancyEntity(@MappingTarget VacancyEntity vacancy, VacancyRs rs);
 
 
