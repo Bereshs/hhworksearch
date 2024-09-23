@@ -43,7 +43,7 @@ public class NegotiationsClientService {
         for (VacancyEntity e : filteredNotRequested) {
             List<String> skills = skillsEntityService.foundAllSkills(e);
             if (skills == null || skills.isEmpty()) {
-                return;
+                continue;
             }
             List<SkillEntity> skillEntities = skillsEntityService.getSkillEntityList(skills);
             String txt = messageEntityService.getNegotiationMessage(e, skillEntities);

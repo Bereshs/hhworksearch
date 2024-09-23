@@ -29,11 +29,14 @@ public class VacancyClientServiceImpl implements VacancyClientService {
     private final VacancyFilterService filter;
 
 
-    public List<VacancyEntity> updateOnClient(List<VacancyEntity> list) {
+    public List<VacancyEntity>
+    updateOnClient(List<VacancyEntity> list) {
         return list.stream().peek(e -> {
-            VacancyRs rs = client.getVacancyById(e.getHhId());
-            mapper.updateVacancyEntity(e, rs);
-        }).toList();
+            if (e.getStatus().equals(VacancyStatus.FOUND)) {
+                VacancyRs rs = client.getVacancyById(e.getHhId());
+                mapper.updateVacancyEntity(e, rs);
+            }
+        }).filter(e -> e.getDescription() != null && e.getDescription().length() > 10).toList();
     }
 
     public Optional<VacancyEntity> getByHhId(String hhId) {

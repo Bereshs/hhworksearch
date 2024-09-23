@@ -8,12 +8,8 @@ import java.util.List;
 
 public interface EmployerEntityService {
     EmployerEntity getByHhId(String hhId);
-    void saveAllIfNotExist(List<EmployerEntity> list);
     void save(EmployerEntity entity);
 
-    boolean existsByHhId(String hhId);
 
-    List<EmployerEntity> toEmployerEntityList(ListDto<VacancyRs> list);
-
-    void saveNewEmployers(ListDto<VacancyRs> list);
+    void saveAll(List<EmployerEntity> list);
 }

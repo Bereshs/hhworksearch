@@ -1,4 +1,4 @@
-package ru.bereshs.hhworksearch.service;
+package ru.bereshs.hhworksearch.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +7,8 @@ import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.model.*;
 import ru.bereshs.hhworksearch.openfeign.hhapi.NegotiationsFeignClient;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.*;
+import ru.bereshs.hhworksearch.service.FilterEntityService;
+import ru.bereshs.hhworksearch.service.VacancyClientService;
 import ru.bereshs.hhworksearch.service.impl.ResumeClientService;
 
 import java.util.List;
@@ -19,7 +21,6 @@ public class GetVacanciesSchedulerService {
 
     private final ResumeClientService resumeClientService;
     private final VacancyClientService vacancyClientService;
-
     private final FilterEntityService filterEntityService;
 
 
@@ -30,8 +31,7 @@ public class GetVacanciesSchedulerService {
                 vacancyClientService.getPageSimilarVacancies(defaultResume.getHhId(), PathParams.builder().build()).items()
         );
 
-        List<VacancyEntity> full = vacancyClientService.updateOnClient(list);
-        List<VacancyEntity> filtered = vacancyClientService.filterList(full);
+        List<VacancyEntity> filtered = filterList(list);
         vacancyClientService.saveAll(filtered);
     }
 
@@ -39,7 +39,8 @@ public class GetVacanciesSchedulerService {
     public void dailyFullSearchSimilar() {
         ResumeEntity defaultResume = resumeClientService.getDefaultResume();
         List<VacancyEntity> list = vacancyClientService.getAllPageSimilarVacancies(defaultResume.getHhId());
-        List<VacancyEntity> filtered = vacancyClientService.filterList(list);
+        List<VacancyEntity> filtered = filterList(list);
+
         vacancyClientService.saveAll(filtered);
     }
 
@@ -48,9 +49,15 @@ public class GetVacanciesSchedulerService {
     public void dailySearchAll() {
 
         List<VacancyEntity> list = vacancyClientService.getAllPageVacancies(filterEntityService.getKey());
-        List<VacancyEntity> filtered = vacancyClientService.filterList(list);
+        List<VacancyEntity> filtered = filterList(list);
         vacancyClientService.saveAll(filtered);
     }
 
 
+    public List<VacancyEntity> filterList(List<VacancyEntity> list) {
+        List<VacancyEntity> preFiltered = vacancyClientService.filterList(list);
+        List<VacancyEntity> full = vacancyClientService.updateOnClient(preFiltered);
+        List<VacancyEntity> filtered = vacancyClientService.filterList(full);
+        return filtered;
+    }
 }

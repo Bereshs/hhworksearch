@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.producer.KafkaProducer;
 import ru.bereshs.hhworksearch.service.*;
+import ru.bereshs.hhworksearch.service.impl.GetVacanciesSchedulerService;
 
 @RestController
 @Slf4j

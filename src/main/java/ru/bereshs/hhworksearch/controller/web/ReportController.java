@@ -30,7 +30,7 @@ public class ReportController {
     @GetMapping("/report")
     String getReportPage(Model model) {
         List<VacancyEntity> list =
-                service.getVacancyEntityByTimeStampAfter(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT).minusDays(1)).stream()
+                service.getVacancyEntityByTimeStampAfter(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT)).stream()
                         .peek(e -> {
                             e.setFilterResult(vacancyFilterService.getFilterResult(e));
                             long totalSkills = e.getSkillStringList() == null ? 0 : e.getSkillStringList().split(",").length;

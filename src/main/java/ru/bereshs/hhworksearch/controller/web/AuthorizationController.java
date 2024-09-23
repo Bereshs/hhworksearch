@@ -54,6 +54,7 @@ public class AuthorizationController {
         ParameterEntity parameter = parameterService.getByType(ParameterType.CLIENT_ID);
 
 
+
         if (keyEntityService.validateKey(key)) {
             UserDto userDto = userFeignClient.getMyPage();
             model.addAttribute("hhUserDto", userDto);
@@ -70,8 +71,10 @@ public class AuthorizationController {
 
     @GetMapping("/authorization")
     public String authorizationPage(@RequestParam(value = "code", required = false) String code, Model model) throws HhWorkSearchException {
+
         if (code == null) return "error";
         ClientTokenDto tokenDto = authorizationClientService.getTokenFromCode(code);
+        log.info("token={}", tokenDto);
         createModel(model, tokenDto);
         return "authorized";
     }

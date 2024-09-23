@@ -2,8 +2,9 @@ package ru.bereshs.hhworksearch.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import ru.bereshs.hhworksearch.model.EmployerEntity;
-import ru.bereshs.hhworksearch.openfeign.hhapi.dto.ElementListDto;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.EmployerDto;
 
 import java.util.List;
 
@@ -11,8 +12,17 @@ import java.util.List;
 public interface EmployerMapper {
 
     @Mapping(source = "id", target = "hhId")
-    EmployerEntity toEmployerEntity(ElementListDto listDto);
-    List<EmployerEntity> toEmployerEntityList(List<ElementListDto> list);
+    @Mapping(source = "alternateUrl", target = "url")
+    @Mapping(source = "name", target = "name")
+    EmployerEntity toEmployerEntity(EmployerDto dto);
+
+    @Mapping(source = "id", target = "hhId")
+    @Mapping(source = "alternateUrl", target = "url")
+    @Mapping(source = "name", target = "name")
+    List<EmployerEntity> toEmployerEntityList(List<EmployerDto> list);
 
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", source = "name")
+    void updateEmployerEntity(@MappingTarget EmployerEntity target, EmployerEntity source);
 }

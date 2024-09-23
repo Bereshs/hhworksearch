@@ -15,6 +15,9 @@ import ru.bereshs.hhworksearch.openfeign.hhapi.dto.TokenRs;
 import ru.bereshs.hhworksearch.service.AuthorizationClientService;
 import ru.bereshs.hhworksearch.service.ParameterEntityService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 @Slf4j
 @Service
@@ -36,27 +39,36 @@ public class AuthorizationClientServiceImpl implements AuthorizationClientServic
         if (keyEntityService.validateKey(key)) {
             return mapper.toClientTokenDto(key);
         }
+        //    log.info("refresh token={}", key.getRefreshToken());
         //if (keyEntityService.isExpired(key)) {
-        TokenRs tokenRs = oauthFeignClient.updateAccessAndRefreshTokens(new TokenRq(null, null, "refresh_token", key.getRefreshToken()));
-        mapper.updateKeyEntity(key, tokenRs);
-        keyEntityService.save(key);
+        //TokenRs tokenRs = oauthFeignClient.updateAccessAndRefreshTokens(new TokenRq(null, null, "refresh_token", key.getRefreshToken()));
+        //   mapper.updateKeyEntity(key, tokenRs);
+        //   keyEntityService.save(key);
         ClientTokenDto token = mapper.toClientTokenDto(key);
-        log.info("token info: access" + token.accessToken() + " refresh " + tokenRs.refreshToken());
+//        log.info("token info: access" + token.accessToken() + " refresh " + tokenRs.refreshToken());
         return token;
         //}
     }
 
     public ClientTokenDto getTokenFromCode(String code) throws HhWorkSearchException {
         TokenRs token = oauthFeignClient.updateAccessAndRefreshTokens(
-                new TokenRq(parameterEntityService.getByType(ParameterType.CLIENT_ID).getData(),
-                        parameterEntityService.getByType(ParameterType.CLIENT_SECRET).getData(),
-                        "authorization_code", code));
+                getBodyMapRequest(code));
 
-
+        log.info("token={}", token);
         KeyEntity key = keyEntityService.getByUserId(1L);
         mapper.updateKeyEntity(key, token);
         keyEntityService.save(key);
         return mapper.toClientTokenDto(key);
+    }
+
+    public Map<String, ?> getBodyMapRequest(String code) throws HhWorkSearchException {
+        Map<String, String> body = new HashMap<>();
+        body.put("client_id", parameterEntityService.getByType(ParameterType.CLIENT_ID).getData());
+        body.put("client_secret", parameterEntityService.getByType(ParameterType.CLIENT_SECRET).getData());
+        body.put("grant_type", "authorization_code");
+        body.put("code", code);
+        return body;
+
     }
 
 

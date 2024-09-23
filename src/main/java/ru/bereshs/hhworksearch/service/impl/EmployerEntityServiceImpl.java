@@ -24,14 +24,6 @@ public class EmployerEntityServiceImpl implements EmployerEntityService {
     }
 
 
-    public void saveAllIfNotExist(List<EmployerEntity> list) {
-        list.forEach(e -> {
-            if (!existsByHhId(e.getHhId())) {
-                save(e);
-            }
-        });
-    }
-
     public void save(EmployerEntity entity) {
         if (entity == null) {
             return;
@@ -39,22 +31,9 @@ public class EmployerEntityServiceImpl implements EmployerEntityService {
         repository.save(entity);
     }
 
-    public boolean existsByHhId(String hhId) {
-        if (hhId == null) {
-            return false;
-        }
-        return repository.existsByHhId(hhId);
-    }
-
     @Override
-    public List<EmployerEntity> toEmployerEntityList(ListDto<VacancyRs> list) {
-        return mapper.toEmployerEntityList(list.items().stream().map(VacancyRs::employer).toList());
-    }
-
-    @Override
-    public void saveNewEmployers(ListDto<VacancyRs> list) {
-        List<EmployerEntity> entityList = toEmployerEntityList(list);
-        saveAllIfNotExist(entityList);
+    public void saveAll(List<EmployerEntity> list) {
+        repository.saveAll(list);
     }
 
 }
