@@ -1,0 +1,9 @@
+GET http://192.168.1.10:8080/authorization
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-09-25T115202.200.html
+
+###
+

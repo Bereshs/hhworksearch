@@ -30,7 +30,7 @@ public class DailyReportServiceImpl implements DailyReportService {
 
     public ReportDto getReportDto(List<VacancyEntity> vacancyEntities) {
         if (vacancyEntities == null || vacancyEntities.isEmpty()) {
-            return new ReportDto(0L,0L,0L,0L,0L,"");
+            return new ReportDto(0L, 0L, 0L, 0L, 0L, "");
         }
 
         var report = vacancyEntities.stream().collect(Collectors.groupingBy(VacancyEntity::getStatus, Collectors.counting()));
@@ -62,7 +62,7 @@ public class DailyReportServiceImpl implements DailyReportService {
         if (entities == null || entities.isEmpty()) {
             return null;
         }
-        return entities.stream().map(VacancyEntity::getExperience).distinct().toList();
+        return entities.stream().filter(e -> e.getCurrency().equalsIgnoreCase("rur")).map(VacancyEntity::getExperience).distinct().toList();
     }
 
     public int getSalaryForExperience(List<VacancyEntity> entities, String experience) {
