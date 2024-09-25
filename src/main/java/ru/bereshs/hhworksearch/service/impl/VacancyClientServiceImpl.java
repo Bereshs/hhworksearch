@@ -106,7 +106,7 @@ public class VacancyClientServiceImpl implements VacancyClientService {
     @Loggable
     public void updateVacancyStatus(List<NegotiationRs> negotiationRsList) {
         List<VacancyEntity> listFromNegotiations = negotiationRsList.stream().map(mapper::toVacancyEntity).toList();
-        service.updateVacancyStatusList(listFromNegotiations);
+        service. updateVacancyStatusList(listFromNegotiations);
     }
 
 
@@ -134,12 +134,11 @@ public class VacancyClientServiceImpl implements VacancyClientService {
     public void updateStatusVacancy(VacancyEntity vacancy, VacancyStatus status) {
         Optional<VacancyEntity> o = service.getByHhId(vacancy.getHhId());
         if (o.isEmpty()) {
-            System.out.println("empty");
             return;
         }
         VacancyEntity v = o.get();
         v.setStatus(status);
-        service.save(vacancy);
+        service.save(v);
     }
 
     @Override

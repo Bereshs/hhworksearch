@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.bereshs.hhworksearch.config.scheduler.GetVacanciesScheduler;
 import ru.bereshs.hhworksearch.config.scheduler.UpdateEmployersScheduler;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
+import ru.bereshs.hhworksearch.mapper.VacancyRsMapper;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.openfeign.hhapi.VacancyFeignClient;
+import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
 import ru.bereshs.hhworksearch.service.impl.GetVacanciesSchedulerService;
 import ru.bereshs.hhworksearch.service.VacancyClientService;
 import ru.bereshs.hhworksearch.service.impl.NegotiationsClientService;
@@ -32,22 +34,25 @@ public class TestServicesController {
     private final VacancyClientService vacancyClientService;
     private final VacancyFeignClient client;
     private final UpdateEmployersScheduler updateEmployersScheduler;
+    private final VacancyRsMapper mapper;
 
     @GetMapping("/api/test")
    String getVacancyEntityList() throws HhWorkSearchException {
+/*
 
 
+        List<NegotiationRs> negotiationRsList = negotiationsClientService.getAllNegotiations().items().stream().filter(e ->
+                !e.state().id().equalsIgnoreCase(VacancyStatus.RESPONSE.name())).toList();
+        vacancyClientService.updateVacancyStatus(negotiationRsList);
+      //  List<VacancyEntity> listFromNegotiations = negotiationRsList.stream().map(mapper::toVacancyEntity).toList();
 
-        List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
-        negotiationsClientService.postNegotiations(list);
 
-        updateEmployersScheduler.scheduleDayLightTask();
-
- //       log.info("size={}",list.size());
+        //       log.info("size={}",list.size());
 
       //  updateEmployersScheduler.scheduleDayLightTask();
 //        schedulerService.scheduleDayLightTask();
-//        updateEmployersScheduler.scheduleDayLightTask();
-        return "ok";
+//*/
+        updateEmployersScheduler.scheduleDayLightTask();
+        return "listFromNegotiations";
     }
 }

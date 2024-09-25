@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/config/scheduler/UpdateEmployersScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/config/scheduler/UpdateEmployersScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/NegotiationsController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/TestServicesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/TestServicesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/FilterSettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/FilterSettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/web/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/openfeign/hhapi/EmployerFeignClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/openfeign/hhapi/EmployerFeignClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/repository/EmployerEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/repository/EmployerEntityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/EmployerEntityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/EmployerEntityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/EmployerClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/EmployerClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/EmployerEntityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/EmployerEntityServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/VacancyClientServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/VacancyClientServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,43 +53,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.AuthorizationControllerTest.authoredPageTest.executor": "Run",
-    "JUnit.AuthorizationControllerTest.authorizationNoCodePageTest.executor": "Run",
-    "JUnit.AuthorizationControllerTest.authorizationPageTest.executor": "Run",
-    "JUnit.AuthorizationControllerTest.executor": "Run",
-    "JUnit.FilterPropertyControllerTest.executor": "Run",
-    "JUnit.VacancyEntityServiceTest.executor": "Run",
-    "JUnit.VacancyEntityServiceTest.getDaily.executor": "Run",
-    "Maven.HHWorkSearch [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.HhWorkSearchApplication.executor": "Run",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "0.3.1",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "/home/bereshs/develop/myProjects/1_productions/HHWorkSearch/src/main/java/ru/bereshs/hhworksearch/config/scheduler",
-    "last_opened_file_path": "/home/bereshs/develop/myProjects/1_productions/HHWorkSearch",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.3586207",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.AuthorizationControllerTest.authoredPageTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthorizationControllerTest.authorizationNoCodePageTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthorizationControllerTest.authorizationPageTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthorizationControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.FilterPropertyControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VacancyEntityServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.VacancyEntityServiceTest.getDaily.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.HHWorkSearch [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.HhWorkSearchApplication.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/home/bereshs/develop/myProjects/1_productions/HHWorkSearch/src/main/java/ru/bereshs/hhworksearch/config/scheduler&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/bereshs/develop/myProjects/1_productions/HHWorkSearch&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.3586207&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="ru.bereshs.hhworksearch.config.scheduler" />
@@ -320,6 +329,7 @@
       <workItem from="1727001199832" duration="9369000" />
       <workItem from="1727075978490" duration="9218000" />
       <workItem from="1727115376429" duration="694000" />
+      <workItem from="1727247609745" duration="4675000" />
     </task>
     <servers />
   </component>
@@ -327,6 +337,31 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="develop" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -337,7 +372,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="0.3.1" />
+                        <option value="develop" />
                       </list>
                     </value>
                   </entry>

@@ -15,6 +15,7 @@ import ru.bereshs.hhworksearch.service.FilterEntityService;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -33,10 +34,11 @@ public class FilterSettingsController {
         List<SimpleDto> employer = filter.stream()
                 .filter(e -> e.getScope().equals(FilterScope.EMPLOYER))
                 .map(e -> {
-                    EmployerEntity entity = employerEntityService.getByHhId(e.getWord());
-                    if (entity == null) {
+                    Optional<EmployerEntity> optional = employerEntityService.getByHhId(e.getWord());
+                    if (optional.isEmpty()) {
                         return new SimpleDto(e.getId(), e.getWord(), null);
                     }
+                    EmployerEntity entity = optional.get();
                     entity.setId(e.getId());
                     return mapper.toSimpleDto(entity);
                 })

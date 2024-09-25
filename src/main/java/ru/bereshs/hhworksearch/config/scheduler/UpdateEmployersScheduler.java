@@ -21,17 +21,15 @@ public class UpdateEmployersScheduler {
     private final EmployerClientService employerClientService;
 
     private final VacancyClientService vacancyClientService;
+
     @Scheduled(cron = "0 2 9-18 * * *")
-    public void scheduleDayLightTask()  {
+    public void scheduleDayLightTask() {
         List<EmployerEntity> list = vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND).stream()
-                .map(e->{
+                .map(e -> {
                     String hhId = e.getEmployerId();
                     return employerClientService.getByHhId(hhId);
-                }).filter(e->e.getName()==null || e.getName().length()<2).toList();
-
-        List<EmployerEntity> updated = employerClientService.updateOnClient(list);
-
-      employerClientService.saveAll(updated);
+                }).toList();
+        employerClientService.saveAll(list);
     }
 
 }

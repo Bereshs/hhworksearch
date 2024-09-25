@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.bereshs.hhworksearch.mapper.VacancyMapper;
+import ru.bereshs.hhworksearch.model.EmployerEntity;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.service.*;
 
@@ -45,7 +46,7 @@ public class ReportController {
 
         model.addAttribute("list",
                 mapper.toVacancyDtoList(list).stream()
-                        .peek(e -> mapper.updateVacancyDto(e, employerService.getByHhId(e.getEmployerId()))).toList());
+                        .peek(e -> mapper.updateVacancyDto(e, employerService.getByHhId(e.getEmployerId()).orElse(new EmployerEntity()))).toList());
 
         return "report";
     }
