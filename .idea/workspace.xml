@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/DailyReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/DailyReportServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +67,7 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "0.3.2",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "/home/bereshs/develop/myProjects/1_productions/HHWorkSearch/src/main/java/ru/bereshs/hhworksearch/config/scheduler",
     "last_opened_file_path": "/home/bereshs/develop/myProjects/1_productions/HHWorkSearch",
@@ -296,7 +297,7 @@
       <workItem from="1727001199832" duration="9369000" />
       <workItem from="1727075978490" duration="9218000" />
       <workItem from="1727115376429" duration="694000" />
-      <workItem from="1727247609745" duration="6412000" />
+      <workItem from="1727247609745" duration="8995000" />
     </task>
     <servers />
   </component>

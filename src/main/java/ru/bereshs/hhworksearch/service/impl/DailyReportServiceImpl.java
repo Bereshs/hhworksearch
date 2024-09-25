@@ -62,7 +62,12 @@ public class DailyReportServiceImpl implements DailyReportService {
         if (entities == null || entities.isEmpty()) {
             return null;
         }
-        return entities.stream().filter(e -> e.getCurrency().equalsIgnoreCase("rur")).map(VacancyEntity::getExperience).distinct().toList();
+        return entities.stream().map(e -> {
+            if (e.getExperience() == null) {
+                return null;
+            }
+            return e.getExperience().toLowerCase();
+        }).distinct().toList();
     }
 
     public int getSalaryForExperience(List<VacancyEntity> entities, String experience) {
@@ -70,7 +75,10 @@ public class DailyReportServiceImpl implements DailyReportService {
             return 0;
         }
         return (int) entities.stream().filter(entity -> entity.getExperience() != null && entity.getExperience().equals(experience))
-                .filter(entity -> entity.getSalary() != null && entity.getSalary() > 0L)
+                .filter(entity -> entity.getCurrency() != null &&
+                        entity.getCurrency().equalsIgnoreCase("rur") &&
+                        entity.getSalary() != null &&
+                        entity.getSalary() > 0L)
                 .mapToLong(VacancyEntity::getSalary).average().orElse(0D);
     }
 
