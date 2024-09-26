@@ -31,7 +31,7 @@ public class EditElementController {
         }
 
         path += id + "/";
-        String ur = "http://" + address + ":" + port + path;
+        String ur = "http://localhost:" + port + path;
         URI url = URI.create(ur);
         SimpleDto simpleDto = client.getDto(url);
 
