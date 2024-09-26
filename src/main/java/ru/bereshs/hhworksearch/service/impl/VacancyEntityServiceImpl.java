@@ -26,12 +26,10 @@ public class VacancyEntityServiceImpl implements VacancyEntityService {
         return vacancyEntityRepository.getVacancyEntitiesByTimeStampAfter(date);
     }
 
-
     public Optional<VacancyEntity> getByHhId(String hhId) {
 
         return Optional.ofNullable(vacancyEntityRepository.getByHhId(hhId));
     }
-
 
     public void saveAll(List<VacancyEntity> vacancyEntityList) {
         for (VacancyEntity element : vacancyEntityList) {
@@ -39,10 +37,6 @@ public class VacancyEntityServiceImpl implements VacancyEntityService {
             mapper.updateVacancyEntity(vacancy, element);
             save(vacancy);
         }
-    }
-
-    public void setStatusOnList(List<VacancyEntity> list, VacancyStatus status) {
-        list.forEach(e -> e.setStatus(status));
     }
 
     public void updateVacancyStatusList(List<VacancyEntity> list) {
@@ -61,7 +55,6 @@ public class VacancyEntityServiceImpl implements VacancyEntityService {
         vacancy.setTimeStamp(LocalDateTime.now());
         vacancyEntityRepository.save(vacancy);
     }
-
 
     public List<VacancyEntity> getAll() {
         return vacancyEntityRepository.findAll();

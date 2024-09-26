@@ -1,7 +1,7 @@
 package ru.bereshs.hhworksearch.controller.web;
 
-import lombok.AllArgsConstructor;
-import org.springframework.cloud.openfeign.FeignClient;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +12,14 @@ import ru.bereshs.hhworksearch.openfeign.InnerFeignClient;
 import java.net.URI;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EditElementController {
 
+    @Value("${server.address}")
+    private String address;
+
+    @Value("${server.port}")
+    private String port;
     private final InnerFeignClient client;
 
     @GetMapping("/editelement")
@@ -26,15 +31,14 @@ public class EditElementController {
         }
 
         path += id + "/";
-        String ur = "http://192.168.1.14:8080" + path;
-
+        String ur = "http://" + address + ":" + port + path;
         URI url = URI.create(ur);
         SimpleDto simpleDto = client.getDto(url);
 
 
         model.addAttribute("dto", simpleDto);
-        model.addAttribute("action", "/api/client/"+name+"/"+id+"/");
-        model.addAttribute("target", name.equals("filter")?"/filtersettings":"/negotiationsettings");
+        model.addAttribute("action", "/api/client/" + name + "/" + id + "/");
+        model.addAttribute("target", name.equals("filter") ? "/filtersettings" : "/negotiationsettings");
         return "/editelement";
     }
 }

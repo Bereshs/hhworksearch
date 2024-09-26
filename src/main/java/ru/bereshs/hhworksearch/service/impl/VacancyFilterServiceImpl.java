@@ -18,9 +18,20 @@ public class VacancyFilterServiceImpl implements VacancyFilterService {
     }
 
     @Override
+    public boolean isContainsKey(VacancyEntity vacancy) {
+        if (vacancy.getDescription() == null || vacancy.getName() == null) {
+            return true;
+        }
+        List<FilterEntity> keys = getScopeElements(FilterScope.KEY);
+        return !isWordNotContains(keys, vacancy.getName()) ||
+                !isWordNotContains(keys, vacancy.getDescription());
+    }
+
+    @Override
     public boolean isSuitVacancy(VacancyEntity vacancy) {
 
         return isSuitName(vacancy.getName())
+                && isContainsKey(vacancy)
                 && isSuitExperience(vacancy.getExperience())
                 && isSuitEmployer(vacancy.getEmployerId())
                 && isSuitDescription(vacancy.getDescription());

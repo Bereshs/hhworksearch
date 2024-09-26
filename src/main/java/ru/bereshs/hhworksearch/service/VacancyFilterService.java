@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface VacancyFilterService {
 
+    boolean isContainsKey(VacancyEntity vacancy);
+
     boolean isSuitVacancy(VacancyEntity vacancy);
 
     List<FilterEntity> getScopeElements(FilterScope scope);

@@ -2,6 +2,7 @@ package ru.bereshs.hhworksearch.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.el.stream.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bereshs.hhworksearch.config.scheduler.GetVacanciesScheduler;
@@ -12,6 +13,7 @@ import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.openfeign.hhapi.VacancyFeignClient;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
+import ru.bereshs.hhworksearch.service.VacancyFilterService;
 import ru.bereshs.hhworksearch.service.impl.GetVacanciesSchedulerService;
 import ru.bereshs.hhworksearch.service.VacancyClientService;
 import ru.bereshs.hhworksearch.service.impl.NegotiationsClientService;
@@ -35,9 +37,14 @@ public class TestServicesController {
     private final VacancyFeignClient client;
     private final UpdateEmployersScheduler updateEmployersScheduler;
     private final VacancyRsMapper mapper;
+    private final VacancyFilterService vacancyFilterService;
 
     @GetMapping("/api/test")
    String getVacancyEntityList() throws HhWorkSearchException {
+
+        VacancyEntity vacancy = vacancyClientService.getByHhId("107758644").orElse(null);
+
+        log.info("wpwe {}", vacancyFilterService.isContainsKey(vacancy));
 /*
 
 

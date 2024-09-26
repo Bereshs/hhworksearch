@@ -114,12 +114,6 @@ public class VacancyClientServiceImpl implements VacancyClientService {
         return list.stream().filter(filter::isSuitVacancy).toList();
     }
 
-    @Loggable
-    public void updateStatusVacancies(List<VacancyEntity> list, VacancyStatus status) {
-
-        service.setStatusOnList(list, VacancyStatus.REQUEST);
-        service.saveAll(list);
-    }
 
     public void saveAll(List<VacancyEntity> list) {
         service.saveAll(list);

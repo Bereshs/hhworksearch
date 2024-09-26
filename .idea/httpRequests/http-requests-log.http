@@ -1,3 +1,21 @@
+GET http://localhost:8080/api/test
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-09-26T103840.200.txt
+
+###
+
+GET http://localhost:8080/api/test
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2024-09-26T103754.200.txt
+
+###
+
 GET http://192.168.1.10:8080/authorization
 Connection: Keep-Alive
 User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.10)

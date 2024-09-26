@@ -41,7 +41,7 @@ public class VacancyEntity  {
     private String skillStringList;
 
     @Transient
-    private Long percent;
+    private Integer percent;
     @Transient
     private String filterResult;
     @Override

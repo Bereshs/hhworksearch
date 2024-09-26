@@ -31,8 +31,6 @@ public interface VacancyClientService {
 
     List<VacancyEntity> filterList(List<VacancyEntity> list);
 
-    void updateStatusVacancies(List<VacancyEntity> list, VacancyStatus status);
-
     public void saveAll(List<VacancyEntity> list);
 
     List<VacancyEntity> getVacancyWithStatus(VacancyStatus vacancyStatus);

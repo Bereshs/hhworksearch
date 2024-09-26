@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VacancyEntityService {
-    void setStatusOnList(List<VacancyEntity> list, VacancyStatus status);
     List<VacancyEntity> getVacancyEntityByTimeStampAfter(LocalDateTime date);
     Optional<VacancyEntity> getByHhId(String hhId);
     void saveAll(List<VacancyEntity> vacancyEntityList);

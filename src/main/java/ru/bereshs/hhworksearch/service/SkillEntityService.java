@@ -10,6 +10,8 @@ import java.util.Optional;
 
 public interface SkillEntityService {
 
+    Integer getCompliancePercent(VacancyEntity vacancy);
+
     List<SkillEntity> getSkillEntityList(List<String> skills);
     Optional<SkillEntity> getById(Long id) throws HhWorkSearchException;
     void update(Long id, SkillEntity entity) throws HhWorkSearchException;

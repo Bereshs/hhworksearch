@@ -20,7 +20,7 @@ public interface VacancyMapper {
 
 
     @Mapping(source = "published", target = "createdAt")
-    @Mapping(target = "percent", expression = "java(10L)")
+    @Mapping(target = "percent", source = "percent")
     VacancyDto toVacancyDto(VacancyEntity vacancy);
 
     @Mapping(source = "name", target = "employerName")

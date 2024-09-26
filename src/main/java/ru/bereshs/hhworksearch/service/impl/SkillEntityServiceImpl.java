@@ -21,6 +21,15 @@ public class SkillEntityServiceImpl implements SkillEntityService {
     private final SkillMapper mapper;
 
     @Override
+    public Integer getCompliancePercent(VacancyEntity vacancy) {
+        List<String> skillList = List.of(vacancy.getSkillStringList().split(","));
+        List<String> suiteList = findAll().stream().map(SkillEntity::getName).filter(skillList::contains).toList();
+        int totalSkills = skillList.size();
+        int suiteSkills = suiteList.size() * 100;
+        return totalSkills > 0 ? suiteSkills / totalSkills : 0;
+    }
+
+    @Override
     public List<SkillEntity> getSkillEntityList(List<String> skills) {
         return skills.stream().map(e -> {
             Optional<SkillEntity> optional = getSkillEntityByName(e);
@@ -70,7 +79,7 @@ public class SkillEntityServiceImpl implements SkillEntityService {
 
     public List<String> foundAllSkills(VacancyEntity vacancy) {
         Set<String> result;
-        if (vacancy.getSkillStringList()!=null && vacancy.getSkillStringList().length() > 2) {
+        if (vacancy.getSkillStringList() != null && vacancy.getSkillStringList().length() > 2) {
             result = new TreeSet<>(Set.of(vacancy.getSkillStringList().split(",")));
         } else {
             result = new TreeSet<>();
@@ -81,7 +90,7 @@ public class SkillEntityServiceImpl implements SkillEntityService {
     }
 
     public List<String> foundAllSkills(String text) {
-        if(text==null) {
+        if (text == null) {
             return new ArrayList<>();
         }
         List<SkillEntity> skills = findAll();
