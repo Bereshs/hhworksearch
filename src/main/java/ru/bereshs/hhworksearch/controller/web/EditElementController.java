@@ -14,10 +14,6 @@ import java.net.URI;
 @Controller
 @RequiredArgsConstructor
 public class EditElementController {
-
-    @Value("${server.address}")
-    private String address;
-
     @Value("${server.port}")
     private String port;
     private final InnerFeignClient client;
