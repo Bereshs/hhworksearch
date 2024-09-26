@@ -15,7 +15,7 @@ import java.net.URI;
 @RequiredArgsConstructor
 public class EditElementController {
 
-    @Value("${server.address}")
+    @Value("${server.addr}")
     private String address;
 
     @Value("${server.port}")
