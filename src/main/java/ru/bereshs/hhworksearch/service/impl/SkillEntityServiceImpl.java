@@ -22,7 +22,7 @@ public class SkillEntityServiceImpl implements SkillEntityService {
 
     @Override
     public Integer getCompliancePercent(VacancyEntity vacancy) {
-        List<String> skillList = List.of(vacancy.getSkillStringList().split(","));
+        List<String> skillList = vacancy.getSkillStringList() != null ? List.of(vacancy.getSkillStringList().split(",")) : new ArrayList<>();
         List<String> suiteList = findAll().stream().map(SkillEntity::getName).filter(skillList::contains).toList();
         int totalSkills = skillList.size();
         int suiteSkills = suiteList.size() * 100;
