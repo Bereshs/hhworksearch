@@ -14,6 +14,10 @@ import java.net.URI;
 @Controller
 @RequiredArgsConstructor
 public class EditElementController {
+
+    @Value("${server.address}")
+    private String address;
+
     @Value("${server.port}")
     private String port;
     private final InnerFeignClient client;
@@ -27,7 +31,7 @@ public class EditElementController {
         }
 
         path += id + "/";
-        String ur = "http://localhost:" + port + path;
+        String ur = "http://" + address + ":" + port + path;
         URI url = URI.create(ur);
         SimpleDto simpleDto = client.getDto(url);
 
