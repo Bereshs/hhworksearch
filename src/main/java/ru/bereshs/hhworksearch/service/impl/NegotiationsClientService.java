@@ -42,7 +42,8 @@ public class NegotiationsClientService {
         ResumeEntity defaultResume = resumeClientService.getDefaultResume();
         for (VacancyEntity e : filteredNotRequested) {
             List<String> skills = skillsEntityService.foundAllSkills(e);
-            if (skills == null || skills.isEmpty()) {
+            if (skills == null || skills.isEmpty() || e.getName() == null || e.getDescription() == null) {
+                vacancyClientService.updateStatusVacancy(e, VacancyStatus.ERROR);
                 continue;
             }
             List<SkillEntity> skillEntities = skillsEntityService.getSkillEntityList(skills);
@@ -53,7 +54,7 @@ public class NegotiationsClientService {
                 vacancyClientService.updateStatusVacancy(e, VacancyStatus.REQUEST);
             } catch (FeignException ex) {
                 vacancyClientService.updateStatusVacancy(e, VacancyStatus.ERROR);
-                log.info("post negotiations error v:id {}, error: {}",e.getHhId(), ex.getMessage());
+                log.info("post negotiations error v:id {}, error: {}", e.getHhId(), ex.getMessage());
             }
         }
 

@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="" />
+    <list default="true" id="5fb1e41a-72e8-4b0b-8014-285d45586c5f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/TestServicesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/controller/TestServicesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/NegotiationsClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bereshs/hhworksearch/service/impl/NegotiationsClientService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,6 +50,8 @@
     "HTTP Request.All in generated-requests.executor": "Run",
     "HTTP Request.generated-requests | #1.executor": "Run",
     "HTTP Request.generated-requests | #2.executor": "Run",
+    "HTTP Request.generated-requests | #3.executor": "Run",
+    "HTTP Request.generated-requests | #4.executor": "Run",
     "JUnit.AuthorizationControllerTest.authoredPageTest.executor": "Run",
     "JUnit.AuthorizationControllerTest.authorizationNoCodePageTest.executor": "Run",
     "JUnit.AuthorizationControllerTest.authorizationPageTest.executor": "Run",
@@ -120,36 +127,11 @@
     <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="2" requestIdentifier="#2" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="AuthorizationControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HHWorkSearch" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.bereshs.hhworksearch.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.controller" />
-      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.controller.AuthorizationControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="generated-requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="3" requestIdentifier="#3" runType="Run single request">
+      <method v="2" />
     </configuration>
-    <configuration name="AuthorizationControllerTest.authorizationNoCodePageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="HHWorkSearch" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ru.bereshs.hhworksearch.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ru.bereshs.hhworksearch.controller" />
-      <option name="MAIN_CLASS_NAME" value="ru.bereshs.hhworksearch.controller.AuthorizationControllerTest" />
-      <option name="METHOD_NAME" value="authorizationNoCodePageTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="4" requestIdentifier="#4" runType="Run single request">
+      <method v="2" />
     </configuration>
     <configuration name="HhWorkSearchApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="HHWorkSearch" />
@@ -160,11 +142,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #4" />
+        <item itemvalue="HTTP Request.generated-requests | #3" />
         <item itemvalue="HTTP Request.generated-requests | #2" />
         <item itemvalue="HTTP Request.generated-requests | #1" />
         <item itemvalue="HTTP Request.All in generated-requests" />
-        <item itemvalue="JUnit.AuthorizationControllerTest" />
-        <item itemvalue="JUnit.AuthorizationControllerTest.authorizationNoCodePageTest" />
       </list>
     </recent_temporary>
   </component>
@@ -282,7 +264,8 @@
       <workItem from="1727075978490" duration="9218000" />
       <workItem from="1727115376429" duration="694000" />
       <workItem from="1727247609745" duration="9647000" />
-      <workItem from="1727335218427" duration="6480000" />
+      <workItem from="1727335218427" duration="7145000" />
+      <workItem from="1727691111009" duration="1157000" />
     </task>
     <servers />
   </component>

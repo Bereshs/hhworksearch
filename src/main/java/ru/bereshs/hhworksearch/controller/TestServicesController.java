@@ -42,9 +42,6 @@ public class TestServicesController {
     @GetMapping("/api/test")
    String getVacancyEntityList() throws HhWorkSearchException {
 
-        VacancyEntity vacancy = vacancyClientService.getByHhId("107758644").orElse(null);
-
-        log.info("wpwe {}", vacancyFilterService.isContainsKey(vacancy));
 /*
 
 
@@ -59,7 +56,14 @@ public class TestServicesController {
       //  updateEmployersScheduler.scheduleDayLightTask();
 //        schedulerService.scheduleDayLightTask();
 //*/
-        updateEmployersScheduler.scheduleDayLightTask();
+
+   //     List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
+   ///     negotiationsClientService.postNegotiations(list);
+
+   //     schedulerService.scheduleDayLightTask();
+
         return "listFromNegotiations";
+
+
     }
 }

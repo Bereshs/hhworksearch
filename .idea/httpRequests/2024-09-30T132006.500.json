@@ -1,0 +1,6 @@
+{
+  "timestamp": "2024-09-30T10:20:06.355+00:00",
+  "status": 500,
+  "error": "Internal Server Error",
+  "path": "/api/test"
+}
