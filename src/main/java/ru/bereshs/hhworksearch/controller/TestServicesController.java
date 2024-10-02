@@ -13,6 +13,7 @@ import ru.bereshs.hhworksearch.model.VacancyEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
 import ru.bereshs.hhworksearch.openfeign.hhapi.VacancyFeignClient;
 import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
+import ru.bereshs.hhworksearch.service.SkillEntityService;
 import ru.bereshs.hhworksearch.service.VacancyFilterService;
 import ru.bereshs.hhworksearch.service.impl.GetVacanciesSchedulerService;
 import ru.bereshs.hhworksearch.service.VacancyClientService;
@@ -38,6 +39,7 @@ public class TestServicesController {
     private final UpdateEmployersScheduler updateEmployersScheduler;
     private final VacancyRsMapper mapper;
     private final VacancyFilterService vacancyFilterService;
+    private final SkillEntityService skillEntityService;
 
     @GetMapping("/api/test")
    String getVacancyEntityList() throws HhWorkSearchException {
@@ -61,6 +63,10 @@ public class TestServicesController {
    ///     negotiationsClientService.postNegotiations(list);
 
    //     schedulerService.scheduleDayLightTask();
+
+        VacancyEntity vacancy = mapper.toVacancyEntity(vacancyClientService.getOnClientByHhId("107692543"));
+        int percent = skillEntityService.getCompliancePercent(vacancy);
+        log.info("percent {}", percent);
 
         return "listFromNegotiations";
 

@@ -1,6 +1,7 @@
 package ru.bereshs.hhworksearch.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.common.quota.ClientQuotaAlteration;
 import org.springframework.stereotype.Service;
 import ru.bereshs.hhworksearch.aop.Loggable;
 import ru.bereshs.hhworksearch.mapper.VacancyRsMapper;
@@ -44,6 +45,9 @@ public class VacancyClientServiceImpl implements VacancyClientService {
                 mapper.toVacancyEntity(client.getVacancyById(hhId))));
     }
 
+    public Optional<VacancyEntity> getByHhIdOnService(String hhId) {
+        return service.getByHhId(hhId);
+    }
 
     public VacancyRs getOnClientByHhId(String hhId) {
         return client.getVacancyById(hhId);

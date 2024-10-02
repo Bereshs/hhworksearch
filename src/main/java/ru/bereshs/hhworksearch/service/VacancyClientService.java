@@ -14,7 +14,7 @@ public interface VacancyClientService {
 
     VacancyRs getOnClientByHhId(String hhId);
     List<VacancyEntity> updateOnClient(List<VacancyEntity> list);
-
+    Optional<VacancyEntity> getByHhIdOnService(String hhId);
     Optional<VacancyEntity> getByHhId(String hhId);
 
     ListDto<VacancyRs> getPageVacancies(PathParams params);

@@ -56,8 +56,11 @@ public class GetVacanciesSchedulerService {
 
     public List<VacancyEntity> filterList(List<VacancyEntity> list) {
         List<VacancyEntity> preFiltered = vacancyClientService.filterList(list);
-        List<VacancyEntity> full = vacancyClientService.updateOnClient(preFiltered);
-        List<VacancyEntity> filtered = vacancyClientService.filterList(full);
-        return filtered;
+        List<VacancyEntity> unique = preFiltered.stream().filter(e ->
+                vacancyClientService.getByHhIdOnService(e.getHhId()).isEmpty()).toList();
+
+        List<VacancyEntity> full = vacancyClientService.updateOnClient(unique);
+
+        return vacancyClientService.filterList(full);
     }
 }
