@@ -66,7 +66,7 @@ public class AuthorizationController {
 
         model.addAttribute("tokenLive", key.getExpireIn().format(formatter));
         model.addAttribute("connectionString", connectionString);
-        return "/index";
+        return "index";
     }
 
     @GetMapping("/authorization")
@@ -74,7 +74,6 @@ public class AuthorizationController {
 
         if (code == null) return "error";
         ClientTokenDto tokenDto = authorizationClientService.getTokenFromCode(code);
-        log.info("token={}", tokenDto);
         createModel(model, tokenDto);
         return "authorized";
     }

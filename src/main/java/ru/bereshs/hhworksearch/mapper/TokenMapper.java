@@ -18,5 +18,8 @@ public interface TokenMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "refreshToken", expression = "java(rs.refreshToken().length()>10?rs.refreshToken():null)")
     @Mapping(target = "accessToken", expression = "java(rs.accessToken().length()>10?rs.accessToken():null)")
+    @Mapping(target = "expiresIn", source = "expiresIn")
+    @Mapping(target = "timeStamp", expression = "java(LocalDateTime.now())")
     void updateKeyEntity(@MappingTarget KeyEntity key, TokenRs rs);
+
 }

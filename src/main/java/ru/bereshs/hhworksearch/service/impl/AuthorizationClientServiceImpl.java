@@ -53,10 +53,15 @@ public class AuthorizationClientServiceImpl implements AuthorizationClientServic
     public ClientTokenDto getTokenFromCode(String code) throws HhWorkSearchException {
         TokenRs token = oauthFeignClient.updateAccessAndRefreshTokens(
                 getBodyMapRequest(code));
-
-        log.info("token={}", token);
         KeyEntity key = keyEntityService.getByUserId(1L);
+        log.info("token {}",token);
+
+
         mapper.updateKeyEntity(key, token);
+
+        log.info("key access {}, refresh {} expires {}", key.getAccessToken(), key.getRefreshToken(), key.getExpireIn());
+        log.info("valid key {}", keyEntityService.validateKey(key));
+
         keyEntityService.save(key);
         return mapper.toClientTokenDto(key);
     }
