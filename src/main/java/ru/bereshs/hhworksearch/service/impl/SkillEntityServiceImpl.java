@@ -12,6 +12,7 @@ import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
 import ru.bereshs.hhworksearch.service.SkillEntityService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -80,7 +81,8 @@ public class SkillEntityServiceImpl implements SkillEntityService {
     public List<String> foundAllSkills(VacancyEntity vacancy) {
         Set<String> result;
         if (vacancy.getSkillStringList() != null && vacancy.getSkillStringList().length() > 2) {
-            result = new TreeSet<>(Set.of(vacancy.getSkillStringList().split(",")));
+
+            result = new TreeSet<>(Set.of(Arrays.stream(vacancy.getSkillStringList().split(",")).distinct().collect(Collectors.joining())));
         } else {
             result = new TreeSet<>();
         }

@@ -58,15 +58,11 @@ public class TestServicesController {
       //  updateEmployersScheduler.scheduleDayLightTask();
 //        schedulerService.scheduleDayLightTask();
 //*/
-
-   //     List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
-   ///     negotiationsClientService.postNegotiations(list);
+        List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
+       negotiationsClientService.postNegotiations(list);
 
    //     schedulerService.scheduleDayLightTask();
 
-        VacancyEntity vacancy = mapper.toVacancyEntity(vacancyClientService.getOnClientByHhId("107692543"));
-        int percent = skillEntityService.getCompliancePercent(vacancy);
-        log.info("percent {}", percent);
 
         return "listFromNegotiations";
 

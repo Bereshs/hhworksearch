@@ -54,4 +54,9 @@ public class VacancyEntity  {
         return !getStatus().equals(VacancyStatus.request)
                 && !getStatus().equals(VacancyStatus.REQUEST);
     }
+
+    public String getSkillStringList() {
+        String result= skillStringList.replaceAll("[0-9]+|[.]","").replaceAll("[\\s]{2,}"," ");
+        return result;
+    }
 }
