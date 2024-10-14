@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Slf4j
 @Schema(description = "Вакансия")
 
-public class VacancyEntity  {
+public class VacancyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,6 +44,7 @@ public class VacancyEntity  {
     private Integer percent;
     @Transient
     private String filterResult;
+
     @Override
     public String toString() {
         return getHhId() + " " + getName() + " " + getEmployerId();
@@ -56,7 +57,6 @@ public class VacancyEntity  {
     }
 
     public String getSkillStringList() {
-        String result= skillStringList.replaceAll("[0-9]+|[.]","").replaceAll("[\\s]{2,}"," ");
-        return result;
+        return skillStringList != null ? skillStringList.replaceAll("[0-9]+|[.]", "").replaceAll("[\\s]{2,}", " ") : null;
     }
 }
