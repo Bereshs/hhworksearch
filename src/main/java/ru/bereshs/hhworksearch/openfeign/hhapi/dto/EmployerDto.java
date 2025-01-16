@@ -9,6 +9,8 @@ public record EmployerDto(
         String alternateUrl,
         String description,
         String id,
-        String name
+        String name,
+        @JsonProperty("site_url")
+        String siteUrl
 ) {
 }

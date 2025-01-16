@@ -2,25 +2,21 @@ package ru.bereshs.hhworksearch.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.el.stream.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bereshs.hhworksearch.config.scheduler.GetVacanciesScheduler;
 import ru.bereshs.hhworksearch.config.scheduler.UpdateEmployersScheduler;
 import ru.bereshs.hhworksearch.exception.HhWorkSearchException;
+import ru.bereshs.hhworksearch.mapper.EmployerMapper;
 import ru.bereshs.hhworksearch.mapper.VacancyRsMapper;
-import ru.bereshs.hhworksearch.model.VacancyEntity;
-import ru.bereshs.hhworksearch.model.VacancyStatus;
+import ru.bereshs.hhworksearch.model.EmployerEntity;
 import ru.bereshs.hhworksearch.openfeign.hhapi.VacancyFeignClient;
-import ru.bereshs.hhworksearch.openfeign.hhapi.dto.NegotiationRs;
 import ru.bereshs.hhworksearch.service.SkillEntityService;
 import ru.bereshs.hhworksearch.service.VacancyFilterService;
-import ru.bereshs.hhworksearch.service.impl.GetVacanciesSchedulerService;
+import ru.bereshs.hhworksearch.service.impl.EmployerClientServiceImpl;
 import ru.bereshs.hhworksearch.service.VacancyClientService;
 import ru.bereshs.hhworksearch.service.impl.NegotiationsClientService;
 import ru.bereshs.hhworksearch.service.impl.ResumeClientService;
-
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -41,30 +37,14 @@ public class TestServicesController {
     private final VacancyFilterService vacancyFilterService;
     private final SkillEntityService skillEntityService;
 
+    private final EmployerClientServiceImpl employerClientService;
+    private final EmployerMapper employerMapper;
     @GetMapping("/api/test")
-   String getVacancyEntityList() throws HhWorkSearchException {
-
-/*
+    EmployerEntity getVacancyEntityList() throws HhWorkSearchException {
 
 
-        List<NegotiationRs> negotiationRsList = negotiationsClientService.getAllNegotiations().items().stream().filter(e ->
-                !e.state().id().equalsIgnoreCase(VacancyStatus.RESPONSE.name())).toList();
-        vacancyClientService.updateVacancyStatus(negotiationRsList);
-      //  List<VacancyEntity> listFromNegotiations = negotiationRsList.stream().map(mapper::toVacancyEntity).toList();
 
-
-        //       log.info("size={}",list.size());
-
-      //  updateEmployersScheduler.scheduleDayLightTask();
-//        schedulerService.scheduleDayLightTask();
-//*/
-        List<VacancyEntity> list =  vacancyClientService.getVacancyWithStatus(VacancyStatus.FOUND);
-       negotiationsClientService.postNegotiations(list);
-
-   //     schedulerService.scheduleDayLightTask();
-
-
-        return "listFromNegotiations";
+        return employerMapper.toEmployerEntity(employerClientService.getByHhIdOnClient("80"));
 
 
     }

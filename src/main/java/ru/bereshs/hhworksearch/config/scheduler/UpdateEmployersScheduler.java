@@ -7,9 +7,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import ru.bereshs.hhworksearch.model.EmployerEntity;
 import ru.bereshs.hhworksearch.model.VacancyStatus;
-import ru.bereshs.hhworksearch.service.EmployerEntityService;
 import ru.bereshs.hhworksearch.service.VacancyClientService;
-import ru.bereshs.hhworksearch.service.impl.EmployerClientService;
+import ru.bereshs.hhworksearch.service.impl.EmployerClientServiceImpl;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class UpdateEmployersScheduler {
-    private final EmployerClientService employerClientService;
+    private final EmployerClientServiceImpl employerClientService;
 
     private final VacancyClientService vacancyClientService;
 

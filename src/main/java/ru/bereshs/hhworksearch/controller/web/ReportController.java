@@ -9,11 +9,13 @@ import ru.bereshs.hhworksearch.mapper.VacancyMapper;
 import ru.bereshs.hhworksearch.model.EmployerEntity;
 import ru.bereshs.hhworksearch.model.SkillEntity;
 import ru.bereshs.hhworksearch.model.VacancyEntity;
+import ru.bereshs.hhworksearch.model.dto.VacancyDto;
 import ru.bereshs.hhworksearch.service.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -35,11 +37,13 @@ public class ReportController {
                         .peek(e -> {
                             e.setFilterResult(vacancyFilterService.getFilterResult(e));
                             e.setPercent(skillEntityService.getCompliancePercent(e));
-                        }).toList();
+                        })
+                        .sorted((v1,v2)->v2.getPublished().compareTo(v1.getPublished())).toList();
 
         model.addAttribute("list",
                 mapper.toVacancyDtoList(list).stream()
-                        .peek(e -> mapper.updateVacancyDto(e, employerService.getByHhId(e.getEmployerId()).orElse(new EmployerEntity()))).toList());
+                        .peek(e -> mapper.updateVacancyDto(e, employerService.getByHhId(e.getEmployerId()).orElse(new EmployerEntity())))
+                        .toList());
 
         return "report";
     }

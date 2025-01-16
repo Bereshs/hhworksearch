@@ -14,15 +14,18 @@ public interface EmployerMapper {
     @Mapping(source = "id", target = "hhId")
     @Mapping(source = "alternateUrl", target = "url")
     @Mapping(source = "name", target = "name")
+    @Mapping(source = "siteUrl", target = "siteUrl")
     EmployerEntity toEmployerEntity(EmployerDto dto);
 
     @Mapping(source = "id", target = "hhId")
     @Mapping(source = "alternateUrl", target = "url")
     @Mapping(source = "name", target = "name")
+    @Mapping(source = "siteUrl", target = "siteUrl")
     List<EmployerEntity> toEmployerEntityList(List<EmployerDto> list);
 
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "name", source = "name")
+    @Mapping(source = "siteUrl", target = "siteUrl")
     void updateEmployerEntity(@MappingTarget EmployerEntity target, EmployerEntity source);
 }
